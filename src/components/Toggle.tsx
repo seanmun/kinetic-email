@@ -9,23 +9,23 @@ export default function Toggle({ onSelect }: { onSelect: (section: string) => vo
 
   const handleSelect = (section: string) => {
     setSelected(section);
-    onSelect(section); // ✅ Now correctly updates `selectedSection` in `page.tsx`
+    onSelect(section);
   };
 
   return (
-    <div className="flex bg-amberPrimary rounded-full p-1">
+    <div className="flex bg-primary rounded-full p-1">
       {sections.map((section) => (
         <button
           key={section}
           onClick={() => handleSelect(section)}
           className={`relative flex-1 px-4 py-2 text-center rounded-full transition-all ${
-            selected === section ? "bg-amberDark text-white" : "text-gray-900"
+            selected === section ? "bg-accent text-darkText" : "text-text"
           }`}
         >
           {selected === section && (
             <motion.div
               layoutId="toggle"
-              className="absolute inset-0 bg-amberDark rounded-full"
+              className="absolute inset-0 bg-accent rounded-full"
               transition={{ type: "spring", stiffness: 300, damping: 20 }}
             />
           )}
