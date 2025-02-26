@@ -12,27 +12,22 @@ export default function Home() {
   const [selectedSection, setSelectedSection] = useState("WHY");
 
   return (
-    <div className="flex flex-col min-h-screen bg-lightAmber text-textLight dark:bg-amberDark dark:text-textDark">
-      {/* Fixed Header */}
+    <div className="flex flex-col min-h-screen bg-secondary text-text dark:bg-secondary dark:text-darkText">
       <Header />
       <AccessibilityToggle />
 
-      {/* Pushes content down so it doesn't overlap the header */}
       <div className="pt-24 flex flex-col flex-grow items-center">
-        {/* Toggle Section */}
         <div className="flex justify-center mt-6">
           <Toggle onSelect={setSelectedSection} />
         </div>
 
-        {/* Content Section */}
-        <main className="p-6 w-3/4 bg-amberPrimary rounded-lg text-center mt-6">
+        <main className="p-6 w-3/4 bg-primary rounded-lg text-center mt-6">
           {selectedSection === "WHY" && <Why />}
           {selectedSection === "HOW" && <How />}
           {selectedSection === "WHEN" && <When />}
         </main>
       </div>
 
-      {/* Footer Stays Pinned When Needed */}
       <Footer />
     </div>
   );

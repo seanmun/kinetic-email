@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --color-primary: #E6A15A; /* Amber Primary */
+    --color-secondary: #FFFBF2; /* Light Background */
+    --color-accent: #7D5A50; /* Dark Mode Accent */
+    --color-text: #5C4033; /* Text Color */
+    --color-dark-text: #E6D5B8; /* Dark Mode Text */
+  }
+  
+  /* Dark Mode */
+  .dark {
+    --color-primary: #7D5A50; /* Brownish Plasma-inspired */
+    --color-secondary: #8f4700; /* Dark purple (Plasma Ball glow) */
+    --color-accent: #E6A15A; /* Electric Plasma color */
+    --color-text: #E6D5B8;
+    --color-dark-text: #FFF;
+  }
+  button:focus, a:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+  

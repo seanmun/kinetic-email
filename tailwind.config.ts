@@ -5,11 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        lightAmber: "#FFFBF2", // Light mode background (Amber)
-        amberPrimary: "#E6A15A", // Primary Amber Color
-        amberDark: "#7D5A50", // Dark Mode Background (Brownish Amber)
-        textLight: "#5C4033", // Text for Light Mode (Darker Amber)
-        textDark: "#E6D5B8", // Text for Dark Mode (Light Amber)
+        primary: "var(--color-primary)",
+        secondary: "var(--color-secondary)",
+        accent: "var(--color-accent)",
+        text: "var(--color-text)",
+        darkText: "var(--color-dark-text)",
       },
     },
   },
