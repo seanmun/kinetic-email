@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Kinetic.Email
 
-## Getting Started
+# Purpose
 
-First, run the development server:
+[Kinetic.Email](https://kinetic.email) is a resource hub and showcase for Kinetic Emails—interactive, engaging, and dynamic email experiences that push the boundaries of traditional email design. This site serves as both an educational tool for email developers and a playground for innovation, demonstrating real-world use cases, implementation techniques, and cutting-edge concepts.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# WHY Kinetic Emails?
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Higher Engagement** – Interactive elements encourage user interaction, leading to better click-through rates.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **More Memorable** – Dynamic and visually stimulating emails stand out in crowded inboxes.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Better UX** – Users can complete actions (like product selection or surveys) inside the email itself.
 
-## Learn More
+- **Reduced Friction** – Eliminates the need for multiple clicks, keeping users engaged within the email.
 
-To learn more about Next.js, take a look at the following resources:
+- **Fun & Interactive** – Adds a layer of playfulness and delight to email marketing.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Supports Kinesthetic Learning** – Interactive elements help reinforce messaging through action.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Next-Gen Email Marketing** – Future-proofs email campaigns by embracing innovation.
 
-## Deploy on Vercel
+- **Wide Support in Apple Mail** – Apple Mail has a high market share, meaning a majority of email opens support kinetic techniques.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Graceful Fallbacks** – If kinetic elements aren’t supported, we can display a fallback, ensuring the email remains functional and visually appealing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Advanced Tracking** – Each action in a kinetic email can trigger pixel tracking, providing valuable engagement insights.
+
+- **Data Collection** – We can gather subscriber information through interactive elements such as quizzes and surveys.
+
+- **Comprehensive User Data** – Tracking pixels can carry metadata like email name, user ID, timestamp, and activity, allowing precise engagement tracking.
+
+- **Personalized Email Experiences** – The collected data can be leveraged to send subscribers more relevant and timely content.
+
+- **Inbox Tools** – Kinetic elements allow subscribers to request information, documents, or set preferences without leaving their inbox.
+
+- **Proven Effectiveness** – Interactive elements, as seen on modern websites, consistently outperform static counterparts.
