@@ -1,37 +1,54 @@
-## Kinetic.Email
+# React + TypeScript + Vite
 
-# Purpose
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-[Kinetic.Email](https://kinetic.email) is a resource hub and showcase for Kinetic Emails—interactive, engaging, and dynamic email experiences that push the boundaries of traditional email design. This site serves as both an educational tool for email developers and a playground for innovation, demonstrating real-world use cases, implementation techniques, and cutting-edge concepts.
+Currently, two official plugins are available:
 
-# WHY Kinetic Emails?
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- **Higher Engagement** – Interactive elements encourage user interaction, leading to better click-through rates.
+## Expanding the ESLint configuration
 
-- **More Memorable** – Dynamic and visually stimulating emails stand out in crowded inboxes.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-- **Better UX** – Users can complete actions (like product selection or surveys) inside the email itself.
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
+```
 
-- **Reduced Friction** – Eliminates the need for multiple clicks, keeping users engaged within the email.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-- **Fun & Interactive** – Adds a layer of playfulness and delight to email marketing.
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-- **Supports Kinesthetic Learning** – Interactive elements help reinforce messaging through action.
-
-- **Next-Gen Email Marketing** – Future-proofs email campaigns by embracing innovation.
-
-- **Wide Support in Apple Mail** – Apple Mail has a high market share, meaning a majority of email opens support kinetic techniques.
-
-- **Graceful Fallbacks** – If kinetic elements aren’t supported, we can display a fallback, ensuring the email remains functional and visually appealing.
-
-- **Advanced Tracking** – Each action in a kinetic email can trigger pixel tracking, providing valuable engagement insights.
-
-- **Data Collection** – We can gather subscriber information through interactive elements such as quizzes and surveys.
-
-- **Comprehensive User Data** – Tracking pixels can carry metadata like email name, user ID, timestamp, and activity, allowing precise engagement tracking.
-
-- **Personalized Email Experiences** – The collected data can be leveraged to send subscribers more relevant and timely content.
-
-- **Inbox Tools** – Kinetic elements allow subscribers to request information, documents, or set preferences without leaving their inbox.
-
-- **Proven Effectiveness** – Interactive elements, as seen on modern websites, consistently outperform static counterparts.
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
+```
