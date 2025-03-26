@@ -29,17 +29,12 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div>
               <p className="text-gray-600 mb-4 md:mb-0">
-                © {currentYear} Kinetic.Email. All rights reserved.
+                © {currentYear} Kinetic.email. All rights reserved.
               </p>
             </div>
             
             <div className="flex flex-wrap justify-center space-x-4 md:space-x-6">
-              <button 
-                onClick={() => openModal('about')} 
-                className="text-gray-600 hover:text-primary-600 transition-colors"
-              >
-                About Me
-              </button>
+
               
               <button 
                 onClick={() => openModal('acknowledgments')} 
