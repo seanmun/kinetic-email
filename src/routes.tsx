@@ -6,27 +6,15 @@ import HomePage from './pages/home/HomePage';
 import LearnPage from './pages/learn/LearnPage';
 import IntroductionModule from './pages/learn/IntroductionModule';
 import CheckboxHackModule from './pages/learn/CheckboxHackModule';
+import LightswitchModule from './pages/learn/LightswitchModule';
+import TabbedElementsModule from './pages/learn/TabbedElementsModule';
 import ExamplesPage from './pages/examples/ExamplesPage';
 import TabbedExample from './pages/examples/TabbedExample';
 import ShowcaseExample from './pages/examples/ShowcaseExample';
 import SurveyExample from './pages/examples/SurveyExample';
 import PlaygroundPage from './pages/playground/PlaygroundPage';
 
-// Add placeholder components for modules we haven't created yet
-const LightswitchModule = () => (
-  <div className="container mx-auto p-8 pt-24">
-    <h1 className="text-3xl font-bold mb-4">The Kinetic Lightswitch</h1>
-    <p className="text-xl text-gray-600">This module will be implemented soon.</p>
-  </div>
-);
-
-const TabbedElementsModule = () => (
-  <div className="container mx-auto p-8 pt-24">
-    <h1 className="text-3xl font-bold mb-4">Building Tabbed Elements</h1>
-    <p className="text-xl text-gray-600">This module will be implemented soon.</p>
-  </div>
-);
-
+// Add placeholder component for the last module we haven't created yet
 const AdvancedTechniquesModule = () => (
   <div className="container mx-auto p-8 pt-24">
     <h1 className="text-3xl font-bold mb-4">Advanced Techniques</h1>

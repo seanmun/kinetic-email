@@ -9,7 +9,7 @@ const Hero = () => {
             Interactive Emails That Engage Your Audience
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-primary-100">
-            Kinetic.Email is your resource hub for building dynamic email experiences that push the boundaries of traditional email design.
+            Kinetic.email is your resource hub for building dynamic email experiences that push the boundaries of traditional email design.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/examples" className="btn bg-white text-primary-700 hover:bg-primary-50">

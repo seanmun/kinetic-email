@@ -39,7 +39,7 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-blue-600">Kinetic.Email</span>
+          <span className="text-2xl font-bold text-blue-600">Kinetic.email</span>
         </Link>
         
         {/* Mobile menu button */}
