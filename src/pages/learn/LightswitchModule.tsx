@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import LightswitchIntro from '../../pages/learn/lightswitch/LightswitchIntro';
 import LightswitchExample from '../../pages/learn/lightswitch/LightswitchExample';
-import LightswitchBestPractices from '../../pages/learn/lightswitch/LightswitchBestPractices';
+import LightswitchBestPractices from './lightswitch/LightswitchBestPractices';
 
 const LightswitchModule: React.FC = () => {
   return (
