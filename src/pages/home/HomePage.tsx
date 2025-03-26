@@ -13,7 +13,7 @@ const HomePage = () => {
             Interactive Emails That Engage Your Audience
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">
-            Kinetic.Email is your resource hub for building dynamic email experiences that push the boundaries of traditional email design.
+            Kinetic.email is your resource hub for building dynamic email experiences that push the boundaries of traditional email design.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/examples" className="px-6 py-3 bg-white text-blue-700 font-medium rounded-md hover:bg-blue-50 transition-colors">
