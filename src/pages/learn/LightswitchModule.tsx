@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import LightswitchIntro from './lightswitch/LightswitchIntro';
 import LightswitchExample from './lightswitch/LightswitchExample';
-import LightswitchBestPractices from './lightswitch/LightswitchBestPractices';
+import KineticLightswitchBestPractices from './lightswitch/KineticLightswitchBestPractices';
 
 const LightswitchModule: React.FC = () => {
   return (
@@ -34,7 +34,7 @@ const LightswitchModule: React.FC = () => {
         <LightswitchExample />
         
         {/* Best Practices Section */}
-        <LightswitchBestPractices />
+        <KineticLightswitchBestPractices />
         
         {/* Next Steps Section */}
         <section className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8 border border-blue-100">
