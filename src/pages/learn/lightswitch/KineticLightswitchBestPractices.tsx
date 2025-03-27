@@ -1,8 +1,8 @@
-// src/components/learn/lightswitch/LightswitchBestPractices.tsx
+// src/components/learn/lightswitch/KineticLightswitchBestPractices.tsx
 
 import React from 'react';
 
-const LightswitchBestPractices: React.FC = () => {
+const KineticLightswitchBestPractices: React.FC = () => {
   return (
     <section className="bg-white rounded-lg shadow-md p-8">
       <h2 className="text-2xl font-bold text-gray-900 mb-4">Best Practices for the Kinetic Lightswitch</h2>
@@ -183,4 +183,4 @@ const LightswitchBestPractices: React.FC = () => {
   );
 };
 
-export default LightswitchBestPractices;
+export default KineticLightswitchBestPractices;
