@@ -15,6 +15,10 @@ import ShowcaseExample from './pages/examples/ShowcaseExample';
 import SurveyExample from './pages/examples/SurveyExample';
 import PlaygroundPage from './pages/playground/PlaygroundPage';
 
+// Import portfolio components
+import PortfolioPage from './pages/portfolio/PortfolioPage';
+import ProjectPage from './pages/portfolio/ProjectPage';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -42,6 +46,14 @@ const router = createBrowserRouter([
         ]
       },
       { path: 'playground', element: <PlaygroundPage /> },
+      
+      // Portfolio section
+      { path: 'portfolio',
+        children: [
+          { index: true, element: <PortfolioPage /> },
+          { path: ':projectId', element: <ProjectPage /> },
+        ]
+      },
     ]
   }
 ]);
