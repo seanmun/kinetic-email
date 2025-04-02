@@ -5,6 +5,7 @@ The site serves as:
 
 An educational platform explaining kinetic email concepts
 A showcase of practical examples with code and live previews
+A portfolio of client projects with interactive email previews
 A future playground for creating kinetic emails
 Eventually, a service to send example emails to visitors
 
@@ -15,6 +16,7 @@ Styling: Tailwind CSS
 Routing: React Router
 Build Tool: Vite
 Code Highlighting: React Syntax Highlighter
+Icons: React Icons
 Hosting: Vercel
 
 Project Structure
@@ -38,10 +40,12 @@ Copykinetic-email/
 │   │   ├── email-examples/ // Components for displaying email examples
 │   │   │   ├── InteractiveExample.tsx
 │   │   │   └── CodeDisplay.tsx
-│   │   └── examples/       // Components for specific example types
-│   │       ├── tabs/       // Tabbed interface example components
-│   │       ├── showcase/   // Product showcase example components
-│   │       └── survey/     // Survey example components
+│   │   ├── examples/       // Components for specific example types
+│   │   │   ├── tabs/       // Tabbed interface example components
+│   │   │   ├── showcase/   // Product showcase example components
+│   │   │   └── survey/     // Survey example components
+│   │   └── portfolio/      // Portfolio-specific components
+│   │       └── IOSMailSimulator.tsx  // iPhone iOS Mail visualization component
 │   ├── pages/              // Page components
 │   │   ├── home/           // Home page components
 │   │   │   └── HomePage.tsx
@@ -66,6 +70,12 @@ Copykinetic-email/
 │   │   │   ├── TabbedExample.tsx
 │   │   │   ├── ShowcaseExample.tsx
 │   │   │   └── SurveyExample.tsx
+│   │   ├── portfolio/      // Portfolio section
+│   │   │   ├── PortfolioPage.tsx      // Main portfolio listing page with project cards
+│   │   │   ├── ProjectPage.tsx        // Project detail page with email previews
+│   │   │   └── data/                  // Data for portfolio projects
+│   │   │       ├── projectsData.ts    // Project metadata
+│   │   │       └── emailsData.ts      // Email content and metadata
 │   │   └── playground/     // Future playground pages
 │   │       └── PlaygroundPage.tsx
 │   ├── styles/             // Global styles
@@ -78,6 +88,7 @@ Copykinetic-email/
 ├── vite.config.ts
 ├── tailwind.config.js
 └── vercel.json            // Vercel deployment configuration
+
 Implementation Approach
 We've taken a modular approach, where:
 
@@ -86,6 +97,20 @@ Content is broken down into smaller, manageable components
 Code examples and HTML previews are separated into helper files
 UI components are reusable across different sections
 Learning modules are split into separate component files for better organization
+
+Portfolio Section Details
+The portfolio section provides:
+
+A grid of project cards showing client campaigns
+Individual project pages with detailed information
+An iOS Mail simulator to preview HTML emails in a realistic environment
+Ability to browse multiple emails within each project
+Each project consists of:
+
+Project metadata (name, brand, type, keywords)
+Multiple email HTML templates with subject lines and content
+Interactive preview capabilities
+React icons are used for visual elements to avoid managing image assets
 
 Current Status
 
@@ -97,6 +122,8 @@ Product Showcase Example partially implemented
 Survey Example implementation in progress
 Introduction, Checkbox Hack, Lightswitch, and Tabbed Elements modules implemented
 ScrollToTop functionality added for better UX
+Portfolio section added with project listing and email preview capability
+iOS Mail simulator implemented for realistic email previews
 Vercel deployment configured and working
 SEO files (sitemap.xml, robots.txt, manifest.json) added
 
@@ -130,6 +157,11 @@ Implement user authentication for email delivery
 Add analytics to track email engagement
 
 
+Add more portfolio projects:
+
+Create additional email HTML examples
+Showcase different interactive techniques
+Cover more industry use cases
 
 Development Guidelines
 
@@ -146,6 +178,7 @@ Styling Approach:
 Use Tailwind utility classes for most styling
 Maintain consistent spacing and color schemes
 Ensure responsive design for all components
+Use React Icons for visual elements to minimize asset management
 
 
 Code Organization:
@@ -183,6 +216,10 @@ npm run build
 
 # Preview production build
 npm run preview
+
+# Install required packages
+npm install react-icons
+
 Troubleshooting Build Issues
 When making changes to the file structure:
 
@@ -191,3 +228,4 @@ Use relative paths for imports within the same directory (./)
 Pay attention to file casing - TypeScript is case-sensitive
 Clear build caches if necessary (rm -rf tsconfig.tsbuildinfo)
 Verify all files exist in the locations referenced by imports
+Check for apostrophes in strings - use double quotes for strings containing apostrophes
