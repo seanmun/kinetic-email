@@ -17,7 +17,7 @@ export const projects: Project[] = [
   {
     id: 'daylight',
     name: 'Daylight Savings Campaign',
-    brand: 'ClockMaster',
+    brand: 'Daylight Computer',
     description: 'Interactive email campaign highlighting seasonal time changes with dynamic content and user engagement features.',
     campaignType: 'Seasonal',
     totalEmails: 4,
