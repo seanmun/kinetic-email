@@ -13,23 +13,9 @@ export const emailMetadata = {
   date: 'March 14, 2024',
 };
 
-// Helper function to generate image paths
-// This function takes a boolean parameter to determine whether to use relative or absolute URLs
-const getImagePath = (filename: string, useAbsoluteUrls = false) => {
-  // For production/export, use absolute URLs
-  if (useAbsoluteUrls) {
-    return `https://kinetic.email/portfolio/daylight/images/${filename}`;
-  }
-  
-  // For development/preview, use the direct path that we know works
-  return `/portfolio/daylight/images/${filename}`;
-};
-
-type ImagePathFunction = (filename: string) => string;
-
-
-// Generate the email HTML with the given image path function
-const generateEmailHTML = (imgFn: ImagePathFunction): string => `<!DOCTYPE html>
+// Generate the email HTML
+const generateEmailHTML = (): string => {
+  return `<!DOCTYPE html>
 <html lang="en" dir="ltr" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="utf-8">
@@ -63,7 +49,7 @@ const generateEmailHTML = (imgFn: ImagePathFunction): string => `<!DOCTYPE html>
 </xml><![endif]-->
 
 <!--[if mso]>
-<style type=”text/css”>
+<style type="text/css">
   sup {
         font-size: 100% !important;
     }
@@ -125,10 +111,10 @@ table {
   }
 
 /* 
-Older versions of Samsung mail reset the font-size on <h1>-<h6> elements - But the newer versions don’t. 
+Older versions of Samsung mail reset the font-size on <h1>-<h6> elements - But the newer versions don't. 
 Mail.ru resets font-size on <h1> & <h3> but other <h*> are left
 outlook.com resets margin on an <h3> but others are left
-So I think a “normalise” on <h1>-<h3> would make sense 
+So I think a "normalise" on <h1>-<h3> would make sense 
 */
 
 h1 {
@@ -495,48 +481,44 @@ This is my preheader text
 </div>
 <!-- Tracking Scripts Here -->
 </body>
-</html>
-`;
+</html>`;
+};
+
+// For export, we need to replace the local paths with absolute URLs
+const getExportHTML = (): string => {
+  return generateEmailHTML().replace(
+    /src="\/portfolio\/daylight\/images\//g,
+    'src="https://kinetic.email/portfolio/daylight/images/'
+  );
+};
 
 // The actual email component
 const SleepTipsEmail: React.FC = () => {
-  // Add debugging code here
-  console.log('Direct path reference:', '/portfolio/daylight/images/hero.png');
-  console.log('Path via function:', getImagePath('hero.png', false));
-  
-  // Debug the actual HTML
-  const testHtml = generateEmailHTML(filename => getImagePath(filename, false));
-  console.log('HTML contains correct path?', testHtml.includes('/portfolio/daylight/images/hero.png'));
-  
   // Use memoized HTML to avoid regenerating on every render
   const emailHtml = useMemo(() => {
-    // Get image function that uses relative paths for the preview
-    const img = (filename: string) => getImagePath(filename, false);
-    return generateEmailHTML(img);
+    return generateEmailHTML();
   }, []);
 
-// Return the HTML content in an iframe for proper rendering
-return (
-  <iframe 
-    srcDoc={emailHtml} 
-    title="Sleep Tips Email" 
-    style={{ 
-      width: '100%', 
-      height: '100%', 
-      border: 'none',
-      minHeight: '500px'
-    }}
-    sandbox="allow-same-origin allow-scripts"
-  />
-);
+  // Return the HTML content in an iframe with enhanced permissions
+  return (
+    <iframe 
+      srcDoc={emailHtml} 
+      title="Sleep Tips Email" 
+      style={{ 
+        width: '100%', 
+        height: '100%', 
+        border: 'none',
+        minHeight: '500px'
+      }}
+      sandbox="allow-same-origin allow-scripts"
+    />
+  );
 };
 
 // Export function to get the raw HTML for the export button feature
 // This is used by ProjectPage.tsx when the user clicks "Export HTML"
-export const getEmailHTML = () => {
-  // Get image function that uses absolute URLs for the exported HTML
-  const img = (filename: string) => getImagePath(filename, true);
-  return generateEmailHTML(img);
+export const getEmailHTML = (): string => {
+  return getExportHTML();
 };
 
 export default SleepTipsEmail;
