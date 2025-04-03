@@ -170,13 +170,6 @@ u + .body a {
   line-height: inherit;
   }
 
-/* Mark Robbins found iOS Gmail will add word-spacing: 1px and word-wrap: break-word 
-https://github.com/JayOram/email-css-resets/issues/2#issue-805476023 
-so added the below to fix that
-
-This doesn't fix GANGA - so may need to be added inline - 
-<body style="word-wrap: normal; word-spacing:normal;">
-*/
 
 .body {
    word-wrap: normal;
