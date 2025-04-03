@@ -1,4 +1,30 @@
-<!DOCTYPE html>
+// src/pages/portfolio/emails/daylight/SpringForwardEmail.tsx
+// Enhanced responsive email component for Spring Forward campaign
+
+import React, { useMemo } from 'react';
+
+// Note: These exports are used by other components to access metadata and the HTML
+// Export metadata for access in ProjectPage or other components
+export const emailMetadata = {
+  id: 'spring-forward',
+  name: 'Spring Forward Reminder',
+  description: 'Reminder email about the upcoming daylight savings time change with interactive checkbox to set a calendar reminder.',
+  subject: "Don't forget to Spring Forward this weekend!",
+  sender: 'ClockMaster',
+  date: 'March 8, 2024',
+};
+
+// Helper function to generate image paths
+// This function takes a boolean parameter to determine whether to use relative or absolute URLs
+const getImagePath = (filename: string, useAbsoluteUrls = false) => {
+  const basePath = useAbsoluteUrls 
+    ? 'https://kinetic.email/portfolio/daylight/images/' 
+    : '/portfolio/daylight/images/';
+  return `${basePath}${filename}`;
+};
+
+// Generate the email HTML with the given image path function
+const generateEmailHTML = (imgFn: (filename: string) => string) => `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -49,10 +75,10 @@
           <div style="padding:20px; display:none;">
             <p style="color:#4b5563; margin-top:0;">TechFlow works best when connected to your favorite tools. Set up integrations with your existing workflow.</p>
             <div style="display:flex; flex-wrap:wrap; gap:10px; margin:15px 0;">
-              <img src="images/integration-1.jpg" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
-              <img src="images/integration-2.jpg" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
-              <img src="images/integration-3.jpg" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
-              <img src="images/integration-4.jpg" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
+              <img src="${imgFn('integration-1.jpg')}" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
+              <img src="${imgFn('integration-2.jpg')}" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
+              <img src="${imgFn('integration-3.jpg')}" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
+              <img src="${imgFn('integration-4.jpg')}" alt="Integration" style="width:80px; height:80px; object-fit:cover; border-radius:4px;">
             </div>
             <a href="#" style="display:inline-block; background-color:#6366f1; color:white; text-decoration:none; padding:10px 20px; border-radius:4px; margin-top:10px;">Connect Apps</a>
           </div>
@@ -121,4 +147,42 @@
     });
   </script>
 </body>
-</html>
+</html>`;
+
+// The actual email component
+const SpringForwardEmail: React.FC = () => {
+  // Use memoized HTML to avoid regenerating on every render
+  const emailHtml = useMemo(() => {
+    // Get image function that uses relative paths for the preview
+    const img = (filename: string) => getImagePath(filename, false);
+    return generateEmailHTML(img);
+  }, []);
+
+  // Return the HTML content in an iframe for proper rendering
+  return (
+    <iframe 
+      srcDoc={emailHtml} 
+      title="Spring Forward Email" 
+      style={{ 
+        width: '100%', 
+        height: '100%', 
+        border: 'none',
+        minHeight: '500px'
+      }}
+      sandbox="allow-same-origin"
+    />
+  );
+};
+
+// Export function to get the raw HTML for the export button feature
+// This is used by ProjectPage.tsx when the user clicks "Export HTML"
+export const getEmailHTML = () => {
+  // Get image function that uses absolute URLs for the exported HTML
+  const img = (filename: string) => getImagePath(filename, true);
+  return generateEmailHTML(img);
+};
+
+export default SpringForwardEmail;
+
+
+
