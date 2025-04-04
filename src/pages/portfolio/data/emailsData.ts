@@ -18,9 +18,9 @@ interface EmailModule {
 }
 
 // Define which emails belong to which projects
-// This is a fallback for static discovery
+// This is a fallback for static discovery and determines the order
 const projectEmailMap: Record<string, string[]> = {
-  'daylight': ['spring-forward', 'sleep-tips'],
+  'daylight': ['junk-light', 'sunlight-vs-screens', 'your-body-clock', 'screen-headaches', 'blue-light-detox', 'revolution'],
   'onboarding': ['welcome'],
   // Add other projects here
 };
@@ -42,20 +42,31 @@ export const getProjectEmails = async (projectId: string): Promise<EmailMetadata
     const modulePaths = getProjectModulePaths(projectId);
     
     // Load all email modules and extract their metadata
-    const loadedEmails = await Promise.all(
+    const loadedEmailsMap: Record<string, EmailMetadata> = {};
+    
+    await Promise.all(
       modulePaths.map(async (path) => {
         try {
           const module: EmailModule = await allEmailModules[path]();
-          return module.emailMetadata;
+          // Store by ID for ordering later
+          loadedEmailsMap[module.emailMetadata.id] = module.emailMetadata;
         } catch (error) {
           console.error(`Error loading email from ${path}`, error);
-          return null;
         }
       })
     );
     
-    // Filter out any null values and return the metadata
-    return loadedEmails.filter(Boolean) as EmailMetadata[];
+    // If we have a predefined order in projectEmailMap, use it
+    if (projectEmailMap[projectId]) {
+      // Order the emails according to projectEmailMap order
+      // For each ID in the map, get the corresponding metadata if it exists
+      return projectEmailMap[projectId]
+        .map(id => loadedEmailsMap[id])
+        .filter(Boolean) as EmailMetadata[];
+    }
+    
+    // Fallback: return all loaded emails in random order if no predefined order
+    return Object.values(loadedEmailsMap);
   } catch (error) {
     console.error(`Error loading emails for project: ${projectId}`, error);
     
