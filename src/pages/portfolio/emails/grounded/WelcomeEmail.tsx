@@ -6,8 +6,8 @@ import React, { useMemo } from 'react';
 // Note: These exports are used by other components to access metadata and the HTML
 // Export metadata for access in ProjectPage or other components
 export const emailMetadata = {
-  id: 'spring-forward',
-  name: 'Spring Forward Reminder',
+  id: 'welcome',
+  name: 'Welcome',
   description: 'Reminder email about the upcoming daylight savings time change with interactive checkbox to set a calendar reminder.',
   subject: "Don't forget to Spring Forward this weekend!",
   sender: 'ClockMaster',

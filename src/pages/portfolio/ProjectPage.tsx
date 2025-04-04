@@ -5,13 +5,15 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from './data/projectsData';
 import { getProjectEmails, getEmailComponent, getEmailHTML, EmailMetadata } from './data/emailsData';
-import { FaSun, FaLaptopCode, FaTshirt, FaChartBar, FaMoon, FaGift, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { FaSun, FaTshirt, FaChartBar, FaMoon, FaGift, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { TbCircuitGround } from "react-icons/tb";
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
+import * as TbIcons from "react-icons/tb";
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
   'daylight': <FaSun size={32} className="text-amber-500" />,
-  'onboarding': <FaLaptopCode size={32} className="text-indigo-500" />,
+  'grounded': <TbCircuitGround size={32} className="text-indigo-500" />,
   'product-launch': <FaTshirt size={32} className="text-pink-500" />,
   'feedback-survey': <FaChartBar size={32} className="text-green-500" />,
   'amber-mode': <FaMoon size={32} className="text-amber-500" />,

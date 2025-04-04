@@ -21,7 +21,7 @@ interface EmailModule {
 // This is a fallback for static discovery and determines the order
 const projectEmailMap: Record<string, string[]> = {
   'daylight': ['junk-light', 'sunlight-vs-screens', 'your-body-clock', 'screen-headaches', 'blue-light-detox', 'revolution'],
-  'onboarding': ['welcome'],
+  'grounded': ['welcome'],
   // Add other projects here
 };
 
