@@ -16,10 +16,10 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'daylight',
-    name: 'Daylight Savings Campaign',
-    brand: 'Daylight Computer',
-    description: 'Interactive email campaign highlighting seasonal time changes with dynamic content and user engagement features.',
-    campaignType: 'Seasonal',
+    name: 'The Blue Light Guide',
+    brand: 'Daylight Computer Company',
+    description: 'Interactive email campaign detailing the negative effects from blue light, highlighted with the introduction of Amber Mode.',
+    campaignType: 'Educational',
     totalEmails: 4,
     keywords: ['interactive', 'seasonal', 'retail', 'checkbox-hack']
   },

@@ -5,15 +5,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Project, projects } from './data/projectsData';
 // We'll use these icons instead of images
-import { FaClock, FaLaptopCode, FaTshirt, FaChartBar, FaMoon, FaGift } from 'react-icons/fa';
+import { FaSun, FaLaptopCode, FaTshirt, FaChartBar, FaMoon, FaGift } from 'react-icons/fa';
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
-  'daylight': <FaClock size={36} className="text-blue-500" />,
+  'daylight': <FaSun size={36} className="text-amber-500" />,
   'onboarding': <FaLaptopCode size={36} className="text-indigo-500" />,
   'product-launch': <FaTshirt size={36} className="text-pink-500" />,
   'feedback-survey': <FaChartBar size={36} className="text-green-500" />,
-  'amber-mode': <FaMoon size={36} className="text-amber-500" />,
+  'amber-mode': <FaMoon size={36} className="text-blue-500" />,
   'holiday-campaign': <FaGift size={36} className="text-red-500" />
 };
 

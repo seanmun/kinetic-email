@@ -5,12 +5,12 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from './data/projectsData';
 import { getProjectEmails, getEmailComponent, getEmailHTML, EmailMetadata } from './data/emailsData';
-import { FaClock, FaLaptopCode, FaTshirt, FaChartBar, FaMoon, FaGift, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { FaSun, FaLaptopCode, FaTshirt, FaChartBar, FaMoon, FaGift, FaEnvelope, FaDownload } from 'react-icons/fa';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
-  'daylight': <FaClock size={32} className="text-blue-500" />,
+  'daylight': <FaSun size={32} className="text-amber-500" />,
   'onboarding': <FaLaptopCode size={32} className="text-indigo-500" />,
   'product-launch': <FaTshirt size={32} className="text-pink-500" />,
   'feedback-survey': <FaChartBar size={32} className="text-green-500" />,

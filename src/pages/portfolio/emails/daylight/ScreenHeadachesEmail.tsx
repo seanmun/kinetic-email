@@ -5,12 +5,23 @@ import React, { useMemo } from 'react';
 
 // Export metadata for access in ProjectPage or other components
 export const emailMetadata = {
-  id: 'sleep-tips',
-  name: 'Sleep Adjustment Tips',
-  description: 'Tips to help adjust sleep schedules after the time change.',
-  subject: "Trouble sleeping? We've got you covered",
+  id: 'screen-headaches',
+  name: 'Screen Headaches',
+  description: 'The Flicker & Strain Reality (Why Your Eyes Hate Your Screen)',
+  subject: "Your Screen is Giving You Headaches, Literally.",
   sender: 'Daylight Computer Company',
   date: 'March 14, 2024',
+};
+
+// Function to transform HTML with image paths
+// Automatically replaces "image/" with the appropriate path
+const transformHtml = (html: string, useAbsoluteUrls = false): string => {
+  const basePath = useAbsoluteUrls 
+    ? 'https://kinetic.email/portfolio/daylight/images/' 
+    : '/portfolio/daylight/images/';
+  
+  // Replace src="image/filename.jpg" with the correct path
+  return html.replace(/src="image\//g, `src="${basePath}`);
 };
 
 // Generate the email HTML
@@ -42,14 +53,16 @@ const generateEmailHTML = (): string => {
 <![endif]-->
 
 <!-- prevent outlook classic from adjusting text alignment -->
-<!--[if mso]><xml>
+<!--[if mso]>
+<xml>
 <w:WordDocument xmlns:w="urn:schemas-microsoft-com:office:word">
 <w:DontUseAdvancedTypographyReadingMail/>
 </w:WordDocument>
-</xml><![endif]-->
+</xml>
+<![endif]-->
 
 <!--[if mso]>
-<style type="text/css">
+<style type=”text/css”>
   sup {
         font-size: 100% !important;
     }
@@ -84,9 +97,9 @@ body {
 }
 /* 
 Normalise on all email clients
-Apple Mail, iOS Mail plus many more have preset margin and padding for the email body - this normalises it so rendering is consistent and designers can choose.
+Apple Mail, iOS Mail plus many more have preset margin and padding for the email body - 
+this normalises it so rendering is consistent and designers can choose.
 */
-
 body {
   margin: 0;
   padding: 0;
@@ -103,7 +116,6 @@ Fix for Outlook on Windows
 border-collapse to stop spaces between tables caused by border size 
 mso-table-lspace / mso-table-rspace to ensure no left and right space is added next to tables - Outlook specific CSS attributes
  */
-
 table {
   border-collapse:collapse;
   mso-table-lspace:0;
@@ -111,12 +123,11 @@ table {
   }
 
 /* 
-Older versions of Samsung mail reset the font-size on <h1>-<h6> elements - But the newer versions don't. 
+Older versions of Samsung mail reset the font-size on <h1>-<h6> elements - But the newer versions don’t. 
 Mail.ru resets font-size on <h1> & <h3> but other <h*> are left
 outlook.com resets margin on an <h3> but others are left
-So I think a "normalise" on <h1>-<h3> would make sense 
+So I think a “normalise” on <h1>-<h3> would make sense 
 */
-
 h1 {
   margin:0.67em 0;
   font-size:2em;
@@ -135,7 +146,6 @@ html[dir] h3, h3 {
 /* From here - all CSS normalisation is based on a specific email client situation */
 
 /* Fix for Outlook links color fix for links and visited links */
-
 span.MsoHyperlink {
   color: inherit !important;
   mso-style-priority: 99 !important;
@@ -160,8 +170,8 @@ a[x-apple-data-detectors=true]{
       -webkit-text-decoration-color: inherit !important;
 }
 
-/* normalise link attributes in Gmail - to match the parent element. NOTE: Need to add class="body" to the body element and a DOCTYPE must be present. */
-
+/* normalise link attributes in Gmail - to match the parent element. 
+NOTE: Need to add class="body" to the body element and a DOCTYPE must be present. */
 u + .body a {
   color: inherit;
   text-decoration: none;
@@ -170,20 +180,17 @@ u + .body a {
   line-height: inherit;
   }
 
-
 .body {
    word-wrap: normal;
    word-spacing:normal;
   }
 
 /* centre email on Android 4.4 - margin reset */
-
  div[style*="margin: 16px 0"] {
   margin: 0!important;
   }
 
 /* revert all styles for LaPoste webmail */
-
 #message *{
   all:revert
 }
@@ -244,7 +251,7 @@ table#email-container {
       margin: 0 0 20px;
     }
     a {
-      color: #D06C00;
+      color: #FEC984;
       text-decoration: underline;
       font-weight: 400;
     }
@@ -252,19 +259,44 @@ table#email-container {
       display: none;
     }
 
-
-    #amberToggle:checked ~ #email-container .content,
-    #amberToggle:checked ~ #email-container .footer {
-      background-color: #ffefcc !important;
-      color: #802b00 !important;
-    }
+    /* handle toggle */
     #amberToggle:checked ~ #email-container .toggleCircle {
       transform: translateX(26px);
-      background-color: #802b00;
+      background-color: #fff !important;
     }
-    #amberToggle:checked ~ #email-container .btn-bg {
-      background-color: #b33b00 !important;
+    #amberToggle:checked ~ #email-container .toggleBg {
+      background-color: #FEC984 !important;
     }
+
+    /* Amber mode bg and copy */
+    #amberToggle:checked ~ #email-container .content,
+    #amberToggle:checked ~ #email-container .footer,
+    #amberToggle:checked ~ #email-container h1,
+    #amberToggle:checked ~ #email-container p,
+    #amberToggle:checked ~ #email-container a {
+      background-color: #FEC984 !important;
+      color: #802b00 !important;
+    }
+
+    /* amber tint images */
+    #amberToggle:checked ~ #email-container .amber {
+      filter: sepia(1) hue-rotate(-10deg) saturate(1.5) brightness(1.1) !important;
+    }
+    /* brown tint light color images */
+    #amberToggle:checked ~ #email-container .light-amber {
+    filter: sepia(1) hue-rotate(-30deg) brightness(0.6) saturate(1.5) !important;
+    }
+    #amberToggle:checked ~ .btn-bg {
+      background-color: #FFEAD6 !important;
+      color: #802b00 !important;
+    }
+
+    #amberToggle:checked ~ #email-container .quiz-option {
+      background-color: #FFEAD6 !important;
+      color: #802b00 !important;
+    }
+
+
     .quiz-reveal { display: none; }
     #a1:checked ~ .quiz-reveal.wrong,
     #a2:checked ~ .quiz-reveal.correct,
@@ -308,31 +340,18 @@ table#email-container {
       }
   </style>
 </head>
-</head>
 <body id="body" xml:lang="en">
 <div style="display:none">
 This is my preheader text 
+
 &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
 &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
+&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; 
 &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; 
-&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; 
-&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; 
-&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; 
-&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy;
+&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy;
+&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; 
+&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; 
+&shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; &shy; 
 &nbsp;
 </div>
 <div id="body-fix" role="article" aria-roledescription="email" aria-label="email name" lang="en" dir="ltr" style="font-size:medium; font-size:max(16px, 1rem)">
@@ -348,24 +367,38 @@ This is my preheader text
   <input type="checkbox" id="amberToggle" style="display:none;">
 
 
-<table id="email-container" width="100%" cellspacing="0" cellpadding="0" border="0" role="none">
 <!-- Stack components here -->
   <table id="email-container" role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; margin: 0 auto;">
 
     <!-- Header with Logo and Toggle -->
+    <!--[if !mso]><!-->
     <tr>
-      <td class="" style="padding: 20px;">
+      <td class="interactive" style="padding: 20px;">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td align="left">
               <img src="https://d3k81ch9hvuctc.cloudfront.net/company/VCR5MS/images/cff8a50c-7884-4a87-87fe-5f07453fced1.png" width="72" alt="Daylight Logo" style="display:block; height:auto;">
             </td>
             <td align="right" class="interactive" style="display:none;">
-              <label for="amberToggle" style="display: inline-block; background-color: #ccc; border-radius: 20px; width: 50px; height: 24px; position: relative; cursor: pointer;">
+            <span style="margin-left: 10px; vertical-align:top;font-size: 16px;">Amber Mode</span>
+              <label for="amberToggle" class="toggleBg" style="display: inline-block; background-color: #ccc; border-radius: 20px; width: 50px; height: 24px; position: relative; cursor: pointer;">
                 <span class="toggleCircle" style="display: block; width: 20px; height: 20px; background-color: #fff; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: all 0.3s ease;"></span>
               </label>
-              <span style="margin-left: 10px; vertical-align: middle; font-size: 14px;">Amber Mode</span>
             </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <!--<![endif]-->
+
+    <tr>
+      <td class="fallback" style="padding: 20px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td align="center">
+              <img src="https://d3k81ch9hvuctc.cloudfront.net/company/VCR5MS/images/cff8a50c-7884-4a87-87fe-5f07453fced1.png" width="72" alt="Daylight Logo" style="display:block; height:auto;">
+            </td>
+
           </tr>
         </table>
       </td>
@@ -378,7 +411,7 @@ This is my preheader text
               <!-- Hero Image Slot -->
             <tr>
               <td style="text-align: center;">
-                <img src="/portfolio/daylight/images/hero.png" width="100%" alt="Hero Image" style="display:block; border-radius: 8px;">
+                <img src="images/hero.png" class="amber" width="100%" alt="Hero Image" style="display:block; border-radius: 8px;">
               </td>
             </tr>
             <tr>
@@ -389,44 +422,52 @@ This is my preheader text
         <p>And it gets worse: most modern screens also <strong>flicker</strong> rapidly (even if you can't see it), which puts constant stress on your brain and eyes. No wonder you feel drained after a day indoors.</p>
         <p><strong>Natural blue light</strong> is your body's cue to wake up and be alert. But when it's delivered out of context — in an <em>imbalanced spectrum</em>, without red or IR, and at the wrong time of day — it becomes toxic.</p>
         <p>Think of it like this: sunlight is a nourishing meal. Screens are like eating sugar straight from the bag.</p>
-
-        <!-- Kinetic Quiz Block -->
-        <div class="interactive" style="display:none;">
-          <p><strong>QUIZ:</strong> What percent infrared does your screen emit?</p>
-          <input type="radio" id="a1" name="infraquiz">
-          <input type="radio" id="a2" name="infraquiz">
-          <input type="radio" id="a3" name="infraquiz">
-
-          <label for="a1" class="quiz-option">A) 20%</label>
-          <label for="a2" class="quiz-option">B) 0%</label>
-          <label for="a3" class="quiz-option">C) 35%</label>
-
-          <div class="quiz-reveal correct">✅ Correct! Most screens emit virtually <strong>0% infrared</strong>.</div>
-          <div class="quiz-reveal wrong">❌ Not quite — screens emit <strong>zero infrared</strong>, unlike sunlight.</div>
-        </div>
+        
                 </td>
               </tr>
-          </table>
 
-        <!-- Fallback Stat -->
-       
-        <table width="100%" cellspacing="0" cellpadding="0" border="0" role="presentation">
-            <tr>
+              <!--[if !mso]><!-->
+              <tr>
+                  <td class="interactive">
+                      <div class="interactive" style="display:none;">
+                        <p><strong>QUIZ:</strong> What percent infrared does your screen emit?</p>
+                        <input type="radio" id="a1" name="quiz">
+                        <input type="radio" id="a2" name="quiz">
+                        <input type="radio" id="a3" name="quiz">
+
+                        <label for="a1" class="quiz-option">A) 20%</label>
+                        <label for="a2" class="quiz-option">B) 0%</label>
+                        <label for="a3" class="quiz-option">C) 35%</label>
+
+                        <div class="quiz-reveal correct">✅ Correct! Most screens emit virtually <strong>0% infrared</strong>.</div>
+                        <div class="quiz-reveal wrong">❌ Not quite — screens emit <strong>zero infrared</strong>, unlike sunlight.</div>
+                      </div>
+                   </td>
+              </tr>
+              <!--<![endif]-->
+
+              
+              <!-- Fallback Stat -->
+              <tr>
                 <td class="fallback">
                      <p><em>Did you know?</em> The sun is about 40% infrared. Most screens are <strong>0%</strong>.</p>
                 </td>
             </tr>
-        </table>
+
+          </table>
 
 
         <!-- Bulletproof Button -->
         <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="margin: 20px 0;">
           <tr>
-            <td align="center" bgcolor="#FF9D00" class="btn-bg" style="border-radius: 8px;">
-              <a href="#" target="_blank" style="font-size: 18px; font-family: ROM, Helvetica, Arial, sans-serif; font-weight: 700; color: #000000; text-decoration: none; padding: 14px 24px; display: inline-block; border-radius: 8px;">See Why Infrared Light Matters</a>
+            <td align="center" class="btn-bg" style="border-radius: 8px;background-color:#FF9D00;">
+              <a href="https://daylightcomputer.com/guides/blue-light-101" target="_blank" style="color: #000000;font-size: 18px; font-family: ROM, Helvetica, Arial, sans-serif; font-weight: 700;  text-decoration: none; padding: 14px 24px; display: inline-block; border-radius: 8px;">
+              See Why Infrared Light Matters&nbsp;&rarr;
+              </a>
             </td>
           </tr>
         </table>
+
       </td>
     </tr>
 
@@ -443,17 +484,22 @@ This is my preheader text
           <tr>
             <td style="padding: 0 6px;">
               <a href="https://twitter.com/daylightco" target="_blank">
-                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/x_twitter_96.png" alt="Twitter" width="32" style="display:block;">
+                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/x_twitter_96.png" class="light-amber" alt="Bluesky" width="32" style="display:block;">
+              </a>
+            </td>
+            <td style="padding: 0 6px;">
+              <a href="https://twitter.com/daylightco" target="_blank">
+                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/x_twitter_96.png" class="light-amber" alt="Twitter" width="32" style="display:block;">
               </a>
             </td>
             <td style="padding: 0 6px;">
               <a href="https://instagram.com/daylightcomputer" target="_blank">
-                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/instagram_96.png" alt="Instagram" width="32" style="display:block;">
+                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/instagram_96.png" class="light-amber" alt="Instagram" width="32" style="display:block;">
               </a>
             </td>
             <td style="padding: 0 6px;">
               <a href="https://youtube.com/@daylightcomputer" target="_blank">
-                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/youtube_96.png" alt="YouTube" width="32" style="display:block;">
+                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/youtube_96.png" class="light-amber" alt="YouTube" width="32" style="display:block;">
               </a>
             </td>
           </tr>
@@ -464,7 +510,6 @@ This is my preheader text
   </table>
 
     
-</table>
 
 <!--[if mso]>
 </td>
@@ -474,29 +519,22 @@ This is my preheader text
 </div>
 <!-- Tracking Scripts Here -->
 </body>
-</html>`;
-};
-
-// For export, we need to replace the local paths with absolute URLs
-const getExportHTML = (): string => {
-  return generateEmailHTML().replace(
-    /src="\/portfolio\/daylight\/images\//g,
-    'src="https://kinetic.email/portfolio/daylight/images/'
-  );
+</html>
+`;
 };
 
 // The actual email component
-const SleepTipsEmail: React.FC = () => {
+const ScreenHeadachesEmail: React.FC = () => {
   // Use memoized HTML to avoid regenerating on every render
   const emailHtml = useMemo(() => {
-    return generateEmailHTML();
+    return transformHtml(generateEmailHTML(), false);
   }, []);
 
   // Return the HTML content in an iframe with enhanced permissions
   return (
     <iframe 
       srcDoc={emailHtml} 
-      title="Sleep Tips Email" 
+      title="Screen Headaches Email" 
       style={{ 
         width: '100%', 
         height: '100%', 
@@ -511,7 +549,7 @@ const SleepTipsEmail: React.FC = () => {
 // Export function to get the raw HTML for the export button feature
 // This is used by ProjectPage.tsx when the user clicks "Export HTML"
 export const getEmailHTML = (): string => {
-  return getExportHTML();
+  return transformHtml(generateEmailHTML(), true);
 };
 
-export default SleepTipsEmail;
+export default ScreenHeadachesEmail;
