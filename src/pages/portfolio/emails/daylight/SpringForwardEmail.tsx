@@ -247,7 +247,7 @@ const generateEmailHTML = (imgFn: (filename: string) => string) => `<!DOCTYPE ht
                             <table role="presentation" cellpadding="0" cellspacing="0">
                               <tr>
                                 <td width="30" valign="top">
-                                  <img src="${imgFn('checkbox.png')}" alt="Checkbox" width="20" height="20" style="margin-right: 10px;" />
+                                  <img src="${imgFn('hero.png')}" alt="Checkbox" width="20" height="20" style="margin-right: 10px;" />
                                 </td>
                                 <td>
                                   <span style="font-size: 16px; color: #4b5563;">Set a reminder on my calendar</span>
