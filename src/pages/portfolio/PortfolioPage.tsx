@@ -5,12 +5,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Project, projects } from './data/projectsData';
 // We'll use these icons instead of images
-import { FaSun, FaLaptopCode, FaTshirt, FaChartBar, FaMoon, FaGift } from 'react-icons/fa';
+import { FaSun, FaTshirt, FaChartBar, FaMoon, FaGift } from 'react-icons/fa';
+import { TbCircuitGround } from "react-icons/tb";
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
   'daylight': <FaSun size={36} className="text-amber-500" />,
-  'onboarding': <FaLaptopCode size={36} className="text-indigo-500" />,
+  'grounded': <TbCircuitGround size={36} className="text-indigo-500" />,
   'product-launch': <FaTshirt size={36} className="text-pink-500" />,
   'feedback-survey': <FaChartBar size={36} className="text-green-500" />,
   'amber-mode': <FaMoon size={36} className="text-blue-500" />,

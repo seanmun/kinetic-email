@@ -21,16 +21,16 @@ export const projects: Project[] = [
     description: 'Interactive email campaign detailing the negative effects from blue light, highlighted with the introduction of Amber Mode.',
     campaignType: 'Educational',
     totalEmails: 4,
-    keywords: ['interactive', 'seasonal', 'retail', 'checkbox-hack']
+    keywords: ['interactive', 'educational', 'amber mode', 'hardware', 'retail']
   },
   {
     id: 'onboarding',
-    name: 'User Onboarding Series',
-    brand: 'TechFlow',
+    name: 'ARES Groundwear',
+    brand: 'The Grounded Athlete',
     description: 'Educational email sequence with interactive tutorials, progress tracking, and personalized tips for new users.',
     campaignType: 'Onboarding',
     totalEmails: 5,
-    keywords: ['onboarding', 'education', 'saas', 'accordion']
+    keywords: ['interactive', 'educational', 'retail', 'fun']
   },
   {
     id: 'product-launch',
