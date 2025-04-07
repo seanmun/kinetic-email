@@ -8,7 +8,6 @@ import { getProjectEmails, getEmailComponent, getEmailHTML, EmailMetadata } from
 import { FaSun, FaTshirt, FaChartBar, FaMoon, FaGift, FaEnvelope, FaDownload } from 'react-icons/fa';
 import { TbCircuitGround } from "react-icons/tb";
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
-import * as TbIcons from "react-icons/tb";
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {

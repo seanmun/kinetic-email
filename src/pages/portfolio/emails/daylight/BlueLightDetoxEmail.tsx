@@ -411,7 +411,7 @@ This is my preheader text
               <!-- Hero Image Slot -->
             <tr>
               <td style="text-align: center;">
-                <img src="images/hero.png" class="amber" width="100%" alt="Hero Image" style="display:block; border-radius: 8px;">
+                <img src="/portfolio/daylight/images/hero.png" class="amber" width="100%" alt="Hero Image" style="display:block; border-radius: 8px;">
               </td>
             </tr>
             <tr>
