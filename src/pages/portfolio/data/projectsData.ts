@@ -24,40 +24,40 @@ export const projects: Project[] = [
     keywords: ['interactive', 'educational', 'amber mode', 'hardware', 'retail']
   },
   {
-    id: 'onboarding',
+    id: 'grounded',
     name: 'ARES Groundwear',
     brand: 'The Grounded Athlete',
     description: 'Educational email sequence with interactive tutorials, progress tracking, and personalized tips for new users.',
-    campaignType: 'Onboarding',
+    campaignType: 'Educational',
     totalEmails: 5,
-    keywords: ['interactive', 'educational', 'retail', 'fun']
+    keywords: ['interactive', 'educational', 'retail', 'fun', 'product-showcase']
   },
   {
-    id: 'product-launch',
-    name: 'Summer Collection Launch',
-    brand: 'FashionForward',
+    id: 'dr-cate',
+    name: 'Dr. Cate',
+    brand: 'Dr. Cate Shanahan, M.D.',
     description: 'Product showcase featuring the latest summer fashion with interactive product carousels and dynamic content.',
-    campaignType: 'Product Launch',
+    campaignType: 'Educational',
     totalEmails: 3,
-    keywords: ['carousel', 'product-showcase', 'fashion', 'tabbed-content']
+    keywords: ['interactive', 'educational', 'quiz', 'health']
   },
   {
-    id: 'feedback-survey',
-    name: 'Customer Feedback Campaign',
-    brand: 'ServiceFirst',
-    description: 'Survey-focused email campaign to gather customer feedback with interactive rating system and response collection.',
-    campaignType: 'Survey',
+    id: 'meraki',
+    name: 'Meraki',
+    brand: 'Meraki Medicinal',
+    description: 'Meraki formulas are fueled by Methylene Blue, a superhero compound that powers your mitochondria and ignites your cellular energy',
+    campaignType: 'Educational',
     totalEmails: 2,
-    keywords: ['survey', 'interactive', 'customer-feedback', 'form-elements']
+    keywords: ['survey', 'interactive', 'Educational', 'carousel']
   },
   {
     id: 'amber-mode',
-    name: 'Dark Mode Email Campaign',
-    brand: 'NightOwl',
-    description: 'Email campaign demonstrating dark mode support with adaptive color schemes and theme switching capabilities.',
+    name: 'Amber Mode Email technique',
+    brand: 'Seanmun',
+    description: 'Email campaign demonstrating amber mode support with adaptive color schemes and theme switching capabilities.',
     campaignType: 'Technical Demo',
     totalEmails: 3,
-    keywords: ['dark-mode', 'adaptive', 'accessibility', 'theme-switching']
+    keywords: ['amber-mode', 'adaptive', 'accessibility', 'theme-switching']
   },
   {
     id: 'holiday-campaign',

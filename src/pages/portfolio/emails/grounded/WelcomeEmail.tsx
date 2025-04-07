@@ -1,4 +1,4 @@
-// src/pages/portfolio/emails/daylight/SpringForwardEmail.tsx
+// src/pages/portfolio/emails/grounded/SpringForwardEmail.tsx
 // Enhanced responsive email component for Spring Forward campaign
 
 import React, { useMemo } from 'react';
@@ -8,7 +8,7 @@ import React, { useMemo } from 'react';
 export const emailMetadata = {
   id: 'welcome',
   name: 'Welcome',
-  description: 'Reminder email about the upcoming daylight savings time change with interactive checkbox to set a calendar reminder.',
+  description: 'Reminder email about the upcoming grounded savings time change with interactive checkbox to set a calendar reminder.',
   subject: "Don't forget to Spring Forward this weekend!",
   sender: 'ClockMaster',
   date: 'March 8, 2024',
@@ -18,8 +18,8 @@ export const emailMetadata = {
 // This function takes a boolean parameter to determine whether to use relative or absolute URLs
 const getImagePath = (filename: string, useAbsoluteUrls = false) => {
   const basePath = useAbsoluteUrls 
-    ? 'https://kinetic.email/portfolio/daylight/images/' 
-    : '/portfolio/daylight/images/';
+    ? 'https://kinetic.email/portfolio/grounded/images/' 
+    : '/portfolio/grounded/images/';
   return `${basePath}${filename}`;
 };
 
@@ -150,7 +150,7 @@ const generateEmailHTML = (imgFn: (filename: string) => string) => `<!DOCTYPE ht
 </html>`;
 
 // The actual email component
-const SpringForwardEmail: React.FC = () => {
+const WelcomeEmail: React.FC = () => {
   // Use memoized HTML to avoid regenerating on every render
   const emailHtml = useMemo(() => {
     // Get image function that uses relative paths for the preview
@@ -162,7 +162,7 @@ const SpringForwardEmail: React.FC = () => {
   return (
     <iframe 
       srcDoc={emailHtml} 
-      title="Spring Forward Email" 
+      title="Welcome Email" 
       style={{ 
         width: '100%', 
         height: '100%', 
@@ -182,7 +182,7 @@ export const getEmailHTML = () => {
   return generateEmailHTML(img);
 };
 
-export default SpringForwardEmail;
+export default WelcomeEmail;
 
 
 
