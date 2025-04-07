@@ -5,18 +5,19 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from './data/projectsData';
 import { getProjectEmails, getEmailComponent, getEmailHTML, EmailMetadata } from './data/emailsData';
-import { FaSun, FaTshirt, FaChartBar, FaMoon, FaGift, FaEnvelope, FaDownload } from 'react-icons/fa';
-import { TbCircuitGround } from "react-icons/tb";
+import { FaSun, FaHandHoldingMedical, FaEyeDropper, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { TbCircuitGround, TbBulbFilled } from "react-icons/tb";
+import { GiStripedSun } from "react-icons/gi";
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
   'daylight': <FaSun size={32} className="text-amber-500" />,
-  'grounded': <TbCircuitGround size={32} className="text-indigo-500" />,
-  'product-launch': <FaTshirt size={32} className="text-pink-500" />,
-  'feedback-survey': <FaChartBar size={32} className="text-green-500" />,
-  'amber-mode': <FaMoon size={32} className="text-amber-500" />,
-  'holiday-campaign': <FaGift size={32} className="text-red-500" />
+  'grounded': <TbCircuitGround size={32} className="text-green-500" />,
+  'dr-cate': <FaHandHoldingMedical size={32} className="text-pink-500" />,
+  'meraki': <FaEyeDropper size={32} className="text-blue-500" />,
+  'amber-mode': <GiStripedSun size={32} className="text-amber-500" />,
+  'chroma': <TbBulbFilled size={32} className="text-red-500" />
 };
 
 const ProjectPage: React.FC = () => {
@@ -139,7 +140,7 @@ const ProjectPage: React.FC = () => {
   const selectedEmail = emails.length > 0 ? emails[selectedEmailIndex] : null;
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 mt-16">
       {/* Back button */}
       <div className="mb-6">
         <Link to="/portfolio" className="text-blue-600 hover:underline inline-flex items-center">

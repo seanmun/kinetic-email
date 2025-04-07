@@ -484,7 +484,7 @@ This is my preheader text
           <tr>
             <td style="padding: 0 6px;">
               <a href="https://twitter.com/daylightco" target="_blank">
-                <img src="https://d3k81ch9hvuctc.cloudfront.net/assets/email/buttons/subtle/x_twitter_96.png" class="light-amber" alt="Bluesky" width="32" style="display:block;">
+                <img src="/portfolio/daylight/images/bluesky.png" class="light-amber" alt="Bluesky" width="32" style="display:block;">
               </a>
             </td>
             <td style="padding: 0 6px;">

@@ -34,7 +34,7 @@ export const projects: Project[] = [
   },
   {
     id: 'dr-cate',
-    name: 'Dr. Cate',
+    name: 'Dr. Cate Education Series',
     brand: 'Dr. Cate Shanahan, M.D.',
     description: 'Product showcase featuring the latest summer fashion with interactive product carousels and dynamic content.',
     campaignType: 'Educational',
@@ -57,15 +57,15 @@ export const projects: Project[] = [
     description: 'Email campaign demonstrating amber mode support with adaptive color schemes and theme switching capabilities.',
     campaignType: 'Technical Demo',
     totalEmails: 3,
-    keywords: ['amber-mode', 'adaptive', 'accessibility', 'theme-switching']
+    keywords: ['amber mode', 'adaptive', 'accessibility', 'theme-switching']
   },
   {
-    id: 'holiday-campaign',
-    name: 'Holiday Promotional Series',
-    brand: 'GiftPerfect',
-    description: 'Multi-email holiday campaign with interactive gift guides, countdown timers, and personalized recommendations.',
+    id: 'chroma',
+    name: 'Product Showcase Series',
+    brand: 'Chroma',
+    description: 'Interactive e-commerce program designed to showcase health centric lighting devices from getChroma.com',
     campaignType: 'Seasonal',
     totalEmails: 6,
-    keywords: ['holiday', 'interactive', 'countdown', 'personalization']
+    keywords: ['product', 'interactive', 'carousel', 'lighting']
   }
 ];
