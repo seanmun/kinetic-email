@@ -22,7 +22,7 @@ export function useProjectImages(projectName: string) {
       
       // Add common image names that might be used
       const commonImages = [
-        'logo.png', 'banner.jpg', 'header.png', 'footer.png',
+        'logo.png', 'bluesky.jpg', 'header.png', 'footer.png',
         'product1.jpg', 'product2.jpg', 'profile.png', 'icon.svg',
         'clockChange.jpg', 'clockCollection.jpg'
       ];

@@ -5,26 +5,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Project, projects } from './data/projectsData';
 // We'll use these icons instead of images
-import { FaSun, FaTshirt, FaChartBar, FaMoon, FaGift } from 'react-icons/fa';
-import { TbCircuitGround } from "react-icons/tb";
+import { FaSun, FaHandHoldingMedical, FaEyeDropper } from 'react-icons/fa';
+import { TbCircuitGround, TbBulbFilled } from "react-icons/tb";
+import { GiStripedSun } from "react-icons/gi";
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
   'daylight': <FaSun size={36} className="text-amber-500" />,
-  'grounded': <TbCircuitGround size={36} className="text-indigo-500" />,
-  'product-launch': <FaTshirt size={36} className="text-pink-500" />,
-  'feedback-survey': <FaChartBar size={36} className="text-green-500" />,
-  'amber-mode': <FaMoon size={36} className="text-blue-500" />,
-  'holiday-campaign': <FaGift size={36} className="text-red-500" />
+  'grounded': <TbCircuitGround size={36} className="text-green-500" />,
+  'dr-kate': <FaHandHoldingMedical size={36} className="text-pink-500" />,
+  'meraki': <FaEyeDropper size={36} className="text-blue-500" />,
+  'amber-mode': <GiStripedSun size={36} className="text-amber-500" />,
+  'chroma': <TbBulbFilled size={36} className="text-red-500" />
 };
 
 const PortfolioPage: React.FC = () => {
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 mt-16">
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Email Campaign Portfolio</h1>
         <p className="text-lg text-gray-600">
-          Browse our collection of interactive kinetic email campaigns created for various brands.
+          Browse my collection of interactive kinetic email campaigns created for various brands.
         </p>
       </div>
 
