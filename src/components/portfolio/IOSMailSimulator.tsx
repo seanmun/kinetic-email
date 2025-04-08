@@ -182,7 +182,7 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
                       color: #6b7280;
                     }
                     .email-content {
-                      padding: 16px;
+                      padding: 0px;
                     }
                     
                     /* Loading and error states */
