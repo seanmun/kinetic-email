@@ -373,7 +373,7 @@ This is my preheader text
     <!-- Header with Logo and Toggle -->
     <!--[if !mso]><!-->
     <tr>
-      <td class="interactive" style="padding: 20px;">
+      <td class="interactive" style="padding: 20px;display:none;">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td align="left">

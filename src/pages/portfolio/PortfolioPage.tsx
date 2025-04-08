@@ -7,15 +7,15 @@ import { Project, projects } from './data/projectsData';
 // We'll use these icons instead of images
 import { FaSun, FaHandHoldingMedical, FaEyeDropper } from 'react-icons/fa';
 import { TbCircuitGround, TbBulbFilled } from "react-icons/tb";
-import { GiStripedSun } from "react-icons/gi";
+import { BsFillHeartPulseFill } from "react-icons/bs";
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
   'daylight': <FaSun size={36} className="text-amber-500" />,
   'grounded': <TbCircuitGround size={36} className="text-green-500" />,
-  'dr-kate': <FaHandHoldingMedical size={36} className="text-pink-500" />,
+  'dr-cate': <FaHandHoldingMedical size={36} className="text-pink-500" />,
   'meraki': <FaEyeDropper size={36} className="text-blue-500" />,
-  'amber-mode': <GiStripedSun size={36} className="text-amber-500" />,
+  'pls': <BsFillHeartPulseFill size={36} className="text-purple-500" />,
   'chroma': <TbBulbFilled size={36} className="text-red-500" />
 };
 

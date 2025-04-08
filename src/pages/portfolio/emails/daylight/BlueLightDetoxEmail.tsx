@@ -20,7 +20,11 @@ const transformHtml = (html: string, useAbsoluteUrls = false): string => {
     ? 'https://kinetic.email/portfolio/daylight/images/' 
     : '/portfolio/daylight/images/';
   
-  // Replace src="image/filename.jpg" with the correct path
+  // First replace direct paths
+  html = html.replace(/src="\/portfolio\/daylight\/images\//g, 
+    useAbsoluteUrls ? 'src="https://kinetic.email/portfolio/daylight/images/' : 'src="/portfolio/daylight/images/');
+  
+  // Then handle any remaining image/ references
   return html.replace(/src="image\//g, `src="${basePath}`);
 };
 
@@ -373,7 +377,7 @@ This is my preheader text
     <!-- Header with Logo and Toggle -->
     <!--[if !mso]><!-->
     <tr>
-      <td class="interactive" style="padding: 20px;">
+      <td class="interactive" style="padding: 20px;display:none;">
         <table width="100%" cellpadding="0" cellspacing="0" border="0">
           <tr>
             <td align="left">

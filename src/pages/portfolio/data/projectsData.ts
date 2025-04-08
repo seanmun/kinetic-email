@@ -43,21 +43,12 @@ export const projects: Project[] = [
   },
   {
     id: 'meraki',
-    name: 'Meraki',
+    name: 'Meraki Educational Series',
     brand: 'Meraki Medicinal',
     description: 'Meraki formulas are fueled by Methylene Blue, a superhero compound that powers your mitochondria and ignites your cellular energy',
     campaignType: 'Educational',
     totalEmails: 2,
     keywords: ['survey', 'interactive', 'Educational', 'carousel']
-  },
-  {
-    id: 'amber-mode',
-    name: 'Amber Mode Email technique',
-    brand: 'Seanmun',
-    description: 'Email campaign demonstrating amber mode support with adaptive color schemes and theme switching capabilities.',
-    campaignType: 'Technical Demo',
-    totalEmails: 3,
-    keywords: ['amber mode', 'adaptive', 'accessibility', 'theme-switching']
   },
   {
     id: 'chroma',
@@ -67,5 +58,14 @@ export const projects: Project[] = [
     campaignType: 'Seasonal',
     totalEmails: 6,
     keywords: ['product', 'interactive', 'carousel', 'lighting']
+  },
+  {
+    id: 'pls',
+    name: 'Pulsechain Newsletter',
+    brand: 'Pulsechain',
+    description: 'Interactive newsletter reporting on the latest updates and proposals of the the latest layer-one EVM blockchain',
+    campaignType: 'Newsletter',
+    totalEmails: 6,
+    keywords: ['newsletter', 'crypto', 'newspaper', 'interactive']
   }
 ];

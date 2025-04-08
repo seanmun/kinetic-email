@@ -5,10 +5,11 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from './data/projectsData';
 import { getProjectEmails, getEmailComponent, getEmailHTML, EmailMetadata } from './data/emailsData';
-import { FaSun, FaHandHoldingMedical, FaEyeDropper, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { FaSun, FaHandHoldingMedical, FaEyeDropper, FaEnvelope, FaDownload, FaApple, FaAndroid } from 'react-icons/fa';
 import { TbCircuitGround, TbBulbFilled } from "react-icons/tb";
-import { GiStripedSun } from "react-icons/gi";
+import { BsFillHeartPulseFill } from "react-icons/bs";
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
+import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
@@ -16,20 +17,51 @@ const projectIcons: Record<string, React.ReactNode> = {
   'grounded': <TbCircuitGround size={32} className="text-green-500" />,
   'dr-cate': <FaHandHoldingMedical size={32} className="text-pink-500" />,
   'meraki': <FaEyeDropper size={32} className="text-blue-500" />,
-  'amber-mode': <GiStripedSun size={32} className="text-amber-500" />,
-  'chroma': <TbBulbFilled size={32} className="text-red-500" />
+  'chroma': <TbBulbFilled size={32} className="text-red-500" />,
+  'pls': <BsFillHeartPulseFill size={32} className="text-purple-500" />
 };
+
+type EmailView = 'ios' | 'android' | 'both';
 
 const ProjectPage: React.FC = () => {
   const { projectId } = useParams<{ projectId: string }>();
   const [selectedEmailIndex, setSelectedEmailIndex] = useState<number>(0);
   const [emails, setEmails] = useState<EmailMetadata[]>([]);
-  const [EmailComponent, setEmailComponent] = useState<React.ComponentType | null>(null);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const [EmailComponent, setEmailComponent] = useState<React.ComponentType | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [emailHtml, setEmailHtml] = useState<string | null>(null);
+  const [emailView, setEmailView] = useState<EmailView>('both');
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
   
   // Find project data
   const project = projects.find(p => p.id === projectId);
+  
+  // Handle window resize to determine default view
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      // Set default view based on screen size
+      if (window.innerWidth < 768) {
+        // On mobile, default to iOS view
+        setEmailView('ios');
+      } else {
+        // On desktop, show both
+        setEmailView('both');
+      }
+    };
+    
+    // Set initial view
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   
   // Load emails for this project
   useEffect(() => {
@@ -68,7 +100,7 @@ const ProjectPage: React.FC = () => {
     updateSelectedEmail();
   }, [selectedEmailIndex, emails]);
   
-  // Function to load email component
+  // Function to load email component and HTML
   const loadEmailComponent = async (emailId: string) => {
     if (!projectId) return;
     
@@ -76,7 +108,7 @@ const ProjectPage: React.FC = () => {
     setEmailHtml(null);
     
     try {
-      // Load the component
+      // Load the component (using your existing infrastructure)
       const component = await getEmailComponent(projectId, emailId);
       setEmailComponent(() => component);
       
@@ -125,6 +157,15 @@ const ProjectPage: React.FC = () => {
     }
   };
   
+  // Toggle between iOS and Android views on mobile
+  const toggleEmailView = () => {
+    if (emailView === 'ios') {
+      setEmailView('android');
+    } else {
+      setEmailView('ios');
+    }
+  };
+  
   if (!project) {
     return (
       <div className="container mx-auto px-4 py-8">
@@ -138,6 +179,9 @@ const ProjectPage: React.FC = () => {
   }
 
   const selectedEmail = emails.length > 0 ? emails[selectedEmailIndex] : null;
+  
+  // Determine if we're on mobile
+  const isMobile = windowWidth < 768;
 
   return (
     <div className="container mx-auto px-4 py-8 mt-16">
@@ -187,37 +231,102 @@ const ProjectPage: React.FC = () => {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">Email Preview</h2>
           
-          {selectedEmail && (
-            <button 
-              onClick={handleExportEmail}
-              className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition"
-            >
-              <FaDownload size={16} />
-              <span>Export HTML</span>
-            </button>
-          )}
+          <div className="flex items-center gap-4">
+            {/* Mobile toggle between iOS and Android */}
+            {isMobile && (
+              <button 
+                onClick={toggleEmailView}
+                className="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-full transition"
+              >
+                {emailView === 'ios' ? (
+                  <>
+                    <FaAndroid size={16} />
+                    <span>Show Gmail</span>
+                  </>
+                ) : (
+                  <>
+                    <FaApple size={16} />
+                    <span>Show iOS Mail</span>
+                  </>
+                )}
+              </button>
+            )}
+            
+            {selectedEmail && (
+              <button 
+                onClick={handleExportEmail}
+                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition"
+              >
+                <FaDownload size={16} />
+                <span>Export HTML</span>
+              </button>
+            )}
+          </div>
         </div>
         
-        <div className="flex flex-col items-center">
-          {isLoading ? (
-            <div className="w-full h-[680px] flex items-center justify-center bg-gray-50 rounded">
-              <div className="text-gray-500 animate-pulse">Loading email...</div>
-            </div>
-          ) : EmailComponent ? (
-            <Suspense fallback={<div className="text-center py-8">Loading email component...</div>}>
-              {/* Use IOSMailSimulator component for a more accurate iOS Mail experience */}
-              {selectedEmail && (
-                <IOSMailSimulator
-                  sender={selectedEmail.sender}
-                  subject={selectedEmail.subject}
-                  date={selectedEmail.date}
-                  htmlContent={emailHtml || undefined}
-                />
+        {/* Email preview - adaptive layout based on screen size and selected view */}
+        <div className={`grid ${isMobile ? 'grid-cols-1' : 'grid-cols-2'} gap-8`}>
+          {/* iOS Mail Preview */}
+          {(emailView === 'ios' || emailView === 'both') && (
+            <div className="flex flex-col items-center">
+              <div className="mb-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <FaApple size={20} className="text-gray-700" />
+                  <h3 className="font-semibold text-lg">iOS Mail (Interactive)</h3>
+                </div>
+                <p className="text-sm text-gray-500">Interactive kinetic email version</p>
+              </div>
+              
+              {isLoading ? (
+                <div className="w-full h-[680px] flex items-center justify-center bg-gray-50 rounded">
+                  <div className="text-gray-500 animate-pulse">Loading email...</div>
+                </div>
+              ) : !selectedEmail ? (
+                <div className="w-full h-[680px] flex items-center justify-center bg-gray-50 rounded">
+                  <div className="text-gray-500">Select an email to preview</div>
+                </div>
+              ) : (
+                <Suspense fallback={<div className="text-center py-8">Loading email component...</div>}>
+                  <IOSMailSimulator
+                    sender={selectedEmail.sender}
+                    subject={selectedEmail.subject}
+                    date={selectedEmail.date}
+                    htmlContent={emailHtml || undefined}
+                  />
+                </Suspense>
               )}
-            </Suspense>
-          ) : (
-            <div className="text-center py-8 bg-gray-50 rounded-lg">
-              <p className="text-gray-500">Select an email to preview</p>
+            </div>
+          )}
+          
+          {/* Android Gmail Preview */}
+          {(emailView === 'android' || emailView === 'both') && (
+            <div className="flex flex-col items-center">
+              <div className="mb-4 text-center">
+                <div className="flex items-center justify-center gap-2 mb-2">
+                  <FaAndroid size={20} className="text-green-500" />
+                  <h3 className="font-semibold text-lg">Android Gmail (Static)</h3>
+                </div>
+                <p className="text-sm text-gray-500">Non-interactive fallback version</p>
+              </div>
+              
+              {isLoading ? (
+                <div className="w-full h-[680px] flex items-center justify-center bg-gray-50 rounded">
+                  <div className="text-gray-500 animate-pulse">Loading email...</div>
+                </div>
+              ) : !selectedEmail ? (
+                <div className="w-full h-[680px] flex items-center justify-center bg-gray-50 rounded">
+                  <div className="text-gray-500">Select an email to preview</div>
+                </div>
+              ) : (
+                <Suspense fallback={<div className="text-center py-8">Loading email component...</div>}>
+                  <AndroidGmailSimulator
+                    sender={selectedEmail.sender}
+                    subject={selectedEmail.subject}
+                    date={selectedEmail.date}
+                    htmlContent={emailHtml || undefined}
+                  />
+                </Suspense>
+              )}
             </div>
           )}
         </div>
