@@ -131,13 +131,7 @@ const ExamplesPage = () => {
               </Link>
             </div>
           </div>
-          <div className="md:w-1/3">
-            <img 
-              src="https://via.placeholder.com/400x300?text=Email+Playground" 
-              alt="Email Playground" 
-              className="rounded-lg shadow-md w-full"
-            />
-          </div>
+          
         </div>
       </div>
     </PageLayout>
