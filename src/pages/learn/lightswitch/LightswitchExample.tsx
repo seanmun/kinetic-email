@@ -1,10 +1,9 @@
-// src/components/learn/lightswitch/LightswitchExample.tsx
-
 import React, { useState } from 'react';
 
 const LightswitchExample: React.FC = () => {
   // State to simulate toggling between supported and unsupported client view
   const [simulateSupported, setSimulateSupported] = useState(true);
+  const [activeTab, setActiveTab] = useState('tab1');
 
   return (
     <section className="bg-white rounded-lg shadow-md p-8">
@@ -193,45 +192,77 @@ const LightswitchExample: React.FC = () => {
           </div>
           
           {simulateSupported ? (
-            // Kinetic Version (supported client)
+            // Kinetic Version (supported client) - Fixed Implementation
             <div>
               <p className="text-gray-700 mb-4">Check out our latest products below:</p>
               
               <div className="relative mb-6">
-                {/* Interactive Tabs UI */}
+                {/* Interactive Tabs UI - Using React state for demo purposes */}
                 <div className="mb-4">
                   <div className="tabs flex border-b">
-                    <input type="radio" name="demo-tabs" id="demo-tab1" className="sr-only peer/tab1" defaultChecked />
-                    <input type="radio" name="demo-tabs" id="demo-tab2" className="sr-only peer/tab2" />
-                    <input type="radio" name="demo-tabs" id="demo-tab3" className="sr-only peer/tab3" />
-                    
-                    <label htmlFor="demo-tab1" className="px-4 py-2 cursor-pointer border-b-2 border-transparent peer-checked/tab1:border-blue-600 peer-checked/tab1:text-blue-600 font-medium">
+                    <button
+                      onClick={() => setActiveTab('tab1')}
+                      className={`px-4 py-2 border-b-2 font-medium transition-colors ${
+                        activeTab === 'tab1'
+                          ? 'border-blue-600 text-blue-600'
+                          : 'border-transparent text-gray-600 hover:text-gray-800'
+                      }`}
+                    >
                       Sneakers
-                    </label>
-                    <label htmlFor="demo-tab2" className="px-4 py-2 cursor-pointer border-b-2 border-transparent peer-checked/tab2:border-blue-600 peer-checked/tab2:text-blue-600 font-medium">
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('tab2')}
+                      className={`px-4 py-2 border-b-2 font-medium transition-colors ${
+                        activeTab === 'tab2'
+                          ? 'border-blue-600 text-blue-600'
+                          : 'border-transparent text-gray-600 hover:text-gray-800'
+                      }`}
+                    >
                       Sandals
-                    </label>
-                    <label htmlFor="demo-tab3" className="px-4 py-2 cursor-pointer border-b-2 border-transparent peer-checked/tab3:border-blue-600 peer-checked/tab3:text-blue-600 font-medium">
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('tab3')}
+                      className={`px-4 py-2 border-b-2 font-medium transition-colors ${
+                        activeTab === 'tab3'
+                          ? 'border-blue-600 text-blue-600'
+                          : 'border-transparent text-gray-600 hover:text-gray-800'
+                      }`}
+                    >
                       Boots
-                    </label>
+                    </button>
                   </div>
                   
-                  <div className="tab-content hidden peer-checked/tab1:block bg-blue-50 p-4 rounded-lg">
-                    <h3 className="font-medium text-lg">Spring Sneaker Collection</h3>
-                    <p>Our lightweight, breathable sneakers are perfect for spring walks and casual outings.</p>
-                    <button className="mt-2 px-4 py-1 bg-blue-600 text-white rounded">Shop Now</button>
-                  </div>
-                  
-                  <div className="tab-content hidden peer-checked/tab2:block bg-green-50 p-4 rounded-lg">
-                    <h3 className="font-medium text-lg">Spring Sandal Collection</h3>
-                    <p>Get ready for warmer days with our comfortable and stylish sandals in vibrant colors.</p>
-                    <button className="mt-2 px-4 py-1 bg-green-600 text-white rounded">Shop Now</button>
-                  </div>
-                  
-                  <div className="tab-content hidden peer-checked/tab3:block bg-amber-50 p-4 rounded-lg">
-                    <h3 className="font-medium text-lg">Spring Boot Collection</h3>
-                    <p>Our weather-resistant spring boots are perfect for those unexpected spring showers.</p>
-                    <button className="mt-2 px-4 py-1 bg-amber-600 text-white rounded">Shop Now</button>
+                  {/* Tab Content */}
+                  <div className="tab-content">
+                    {activeTab === 'tab1' && (
+                      <div className="bg-blue-50 p-4 rounded-lg">
+                        <h3 className="font-medium text-lg">Spring Sneaker Collection</h3>
+                        <p>Our lightweight, breathable sneakers are perfect for spring walks and casual outings.</p>
+                        <button className="mt-2 px-4 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                          Shop Now
+                        </button>
+                      </div>
+                    )}
+                    
+                    {activeTab === 'tab2' && (
+                      <div className="bg-green-50 p-4 rounded-lg">
+                        <h3 className="font-medium text-lg">Spring Sandal Collection</h3>
+                        <p>Get ready for warmer days with our comfortable and stylish sandals in vibrant colors.</p>
+                        <button className="mt-2 px-4 py-1 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+                          Shop Now
+                        </button>
+                      </div>
+                    )}
+                    
+                    {activeTab === 'tab3' && (
+                      <div className="bg-amber-50 p-4 rounded-lg">
+                        <h3 className="font-medium text-lg">Spring Boot Collection</h3>
+                        <p>Our weather-resistant spring boots are perfect for those unexpected spring showers.</p>
+                        <button className="mt-2 px-4 py-1 bg-amber-600 text-white rounded hover:bg-amber-700 transition-colors">
+                          Shop Now
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
                 

@@ -1,8 +1,13 @@
 // src/pages/learn/advanced/AccordionExample.tsx
-
-import React from 'react';
+import React, { useState } from 'react';
 
 const AccordionExample: React.FC = () => {
+  const [openSection, setOpenSection] = useState<string>('section1');
+
+  const toggleSection = (section: string) => {
+    setOpenSection(openSection === section ? '' : section);
+  };
+
   return (
     <section className="bg-white rounded-lg shadow-md p-8">
       <h2 className="text-2xl font-bold text-gray-900 mb-4">Animated Accordion for Kinetic Emails</h2>
@@ -82,30 +87,32 @@ const AccordionExample: React.FC = () => {
           
           <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
             <div className="bg-white p-4 rounded shadow-sm">
-              <div className="relative accordion-demo">
-                <input type="radio" id="demo-section1" name="demo-accordion" className="absolute opacity-0 peer/sec1" defaultChecked />
-                <input type="radio" id="demo-section2" name="demo-accordion" className="absolute opacity-0 peer/sec2" />
-                <input type="radio" id="demo-section3" name="demo-accordion" className="absolute opacity-0 peer/sec3" />
-                
+              <div className="accordion-demo">
                 {/* Section 1 */}
                 <div className="mb-2 border rounded-md overflow-hidden">
-                  <label 
-                    htmlFor="demo-section1" 
-                    className="flex justify-between items-center p-4 bg-blue-50 cursor-pointer hover:bg-blue-100 transition-colors peer-checked/sec1:bg-blue-100"
+                  <button 
+                    onClick={() => toggleSection('section1')}
+                    className={`w-full flex justify-between items-center p-4 text-left cursor-pointer transition-colors ${
+                      openSection === 'section1' ? 'bg-blue-100' : 'bg-blue-50 hover:bg-blue-100'
+                    }`}
                   >
                     <span className="font-medium">Product Features</span>
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
-                      className="h-5 w-5 transition-transform duration-300 peer-checked/sec1:rotate-180" 
+                      className={`h-5 w-5 transition-transform duration-300 ${
+                        openSection === 'section1' ? 'rotate-180' : ''
+                      }`}
                       fill="none" 
                       viewBox="0 0 24 24" 
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                  </label>
+                  </button>
                   
-                  <div className="max-h-0 overflow-hidden transition-all duration-500 peer-checked/sec1:max-h-40">
+                  <div className={`overflow-hidden transition-all duration-500 ${
+                    openSection === 'section1' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                  }`}>
                     <div className="p-4 border-t">
                       <p>Discover our latest features including seamless integration, advanced analytics, and custom reporting tools that help you make better business decisions.</p>
                     </div>
@@ -114,23 +121,29 @@ const AccordionExample: React.FC = () => {
                 
                 {/* Section 2 */}
                 <div className="mb-2 border rounded-md overflow-hidden">
-                  <label 
-                    htmlFor="demo-section2" 
-                    className="flex justify-between items-center p-4 bg-blue-50 cursor-pointer hover:bg-blue-100 transition-colors peer-checked/sec2:bg-blue-100"
+                  <button 
+                    onClick={() => toggleSection('section2')}
+                    className={`w-full flex justify-between items-center p-4 text-left cursor-pointer transition-colors ${
+                      openSection === 'section2' ? 'bg-blue-100' : 'bg-blue-50 hover:bg-blue-100'
+                    }`}
                   >
                     <span className="font-medium">Pricing Plans</span>
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
-                      className="h-5 w-5 transition-transform duration-300 peer-checked/sec2:rotate-180" 
+                      className={`h-5 w-5 transition-transform duration-300 ${
+                        openSection === 'section2' ? 'rotate-180' : ''
+                      }`}
                       fill="none" 
                       viewBox="0 0 24 24" 
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                  </label>
+                  </button>
                   
-                  <div className="max-h-0 overflow-hidden transition-all duration-500 peer-checked/sec2:max-h-40">
+                  <div className={`overflow-hidden transition-all duration-500 ${
+                    openSection === 'section2' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                  }`}>
                     <div className="p-4 border-t">
                       <p>We offer flexible pricing options to suit businesses of all sizes. Check out our Starter, Professional, and Enterprise plans designed to scale with your needs.</p>
                     </div>
@@ -139,23 +152,29 @@ const AccordionExample: React.FC = () => {
                 
                 {/* Section 3 */}
                 <div className="mb-2 border rounded-md overflow-hidden">
-                  <label 
-                    htmlFor="demo-section3" 
-                    className="flex justify-between items-center p-4 bg-blue-50 cursor-pointer hover:bg-blue-100 transition-colors peer-checked/sec3:bg-blue-100"
+                  <button 
+                    onClick={() => toggleSection('section3')}
+                    className={`w-full flex justify-between items-center p-4 text-left cursor-pointer transition-colors ${
+                      openSection === 'section3' ? 'bg-blue-100' : 'bg-blue-50 hover:bg-blue-100'
+                    }`}
                   >
                     <span className="font-medium">Customer Testimonials</span>
                     <svg 
                       xmlns="http://www.w3.org/2000/svg" 
-                      className="h-5 w-5 transition-transform duration-300 peer-checked/sec3:rotate-180" 
+                      className={`h-5 w-5 transition-transform duration-300 ${
+                        openSection === 'section3' ? 'rotate-180' : ''
+                      }`}
                       fill="none" 
                       viewBox="0 0 24 24" 
                       stroke="currentColor"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
-                  </label>
+                  </button>
                   
-                  <div className="max-h-0 overflow-hidden transition-all duration-500 peer-checked/sec3:max-h-40">
+                  <div className={`overflow-hidden transition-all duration-500 ${
+                    openSection === 'section3' ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                  }`}>
                     <div className="p-4 border-t">
                       <p>"Your product transformed how we approach our business. The ROI has been incredible and the support team is always there when we need them." - Sarah J., Marketing Director</p>
                     </div>
@@ -333,7 +352,7 @@ const AccordionExample: React.FC = () => {
 }
 
 .accordion-body {
-  padding: 0 15px;
+  padding: 15px;
   border-top: 1px solid #e2e8f0;
 }
 
@@ -342,7 +361,6 @@ const AccordionExample: React.FC = () => {
   transition: transform 0.3s ease;
 }
 
-/* Show selected section with animation */
 /* Show selected section with animation */
 #section1:checked ~ .kinetic-content .accordion-item:nth-child(1) .accordion-content {
   max-height: 500px !important;
