@@ -59,62 +59,6 @@ Showcasing real client campaigns across various industries:
 | **React Icons** | Icon Library | ^4.0.0 |
 | **Vercel** | Hosting & Deployment | - |
 
-## 📁 Project Structure
-
-```
-kinetic-email/
-├── public/                     # Static assets
-│   ├── images/                # Example images and icons
-│   ├── sitemap.xml            # SEO optimization
-│   ├── robots.txt             # Search engine directives
-│   ├── manifest.json          # PWA configuration
-│   └── favicon.ico
-├── src/
-│   ├── components/            # Reusable UI components
-│   │   ├── common/           # Shared components
-│   │   │   ├── Navigation.tsx
-│   │   │   ├── Footer.tsx
-│   │   │   └── ScrollToTop.tsx
-│   │   ├── layout/           # Layout components
-│   │   │   ├── MainLayout.tsx
-│   │   │   ├── PageLayout.tsx
-│   │   │   └── DocsLayout.tsx
-│   │   ├── email-examples/   # Email display components
-│   │   │   ├── InteractiveExample.tsx
-│   │   │   └── CodeDisplay.tsx
-│   │   └── portfolio/        # Portfolio-specific components
-│   │       ├── IOSMailSimulator.tsx
-│   │       └── AndroidGmailSimulator.tsx
-│   ├── pages/                # Page components
-│   │   ├── home/            # Homepage
-│   │   ├── learn/           # Learning modules
-│   │   │   ├── IntroductionModule.tsx
-│   │   │   ├── CheckboxHackModule.tsx
-│   │   │   ├── LightswitchModule.tsx
-│   │   │   ├── TabbedElementsModule.tsx
-│   │   │   └── AdvancedTechniquesModule.tsx
-│   │   ├── examples/        # Interactive examples
-│   │   │   ├── TabbedExample.tsx
-│   │   │   ├── ShowcaseExample.tsx
-│   │   │   └── SurveyExample.tsx
-│   │   ├── portfolio/       # Portfolio showcase
-│   │   │   ├── PortfolioPage.tsx
-│   │   │   ├── ProjectPage.tsx
-│   │   │   └── data/
-│   │   │       ├── projectsData.ts
-│   │   │       └── emailsData.ts
-│   │   └── playground/      # Future development
-│   ├── styles/
-│   │   └── tailwind.css
-│   ├── App.tsx
-│   ├── main.tsx
-│   └── routes.tsx
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-├── tailwind.config.js
-└── vercel.json               # Deployment configuration
-```
 
 ## 🚀 Getting Started
 
