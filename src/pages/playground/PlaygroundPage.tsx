@@ -55,7 +55,7 @@ const PlaygroundPage = () => {
     setShowExamples(false); // Hide examples after first generation
 
     try {
-      const response = await fetch('https://kinetic-email.vercel.app/api/generate', {
+      const response = await fetch('/api/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
