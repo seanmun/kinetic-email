@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaRobot } from 'react-icons/fa';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,9 +76,15 @@ const Navigation = () => {
           <NavLink to="/examples" active={isActive('/examples')}>
             Examples
           </NavLink>
-          <NavLink to="/playground" active={isActive('/playground')}>
-            Playground
-          </NavLink>
+          <PlaygroundNavLink to="/playground" active={isActive('/playground')}>
+            <div className="flex items-center gap-2">
+              <FaRobot className="text-sm" />
+              AI Playground
+              <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold px-2 py-1 rounded-full animate-pulse">
+                NEW
+              </span>
+            </div>
+          </PlaygroundNavLink>
         </nav>
       </div>
       
@@ -98,9 +105,15 @@ const Navigation = () => {
             <MobileNavLink to="/examples" active={isActive('/examples')}>
               Examples
             </MobileNavLink>
-            <MobileNavLink to="/playground" active={isActive('/playground')}>
-              Playground
-            </MobileNavLink>
+            <MobilePlaygroundNavLink to="/playground" active={isActive('/playground')}>
+              <div className="flex items-center gap-2">
+                <FaRobot className="text-sm" />
+                AI Playground
+                <span className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+                  NEW
+                </span>
+              </div>
+            </MobilePlaygroundNavLink>
           </nav>
         </div>
       </div>
@@ -128,6 +141,20 @@ const NavLink: React.FC<NavLinkProps> = ({ to, active, children }) => (
   </Link>
 );
 
+// Special playground navigation link for desktop
+const PlaygroundNavLink: React.FC<NavLinkProps> = ({ to, active, children }) => (
+  <Link
+    to={to}
+    className={`font-medium transition-all duration-200 transform hover:scale-105 ${
+      active 
+        ? 'text-blue-600 border-b-2 border-blue-600 pb-1' 
+        : 'text-gray-600 hover:text-blue-600 hover:border-b-2 hover:border-blue-400 pb-1'
+    }`}
+  >
+    {children}
+  </Link>
+);
+
 // Mobile navigation link
 const MobileNavLink: React.FC<NavLinkProps> = ({ to, active, children }) => (
   <Link
@@ -136,6 +163,20 @@ const MobileNavLink: React.FC<NavLinkProps> = ({ to, active, children }) => (
       active 
         ? 'bg-blue-50 text-blue-600' 
         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+    }`}
+  >
+    {children}
+  </Link>
+);
+
+// Special playground navigation link for mobile
+const MobilePlaygroundNavLink: React.FC<NavLinkProps> = ({ to, active, children }) => (
+  <Link
+    to={to}
+    className={`block py-2 px-3 rounded-md font-medium ${
+      active 
+        ? 'bg-gradient-to-r from-blue-50 to-emerald-50 text-blue-600' 
+        : 'text-gray-600 hover:bg-gradient-to-r hover:from-gray-50 hover:to-emerald-50 hover:text-gray-900'
     }`}
   >
     {children}
