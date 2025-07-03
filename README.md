@@ -112,7 +112,7 @@ Our kinetic email techniques work across these email clients:
 | **Apple Mail (macOS)** | ✅ Full Support | ✅ |
 | **Mail (iOS)** | ✅ Full Support | ✅ |
 | **Outlook for Mac** | ✅ Full Support | ✅ |
-| **Outlook for iOS** | ✅ Full Support | ✅ |
+| **Outlook for iOS** | ❌ No Support | ✅ |
 | **Gmail (Web)** | ❌ No Support | ✅ |
 | **Outlook (Windows)** | ❌ No Support | ✅ |
 | **Yahoo Mail** | ❌ No Support | ✅ |
