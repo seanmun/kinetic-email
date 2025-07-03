@@ -1,31 +1,81 @@
 {
-    "name": "Kinetic.Email",
-    "short_name": "Kinetic.Email",
-    "description": "Interactive email development resources and examples",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#6366F1",
-    "icons": [
-      {
-        "src": "/icons/icon-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-        "src": "/icons/icon-512x512.png",
-        "sizes": "512x512",
-        "type": "image/png"
-      },
-      {
-        "src": "/icons/maskable_icon.png",
-        "sizes": "512x512",
-        "type": "image/png",
-        "purpose": "maskable"
-      }
-    ],
-    "orientation": "portrait",
-    "lang": "en-US",
-    "categories": ["education", "development", "email", "webdevelopment"],
-    "dir": "ltr"
-  }
+  "name": "Kinetic Email AI - Interactive Email Generator",
+  "short_name": "Kinetic.Email",
+  "description": "AI-powered interactive email generator for creating kinetic emails with advanced personalization and automation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3B82F6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["productivity", "business", "marketing", "ai"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png", 
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Kinetic Email AI Playground Desktop View"
+    },
+    {
+      "src": "/screenshot-mobile.png", 
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Kinetic Email AI Mobile Generator"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "AI Email Generator",
+      "short_name": "AI Generator", 
+      "description": "Create kinetic emails with AI",
+      "url": "/playground",
+      "icons": [
+        {
+          "src": "/ai-icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Email Examples",
+      "short_name": "Examples",
+      "description": "Browse kinetic email examples", 
+      "url": "/examples",
+      "icons": [
+        {
+          "src": "/examples-icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Learn Kinetic Emails",
+      "short_name": "Learn",
+      "description": "Master kinetic email techniques",
+      "url": "/learn", 
+      "icons": [
+        {
+          "src": "/learn-icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
