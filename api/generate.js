@@ -1,5 +1,5 @@
 // api/generate.js - Vercel serverless function - CommonJS version 2
-const Anthropic = require('@anthropic-ai/sdk');
+import Anthropic from '@anthropic-ai/sdk';
 
 // Initialize Claude (Vercel will handle environment variables)
 const anthropic = new Anthropic({
@@ -162,7 +162,7 @@ function detectKineticTechnique(html) {
 }
 
 // Main serverless function
-module.exports = async function handler(req, res) {
+export default async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
