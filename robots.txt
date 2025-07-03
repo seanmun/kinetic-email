@@ -1,6 +1,38 @@
+# Enhanced robots.txt for Kinetic Email AI
+
 # Allow all search engine crawlers
 User-agent: *
 Allow: /
 
+# Specifically encourage indexing of key AI pages
+Allow: /playground
+Allow: /examples
+Allow: /learn
+Allow: /portfolio
+
+# Block any admin or development paths (if they exist)
+Disallow: /admin/
+Disallow: /api/
+Disallow: /dev/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Allow search engines to crawl CSS and JS for better indexing
+Allow: /assets/
+Allow: /*.css$
+Allow: /*.js$
+
+# Block common bot traps
+Disallow: /wp-admin/
+Disallow: /wordpress/
+Disallow: /wp/
+
+# Crawl delay (optional - be nice to smaller crawlers)
+Crawl-delay: 1
+
 # Sitemap location
 Sitemap: https://kinetic.email/sitemap.xml
+
+# Additional sitemaps for different content types
+Sitemap: https://kinetic.email/sitemap-images.xml
+Sitemap: https://kinetic.email/sitemap-examples.xml
