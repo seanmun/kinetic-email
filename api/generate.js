@@ -78,7 +78,7 @@ input[type="radio"], input[type="checkbox"] {
 /* KINETIC LIGHTSWITCH - Critical for email client compatibility */
 .kinetic { display: none !important; }
 
-/* Show interactive content when kinetic is supported */
+/* LIGHTSWITCH CORE FUNCTIONALITY - Always include these exact selectors */
 #Kinetic:checked ~* .interactive { display: block !important; }
 #Kinetic:checked ~* .fallback { display: none !important; }
 
@@ -97,29 +97,42 @@ input[type="radio"], input[type="checkbox"] {
 <style data-ignore-inlining>
 /* ADVANCED KINETIC STYLES - Not inlined for interaction preservation */
 
-/* KINETIC LIGHTSWITCH ADVANCED SELECTORS */
+/* LIGHTSWITCH CORE FUNCTIONALITY - Always include these exact selectors */
 #Kinetic:checked ~* .interactive { display: block !important; }
 #Kinetic:checked ~* .fallback { display: none !important; }
 
-/* Sibling combinator examples for kinetic interactions */
-/* IMPORTANT: Use ~* for deep nesting, ~ for direct siblings */
+/* CSS SELECTOR RULES FOR KINETIC INTERACTIONS:
+   
+   USE ~* (general sibling + universal) when:
+   - Target is nested inside another element after the input
+   - Most common case in email layouts
+   - Example: input -> table -> tr -> td -> div.content
+   
+   USE ~ (general sibling only) when:
+   - Target is a direct sibling of the input
+   - Less common in email due to table structures
+   - Example: input -> div.content (direct siblings)
+*/
 
-/* Example tab structure:
+/* WORKING SELECTOR PATTERNS:
+
+For TABS (most common):
 #tab1:checked ~* .content1 { display: block !important; }
 #tab2:checked ~* .content2 { display: block !important; }
-*/
 
-/* Example accordion structure:
-#accordion1:checked ~* .accordion-content1 { display: block !important; }
-#accordion1:checked ~* .accordion-arrow1 { transform: rotate(180deg); }
-*/
+For ACCORDIONS:
+#acc1:checked ~* .accordion-content1 { display: block !important; }
+#acc1:checked ~* .accordion-arrow1 { transform: rotate(180deg); }
 
-/* Example survey structure:
+For SURVEYS (progressive disclosure):
 #q1a:checked ~* .question2 { display: block !important; }
 #q1b:checked ~* .question3 { display: block !important; }
-*/
 
-/* Add your specific kinetic interaction styles here */
+For STYLING active states:
+#tab1:checked ~* .tab-label1 { background: #007bff !important; color: white !important; }
+
+CRITICAL: Always use !important on display and visibility properties
+*/
 
 </style>
 </head>
@@ -156,11 +169,28 @@ CRITICAL KINETIC EMAIL RULES:
    - Wrap kinetic content in: <div class="interactive" style="display: none;">
    - Wrap fallback content in: <div class="fallback" style="display: block;">
 
-2. CSS PSEUDO SELECTORS:
-   - Use ~* for nested elements: #tab1:checked ~* .content1 { display: block !important; }
-   - Use ~ only for direct siblings: #tab1:checked ~ .tabs label[for="tab1"] { background: blue; }
-   - ALWAYS include !important on display properties
-   - Test all selectors work with deep nesting
+2. CSS PSEUDO SELECTORS (CRITICAL UNDERSTANDING):
+   
+   **USE ~* (99% of cases in email):**
+   - When target element is nested inside other elements after the input
+   - Email table structures create deep nesting: input -> table -> tr -> td -> content
+   - Example: #tab1:checked ~* .content1 { display: block !important; }
+   - The ~* means "any element that comes after AND any nested element within those"
+   
+   **USE ~ (rare in email):**
+   - ONLY when target is a direct sibling of the input (same parent, no nesting)
+   - Example: input and div are both direct children of same container
+   - Email layouts rarely have this structure due to table requirements
+   
+   **ALWAYS INCLUDE !important on display/visibility properties**
+   
+   **COMMON EMAIL STRUCTURE requiring ~*:**
+   
+   Structure: input -> table -> tr -> td -> div.content
+   The input is followed by a table, then nested tr, td, and finally the target content.
+   This deep nesting is why ~* is required instead of just ~.
+   
+   Selector: #tab1:checked ~* .content1 { display: block !important; }
 
 3. FALLBACK CONTENT STRUCTURE:
    - Fallback MUST use table-based layout (no divs for structure)
@@ -173,24 +203,35 @@ CRITICAL KINETIC EMAIL RULES:
    - Exception: Surveys show CTA instead of actual survey
    - Use semantic HTML in fallback (proper headings, paragraphs)
 
-WORKING EXAMPLES:
+WORKING EXAMPLES WITH CORRECT SELECTORS:
 
-TABS:
+TABS EXAMPLE:
+HTML Structure: input -> table -> tr -> td -> content (requires ~*)
 - Radio inputs: <input type="radio" id="tab1" name="tabs" checked style="display: none;">
-- Labels: <label for="tab1" style="cursor: pointer;">Tab 1</label>
-- Content: <div class="tab-content" id="content1">Content here</div>
-- CSS: #tab1:checked ~* #content1 { display: block !important; }
+- Labels inside table: <label for="tab1">Tab 1</label>
+- Content nested in table cells: <div class="content1">Content 1</div>
+- CSS: #tab1:checked ~* .content1 { display: block !important; }
+- CSS: #tab2:checked ~* .content2 { display: block !important; }
+- Active styling: #tab1:checked ~* label[for="tab1"] { background: #007bff !important; }
 
-ACCORDION:
-- Checkbox inputs: <input type="checkbox" id="acc1" style="display: none;">
-- Trigger: <label for="acc1">Click to expand</label>
-- Content: <div class="accordion-content">Hidden content</div>
+ACCORDION EXAMPLE:
+HTML Structure: input -> table -> tr -> td -> content (requires ~*)
+- Checkbox input: <input type="checkbox" id="acc1" style="display: none;">
+- Trigger label: <label for="acc1">Click to expand</label>
+- Hidden content: <div class="accordion-content" style="display: none;">Hidden content</div>
 - CSS: #acc1:checked ~* .accordion-content { display: block !important; }
 
-SURVEY:
-- Radio inputs for each answer
-- Use progressive disclosure: each answer reveals next question
-- Fallback: Single table with CTA button
+SURVEY PROGRESSIVE DISCLOSURE:
+HTML Structure: input -> table -> tr -> td -> questions (requires ~*)
+- Answer inputs: <input type="radio" id="q1a" name="q1" style="display: none;">
+- Labels: <label for="q1a">Yes</label>
+- Next questions: <div class="question2" style="display: none;">Question 2...</div>
+- CSS: #q1a:checked ~* .question2 { display: block !important; }
+- CSS: #q1b:checked ~* .question3 { display: block !important; }
+
+SELECTOR PATH EXPLANATION:
+input (start) -> table (sibling ~) -> tr (nested *) -> td (nested *) -> content (nested * TARGET)
+This is why ~* is required - content is nested multiple levels deep in table structure.
 
 MODIFICATION REQUIREMENTS:
 1. Output COMPLETE HTML template from <!DOCTYPE html> to </html>
