@@ -1,4 +1,4 @@
-// api/generate.js - Vercel serverless function - CommonJS version 2
+// api/generate.js - Updated with proper kinetic email instructions
 import Anthropic from '@anthropic-ai/sdk';
 
 // Initialize Claude (Vercel will handle environment variables)
@@ -63,47 +63,76 @@ span.MsoHyperlinkFollowed { color: inherit !important; mso-style-priority: 99 !i
 
 /* GMAIL FIXES */
 u + .body a { color: inherit; text-decoration: none; font-size: inherit; font-weight: inherit; line-height: inherit; }
-.body { word-wrap: normal; word-spacing:normal; }
+/* Hide from display */
+.a6S { display: none !important; opacity: 0.01 !important; }
+.im { color: inherit !important; }
 
-/* ANDROID FIXES */
-div[style*="margin: 16px 0"] { margin: 0!important; }
-
-/* LAPOSTE WEBMAIL */
-#message *{ all:revert }
-
-/* EMAIL CONTAINER */
-table#email-container { max-width: 600px; margin-left: auto; margin-right: auto; }
-
-/* RESPONSIVE UTILITY CLASSES */
-.hide { display: none !important; width: 0px !important; height: 0px !important; mso-hide: all; font-size: 0px; }
-.mobile { width: 0; max-height: 0; overflow: hidden; float: left; display: none; }
-
-@media only screen and (max-width: 600px) { 
-    .mobile {display : block !important;width : 100% !important;max-height: inherit !important;overflow : visible !important;float : none !important;}
-    .desktop {display: none !important;width: 0px !important;height: 0px !important;mso-hide: all; font-size: 0px;}
-    .hidemobile {display: none !important;width: 0px !important;height: 0px !important;}
-    .full {width: 100% !important;float: none !important;display: block !important;margin-right: auto !important;margin-left: auto !important;padding-left: 0px !important;padding-right: 0px !important;text-align: center !important;padding-top: 10px !important;padding-bottom: 10px !important;}
-    .full0 {width: 100% !important;float: none !important;display: block !important;margin-right: auto !important;margin-left: auto !important;padding-left: 0px !important;padding-right: 0px !important;text-align: center !important;}
-    .mobile-center {margin-left: auto !important;margin-right: auto !important;display: table !important;}
-    .fluid {width:100% !important;}
+/* KINETIC EMAIL STYLES */
+/* Hide all form inputs */
+input[type="radio"], input[type="checkbox"] { 
+  display: none !important; 
+  -webkit-appearance: none !important; 
+  mso-hide: all !important; 
 }
 
-/* KINETIC EMAIL STYLES - PLACE KINETIC CSS HERE */
+/* KINETIC LIGHTSWITCH - Critical for email client compatibility */
+.kinetic { display: none !important; }
+
+/* Show interactive content when kinetic is supported */
+#Kinetic:checked ~* .interactive { display: block !important; }
+#Kinetic:checked ~* .fallback { display: none !important; }
+
+/* AOL/Yahoo Compatibility Fixes */
+#Kinetic:checked ~* .& .fallback { display: block !important; }
+#Kinetic:checked ~* .& .interactive { display: none !important; }
+
+/* Interactive content hidden by default */
+.interactive { display: none !important; }
+.fallback { display: block !important; }
+
+/* Add your kinetic styles here */
+
 </style>
 
 <style data-ignore-inlining>
-/* KINETIC INTERACTIVITY CSS GOES HERE */
+/* ADVANCED KINETIC STYLES - Not inlined for interaction preservation */
+
+/* KINETIC LIGHTSWITCH ADVANCED SELECTORS */
+#Kinetic:checked ~* .interactive { display: block !important; }
+#Kinetic:checked ~* .fallback { display: none !important; }
+
+/* Sibling combinator examples for kinetic interactions */
+/* IMPORTANT: Use ~* for deep nesting, ~ for direct siblings */
+
+/* Example tab structure:
+#tab1:checked ~* .content1 { display: block !important; }
+#tab2:checked ~* .content2 { display: block !important; }
+*/
+
+/* Example accordion structure:
+#accordion1:checked ~* .accordion-content1 { display: block !important; }
+#accordion1:checked ~* .accordion-arrow1 { transform: rotate(180deg); }
+*/
+
+/* Example survey structure:
+#q1a:checked ~* .question2 { display: block !important; }
+#q1b:checked ~* .question3 { display: block !important; }
+*/
+
+/* Add your specific kinetic interaction styles here */
+
 </style>
 </head>
-<body id="body" xml:lang="en" class="body">
-<div style="display:none">
-Preview text here &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847;
-</div>
-<div id="body-fix" role="article" aria-roledescription="email" aria-label="kinetic email" lang="en" dir="ltr" style="font-size:medium; font-size:max(16px, 1rem)">
-<!--[if (gte mso 9) | IE]>
-<table align="center" width="600" style="margin-left:auto; margin-right:auto;" role="none">
-<tr><td>
+<body class="body">
+<!--[if mso]>
+<table width="100%" cellspacing="0" cellpadding="0" border="0" role="none">
+<tr><td width="600">
 <![endif]-->
+
+<div id="body-fix">
+
+<!-- KINETIC LIGHTSWITCH - CRITICAL: This must be first -->
+<input type="checkbox" class="kinetic" name="interactive" id="Kinetic" checked style="display: none !important;">
 
 <table id="email-container" width="100%" cellspacing="0" cellpadding="0" border="0" role="none">
 <!-- KINETIC EMAIL CONTENT GOES HERE -->
@@ -119,35 +148,58 @@ Preview text here &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199;&#847; &#8199
 
 const ENHANCED_SYSTEM_PROMPT = `You are an expert EMAIL developer creating KINETIC EMAILS using ONLY HTML and CSS.
 
-CRITICAL INSTRUCTIONS:
-- You MUST output the COMPLETE modified HTML template
-- Do NOT provide instructions or explanations 
-- Do NOT break down the template into pieces
-- Output the ENTIRE HTML from <!DOCTYPE html> to </html>
+CRITICAL KINETIC EMAIL RULES:
 
-EMAIL CONSTRAINTS:
-- This is for EMAIL CLIENTS (Apple Mail, iOS Mail)
-- NO JavaScript allowed
-- Use checkbox hack: hidden inputs + CSS :checked selectors
-- Table-based layouts required for email compatibility
+1. KINETIC LIGHTSWITCH (MANDATORY):
+   - ALWAYS include: <input type="checkbox" class="kinetic" name="interactive" id="Kinetic" checked style="display: none !important;">
+   - This MUST be the first element after <table id="email-container">
+   - Wrap kinetic content in: <div class="interactive" style="display: none;">
+   - Wrap fallback content in: <div class="fallback" style="display: block;">
 
-BASE TEMPLATE TO MODIFY:
-${BASE_TEMPLATE}
+2. CSS PSEUDO SELECTORS:
+   - Use ~* for nested elements: #tab1:checked ~* .content1 { display: block !important; }
+   - Use ~ only for direct siblings: #tab1:checked ~ .tabs label[for="tab1"] { background: blue; }
+   - ALWAYS include !important on display properties
+   - Test all selectors work with deep nesting
+
+3. FALLBACK CONTENT STRUCTURE:
+   - Fallback MUST use table-based layout (no divs for structure)
+   - Kinetic content CAN use divs freely
+   - For surveys: Fallback = single CTA button "Take Survey" with "View in Browser" link
+   - For other content: Fallback should match kinetic content but in static table format
+
+4. CONTENT MATCHING:
+   - Fallback content should show same information as kinetic version
+   - Exception: Surveys show CTA instead of actual survey
+   - Use semantic HTML in fallback (proper headings, paragraphs)
+
+WORKING EXAMPLES:
+
+TABS:
+- Radio inputs: <input type="radio" id="tab1" name="tabs" checked style="display: none;">
+- Labels: <label for="tab1" style="cursor: pointer;">Tab 1</label>
+- Content: <div class="tab-content" id="content1">Content here</div>
+- CSS: #tab1:checked ~* #content1 { display: block !important; }
+
+ACCORDION:
+- Checkbox inputs: <input type="checkbox" id="acc1" style="display: none;">
+- Trigger: <label for="acc1">Click to expand</label>
+- Content: <div class="accordion-content">Hidden content</div>
+- CSS: #acc1:checked ~* .accordion-content { display: block !important; }
+
+SURVEY:
+- Radio inputs for each answer
+- Use progressive disclosure: each answer reveals next question
+- Fallback: Single table with CTA button
 
 MODIFICATION REQUIREMENTS:
-1. Keep the entire template structure intact
-2. Replace "<!-- KINETIC EMAIL CONTENT GOES HERE -->" with your email content
-3. Add kinetic CSS in the "/* KINETIC EMAIL STYLES */" section  
-4. Add interactive CSS in the <style data-ignore-inlining> block
-5. Include lightswitch pattern and proper content labeling
+1. Output COMPLETE HTML template from <!DOCTYPE html> to </html>
+2. Replace "<!-- KINETIC EMAIL CONTENT GOES HERE -->" with your content
+3. Add kinetic-specific CSS in both style sections
+4. Include proper lightswitch implementation
+5. Create appropriate fallback content
 
-WORKING KINETIC PATTERN:
-- Hidden inputs: <input type="radio" id="tab1" name="tabs" checked style="display:none;">
-- Clickable labels: <label for="tab1">Click me</label>
-- Content sections with classes: kinetic-content (hidden), fallback-content (shown)
-- CSS selectors: #tab1:checked ~ table#email-container .content { display: block !important; }
-
-OUTPUT REQUIREMENT: Complete modified HTML template ready to use in email campaigns.`;
+OUTPUT: Complete modified HTML template ready for email campaigns.`;
 
 // Helper function to detect kinetic technique
 function detectKineticTechnique(html) {
@@ -157,7 +209,10 @@ function detectKineticTechnique(html) {
     if (html.includes('slide') || html.includes('carousel')) return 'carousel';
     return 'navigation';
   }
-  if (html.includes('type="checkbox"')) return 'toggle';
+  if (html.includes('type="checkbox"')) {
+    if (html.includes('accordion')) return 'accordion';
+    return 'toggle';
+  }
   return 'unknown';
 }
 
@@ -187,25 +242,40 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
+    // Enhanced user prompt with specific kinetic requirements
     const userPrompt = `Create a kinetic email for: ${prompt}
 
-YOU MUST OUTPUT THE COMPLETE MODIFIED HTML TEMPLATE - NOT INSTRUCTIONS!
+SPECIFIC REQUIREMENTS FOR THIS EMAIL:
 
-CRITICAL REQUIREMENTS:
-1. Output the ENTIRE base template HTML from <!DOCTYPE html> to </html>
-2. Insert your kinetic email content where it says "<!-- KINETIC EMAIL CONTENT GOES HERE -->"
-3. Add kinetic CSS in the designated style sections
-4. Do NOT give instructions - output the complete working HTML
+1. KINETIC LIGHTSWITCH:
+   - Include the lightswitch checkbox as first element
+   - Wrap interactive version in <div class="interactive" style="display: none;">
+   - Create table-based fallback in <div class="fallback" style="display: block;">
 
-KINETIC TECHNIQUE:
-- Use checkbox hack: hidden inputs + CSS :checked selectors
-- Include lightswitch pattern with kinetic-content/fallback-content classes
-- Use table layouts for email compatibility
-- Add proper mobile responsive behavior
+2. CSS SELECTORS:
+   - Use correct ~* syntax for nested elements
+   - Include !important on all display properties
+   - Test that selectors work with email client restrictions
 
-OUTPUT FORMAT: Complete HTML template with your content inserted (no explanations or instructions).`;
+3. FALLBACK STRATEGY:
+   ${prompt.toLowerCase().includes('survey') || prompt.toLowerCase().includes('quiz') || prompt.toLowerCase().includes('form') ? 
+     '- Create a CTA button "Take Survey" instead of showing actual survey\n   - Include "View in Browser" text in the CTA' :
+     '- Match the kinetic content but use static table layout\n   - Show all content that would be available interactively'
+   }
 
-    console.log('Generating complete HTML template for:', prompt);
+4. STRUCTURE:
+   - Kinetic content: Can use divs freely for layout
+   - Fallback content: Must use table-based structure for email compatibility
+   - Both versions should serve the same purpose
+
+YOU MUST OUTPUT THE COMPLETE MODIFIED HTML TEMPLATE - NO INSTRUCTIONS OR EXPLANATIONS!
+
+Base template to modify:
+${BASE_TEMPLATE}
+
+Replace "<!-- KINETIC EMAIL CONTENT GOES HERE -->" with your kinetic email implementation.`;
+
+    console.log('Generating kinetic email for:', prompt);
 
     const response = await anthropic.messages.create({
       model: "claude-3-5-sonnet-20241022",
@@ -222,14 +292,28 @@ OUTPUT FORMAT: Complete HTML template with your content inserted (no explanation
 
     const generatedHTML = response.content[0].text;
 
+    // Enhanced validation
+    const hasLightswitch = generatedHTML.includes('id="Kinetic"');
+    const hasInteractiveClass = generatedHTML.includes('class="interactive"');
+    const hasFallbackClass = generatedHTML.includes('class="fallback"');
+    const hasProperSelectors = generatedHTML.includes('~*');
+
     res.status(200).json({
       html: generatedHTML,
       success: true,
       metadata: {
-        template: 'base_template_v1',
+        template: 'enhanced_kinetic_v2',
         complexity,
-        hasLightswitch: generatedHTML.includes('id="Kinetic"'),
-        technique: detectKineticTechnique(generatedHTML)
+        hasLightswitch,
+        hasInteractiveClass,
+        hasFallbackClass,
+        hasProperSelectors,
+        technique: detectKineticTechnique(generatedHTML),
+        validation: {
+          lightswitch: hasLightswitch,
+          properStructure: hasInteractiveClass && hasFallbackClass,
+          cssSelectors: hasProperSelectors
+        }
       }
     });
 
