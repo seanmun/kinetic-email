@@ -166,8 +166,13 @@ CRITICAL KINETIC EMAIL RULES:
 1. KINETIC LIGHTSWITCH (MANDATORY):
    - ALWAYS include: <input type="checkbox" class="kinetic" name="interactive" id="Kinetic" checked style="display: none !important;">
    - This MUST be the first element after <table id="email-container">
-   - Wrap kinetic content in: <div class="interactive" style="display: none;">
-   - Wrap fallback content in: <div class="fallback" style="display: block;">
+   - Always include the kinetic lightswitch
+   - Place kineitc module within a table, use firt td to separate kinetic from fallback
+   - Wrap kinetic content in: <!--[if !mso]><!--> <td class="interactive" style="display: none;"></td><!--<![endif]-->
+   - Must wrap opening interactive td with mso code to hide it on outlook
+   - for actual kinetic fucntioning code, use <div>'s
+   - Wrap fallback content in:  <td class="fallback"></td>
+   - Fallback content must use <tr><td><table> structure to to limitations in outlook
 
 2. CSS PSEUDO SELECTORS (CRITICAL UNDERSTANDING):
    
@@ -228,6 +233,7 @@ HTML Structure: input -> table -> tr -> td -> questions (requires ~*)
 - Next questions: <div class="question2" style="display: none;">Question 2...</div>
 - CSS: #q1a:checked ~* .question2 { display: block !important; }
 - CSS: #q1b:checked ~* .question3 { display: block !important; }
+- For the fallback on Surveys use a simple CTA button to "take the survey" we will use a view in brower link to get subscribers into kinetic version
 
 SELECTOR PATH EXPLANATION:
 input (start) -> table (sibling ~) -> tr (nested *) -> td (nested *) -> content (nested * TARGET)
@@ -239,6 +245,7 @@ MODIFICATION REQUIREMENTS:
 3. Add kinetic-specific CSS in both style sections
 4. Include proper lightswitch implementation
 5. Create appropriate fallback content
+6. Prioritize mobile responsiveness
 
 OUTPUT: Complete modified HTML template ready for email campaigns.`;
 
