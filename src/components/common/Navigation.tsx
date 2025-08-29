@@ -76,6 +76,9 @@ const Navigation = () => {
           <NavLink to="/examples" active={isActive('/examples')}>
             Examples
           </NavLink>
+          <NavLink to="/blog" active={isActive('/blog')}>
+            Blog
+          </NavLink>
           <PlaygroundNavLink to="/playground" active={isActive('/playground')}>
             <div className="flex items-center gap-2">
               <FaRobot className="text-sm" />
@@ -104,6 +107,9 @@ const Navigation = () => {
             </MobileNavLink>
             <MobileNavLink to="/examples" active={isActive('/examples')}>
               Examples
+            </MobileNavLink>
+            <MobileNavLink to="/blog" active={isActive('/blog')}>
+              Blog
             </MobileNavLink>
             <MobilePlaygroundNavLink to="/playground" active={isActive('/playground')}>
               <div className="flex items-center gap-2">
