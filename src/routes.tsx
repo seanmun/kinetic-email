@@ -9,6 +9,7 @@ import CheckboxHackModule from './pages/learn/CheckboxHackModule';
 import LightswitchModule from './pages/learn/LightswitchModule';
 import TabbedElementsModule from './pages/learn/TabbedElementsModule';
 import AdvancedTechniquesModule from './pages/learn/AdvancedTechniquesModule';
+import TrackingModule from './pages/learn/TrackingModule';
 import ExamplesPage from './pages/examples/ExamplesPage';
 import TabbedExample from './pages/examples/TabbedExample';
 import ShowcaseExample from './pages/examples/ShowcaseExample';
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
           { path: 'lightswitch', element: <LightswitchModule /> },
           { path: 'tabbed-elements', element: <TabbedElementsModule /> },
           { path: 'advanced-techniques', element: <AdvancedTechniquesModule /> },
+          { path: 'tracking', element: <TrackingModule /> },
         ]
       },
       // Examples section
