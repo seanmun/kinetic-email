@@ -1,6 +1,7 @@
 // src/components/learn/tabs/TabbedAdvancedExample.tsx
 
 import React, { useState } from 'react';
+import CodeBlock from '../../../components/common/CodeBlock';
 
 const TabbedAdvancedExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -16,8 +17,8 @@ const TabbedAdvancedExample: React.FC = () => {
       <div className="grid md:grid-cols-2 gap-8">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Styled Tabs</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`/* Horizontal tabs with more styling */
+          <CodeBlock
+            code={`/* Horizontal tabs with more styling */
 .tabs {
   display: flex;
   border-bottom: 2px solid #e5e7eb;
@@ -41,12 +42,13 @@ const TabbedAdvancedExample: React.FC = () => {
 #tab3:checked ~ .tabs label[for="tab3"] {
   border-bottom: 2px solid #2563eb;
   color: #2563eb;
-}`}</pre>
-          </div>
+}`}
+            language="css"
+          />
           
           <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Animated Transitions</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`/* Fade-in effect for tab content */
+          <CodeBlock
+            code={`/* Fade-in effect for tab content */
 .tab-content {
   display: none;
   opacity: 0;
@@ -58,8 +60,9 @@ const TabbedAdvancedExample: React.FC = () => {
 #tab3:checked ~* #content3 {
   display: block !important;
   opacity: 1;
-}`}</pre>
-          </div>
+}`}
+            language="css"
+          />
           
           <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200 mt-4">
             <p className="text-yellow-800 text-sm">
@@ -70,8 +73,8 @@ const TabbedAdvancedExample: React.FC = () => {
         
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-3">Vertical Tabs</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`/* Vertical tab layout */
+          <CodeBlock
+            code={`/* Vertical tab layout */
 .tabs-container {
   display: flex;
 }
@@ -103,12 +106,13 @@ const TabbedAdvancedExample: React.FC = () => {
 .content {
   padding-left: 20px;
   flex: 1;
-}`}</pre>
-          </div>
+}`}
+            language="css"
+          />
           
           <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">Icons in Tabs</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`/* Tab with icons */
+          <CodeBlock
+            code={`/* Tab with icons */
 .tabs label {
   display: flex;
   align-items: center;
@@ -133,8 +137,9 @@ const TabbedAdvancedExample: React.FC = () => {
 
 .tabs label[for="tab3"] .icon {
   background-image: url('support-icon.png');
-}`}</pre>
-          </div>
+}`}
+            language="css"
+          />
         </div>
       </div>
       

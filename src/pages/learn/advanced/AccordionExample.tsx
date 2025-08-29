@@ -1,5 +1,6 @@
 // src/pages/learn/advanced/AccordionExample.tsx
 import React, { useState } from 'react';
+import CodeBlock from '../../../components/common/CodeBlock';
 
 const AccordionExample: React.FC = () => {
   const [openSection, setOpenSection] = useState<string>('section1');
@@ -209,8 +210,8 @@ const AccordionExample: React.FC = () => {
         <div className="grid md:grid-cols-2 gap-8">
           <div>
             <h4 className="font-medium text-gray-900 mb-3">HTML Structure</h4>
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`<!-- Radio buttons for accordion control -->
+            <CodeBlock
+              code={`<!-- Radio buttons for accordion control -->
 <input type="radio" name="accordion" id="section1" class="accordion-radio" checked>
 <input type="radio" name="accordion" id="section2" class="accordion-radio">
 <input type="radio" name="accordion" id="section3" class="accordion-radio">
@@ -285,14 +286,15 @@ const AccordionExample: React.FC = () => {
       The ROI has been incredible!" - Sarah J., Marketing Director</p>
     </div>
   </div>
-</div>`}</pre>
-            </div>
+</div>`}
+                language="html"
+              />
           </div>
           
           <div>
             <h4 className="font-medium text-gray-900 mb-3">CSS for Animation</h4>
-            <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`/* Hide radio buttons */
+            <CodeBlock
+              code={`/* Hide radio buttons */
 .accordion-radio {
   position: absolute;
   opacity: 0;
@@ -405,8 +407,9 @@ const AccordionExample: React.FC = () => {
   margin-top: 0;
   margin-bottom: 10px;
   font-weight: 600;
-}`}</pre>
-            </div>
+}`}
+              language="css"
+            />
           </div>
         </div>
       </div>
