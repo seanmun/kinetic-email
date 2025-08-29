@@ -1,6 +1,7 @@
 // src/components/learn/tabs/TabbedBasicExample.tsx
 
 import React, { useState } from 'react';
+import CodeBlock from '../../../components/common/CodeBlock';
 
 const TabbedBasicExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -16,8 +17,8 @@ const TabbedBasicExample: React.FC = () => {
       <div className="grid md:grid-cols-2 gap-8">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-3">HTML Structure</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`<!-- Tab inputs -->
+          <CodeBlock
+            code={`<!-- Tab inputs -->
 <input type="radio" id="tab1" name="tabs" checked>
 <input type="radio" id="tab2" name="tabs">
 <input type="radio" id="tab3" name="tabs">
@@ -43,12 +44,13 @@ const TabbedBasicExample: React.FC = () => {
     <h2>Content for Tab 3</h2>
     <p>This is the content for the third tab.</p>
   </div>
-</div>`}</pre>
-          </div>
+</div>`}
+            language="html"
+          />
           
           <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">CSS Rules</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`/* Hide radio buttons */
+          <CodeBlock
+            code={`/* Hide radio buttons */
 input[type="radio"] { 
   display: none; 
 }
@@ -87,8 +89,9 @@ label {
 #tab2:checked ~* #content2,
 #tab3:checked ~* #content3 { 
   display: block !important; 
-}`}</pre>
-          </div>
+}`}
+            language="css"
+          />
         </div>
         
         <div>

@@ -3,6 +3,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
+import CodeBlock from '../../components/common/CodeBlock';
 
 const CheckboxHackModule: React.FC = () => {
   return (
@@ -100,18 +101,19 @@ const CheckboxHackModule: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">HTML Structure</h3>
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <pre className="text-sm text-gray-800 whitespace-pre">{`<input type="checkbox" id="toggle" class="hidden-checkbox">
+              <CodeBlock
+                code={`<input type="checkbox" id="toggle" class="hidden-checkbox">
 <label for="toggle" class="toggle-label">Show Details</label>
 
 <div class="content">
   This content will be hidden until the checkbox is checked.
-</div>`}</pre>
-              </div>
+</div>`}
+                language="html"
+              />
               
               <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">CSS Rules</h3>
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <pre className="text-sm text-gray-800 whitespace-pre">{`.hidden-checkbox {
+              <CodeBlock
+                code={`.hidden-checkbox {
   display: none;
 }
 
@@ -137,8 +139,9 @@ const CheckboxHackModule: React.FC = () => {
 /* The key selector that shows content when checked */
 #toggle:checked ~ .content {
   display: block !important;
-}`}</pre>
-              </div>
+}`}
+                language="css"
+              />
             </div>
             
             <div>
@@ -228,8 +231,8 @@ const CheckboxHackModule: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">HTML Structure</h3>
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <pre className="text-sm text-gray-800 whitespace-pre">{`<input type="radio" id="tab1" name="tabs" checked>
+              <CodeBlock
+                code={`<input type="radio" id="tab1" name="tabs" checked>
 <input type="radio" id="tab2" name="tabs">
 <input type="radio" id="tab3" name="tabs">
 
@@ -243,12 +246,13 @@ const CheckboxHackModule: React.FC = () => {
   <div id="content1" class="tab-content">Content for Tab 1</div>
   <div id="content2" class="tab-content">Content for Tab 2</div>
   <div id="content3" class="tab-content">Content for Tab 3</div>
-</div>`}</pre>
-              </div>
+</div>`}
+                language="html"
+              />
               
               <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">CSS Rules</h3>
-              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                <pre className="text-sm text-gray-800 whitespace-pre">{`/* Hide radio buttons */
+              <CodeBlock
+                code={`/* Hide radio buttons */
 input[type="radio"] { 
   display: none; 
 }
@@ -287,8 +291,9 @@ label {
 #tab2:checked ~ .content #content2,
 #tab3:checked ~ .content #content3 { 
   display: block !important; 
-}`}</pre>
-              </div>
+}`}
+                language="css"
+              />
             </div>
             
             <div>

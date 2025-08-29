@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CodeBlock from '../../../components/common/CodeBlock';
 
 const LightswitchExample: React.FC = () => {
   // State to simulate toggling between supported and unsupported client view
@@ -16,8 +17,8 @@ const LightswitchExample: React.FC = () => {
       <div className="grid md:grid-cols-2 gap-8">
         <div>
           <h3 className="text-lg font-semibold text-gray-900 mb-3">HTML Structure</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre">{`<!-- The Lightswitch checkbox -->
+          <CodeBlock
+            code={`<!-- The Lightswitch checkbox -->
 <input type="checkbox" class="kinetic" 
   name="interactive" id="Kinetic" checked>
 
@@ -29,12 +30,13 @@ const LightswitchExample: React.FC = () => {
 <!-- Fallback content container -->
 <div class="fallback">
   <!-- Your fallback content here -->
-</div>`}</pre>
-          </div>
+</div>`}
+            language="html"
+          />
           
           <h3 className="text-lg font-semibold text-gray-900 mt-6 mb-3">CSS Rules</h3>
-          <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-            <pre className="text-sm text-gray-800 whitespace-pre">{`/* Hide the checkbox */
+          <CodeBlock
+            code={`/* Hide the checkbox */
 .kinetic {
   display: none;
 }
@@ -55,8 +57,9 @@ const LightswitchExample: React.FC = () => {
 }
 #Kinetic:checked ~* .& .interactive { 
   display: none !important; 
-}`}</pre>
-          </div>
+}`}
+            language="css"
+          />
         </div>
         
         <div>
@@ -111,8 +114,8 @@ const LightswitchExample: React.FC = () => {
           This example shows a tabbed interface with a fallback for non-supporting email clients:
         </p>
         
-        <div className="bg-white p-4 rounded border border-gray-300">
-          <pre className="text-sm text-gray-800 whitespace-pre overflow-x-auto">{`<!-- The Lightswitch -->
+        <CodeBlock
+          code={`<!-- The Lightswitch -->
 <input type="checkbox" class="kinetic" name="interactive" id="Kinetic" checked>
 
 <!-- Interactive Tabbed Content -->
@@ -147,7 +150,6 @@ const LightswitchExample: React.FC = () => {
 <!-- Fallback Content -->
 <div class="fallback">
   <h2>Our Products</h2>
-  <!-- Static version with all products listed vertically -->
   <div class="fallback-item">
     <h3>Product A</h3>
     <p>This is the fallback content for Product A.</p>
@@ -160,8 +162,9 @@ const LightswitchExample: React.FC = () => {
     <h3>Product C</h3>
     <p>This is the fallback content for Product C.</p>
   </div>
-</div>`}</pre>
-        </div>
+</div>`}
+          language="html"
+        />
       </div>
       
       {/* Live Interactive Example */}
