@@ -15,6 +15,7 @@ import TabbedExample from './pages/examples/TabbedExample';
 import ShowcaseExample from './pages/examples/ShowcaseExample';
 import SurveyExample from './pages/examples/SurveyExample';
 import PlaygroundPage from './pages/playground/PlaygroundPage';
+import BlogPage from './pages/blog/BlogPage';
 
 // Import portfolio components
 import PortfolioPage from './pages/portfolio/PortfolioPage';
@@ -48,6 +49,7 @@ const router = createBrowserRouter([
         ]
       },
       { path: 'playground', element: <PlaygroundPage /> },
+      { path: 'blog', element: <BlogPage /> },
       
       // Portfolio section
       { path: 'portfolio',
