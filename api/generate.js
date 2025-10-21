@@ -1,9 +1,21 @@
 // api/generate.js - Updated with proper kinetic email instructions
 import Anthropic from '@anthropic-ai/sdk';
+import { Pinecone } from '@pinecone-database/pinecone';
+import OpenAI from 'openai';
 
 // Initialize Claude (Vercel will handle environment variables)
 const anthropic = new Anthropic({
   apiKey: process.env.CLAUDE_API_KEY
+});
+
+// Initialize Pinecone for RAG
+const pinecone = new Pinecone({
+  apiKey: process.env.PINECONE_API_KEY
+});
+
+// Initialize OpenAI for embeddings
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
 });
 
 // Your base template and prompts (same as before)
@@ -284,14 +296,83 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { prompt, useTemplate = true, complexity = 'intermediate' } = req.body;
+    const { prompt, useTemplate = true, complexity = 'intermediate', useRAG = false } = req.body;
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
     }
 
+    // RAG: Retrieve similar examples from Pinecone if enabled
+    let ragExamples = '';
+    let ragMetadata = { used: false, examplesCount: 0 };
+
+    if (useRAG) {
+      try {
+        console.log('RAG mode enabled - querying Pinecone for similar examples...');
+
+        // Generate embedding for user's prompt
+        const embeddingResponse = await openai.embeddings.create({
+          model: 'text-embedding-3-small',
+          input: prompt,
+        });
+
+        const queryEmbedding = embeddingResponse.data[0].embedding;
+
+        // Query Pinecone for top 5 similar examples
+        const index = pinecone.index(process.env.PINECONE_INDEX_NAME);
+        const queryResponse = await index.query({
+          vector: queryEmbedding,
+          topK: 5,
+          includeMetadata: true,
+        });
+
+        console.log(`Found ${queryResponse.matches.length} similar examples`);
+
+        // Build RAG context from retrieved examples
+        if (queryResponse.matches.length > 0) {
+          ragExamples = '\n\n--- REFERENCE EXAMPLES FROM KNOWLEDGE BASE ---\n\n';
+          ragExamples += 'Here are proven examples similar to what the user is requesting. Use these as reference for structure, patterns, and best practices:\n\n';
+
+          queryResponse.matches.forEach((match, index) => {
+            const meta = match.metadata;
+            ragExamples += `\nEXAMPLE ${index + 1} (Similarity: ${(match.score * 100).toFixed(1)}%):\n`;
+
+            if (meta.type === 'html') {
+              ragExamples += `Description: ${meta.description}\n`;
+              ragExamples += `Technique: ${meta.technique}\n`;
+              ragExamples += `Purpose: ${meta.emailPurpose}\n`;
+              ragExamples += `Complexity: ${meta.complexity}\n`;
+              if (meta.keyFeatures && meta.keyFeatures.length > 0) {
+                ragExamples += `Features: ${meta.keyFeatures.join(', ')}\n`;
+              }
+              ragExamples += `\nHTML Code:\n${meta.html}\n`;
+              ragExamples += '\n---\n';
+            } else if (meta.type === 'blog') {
+              ragExamples += `Blog Title: ${meta.blogTitle}\n`;
+              ragExamples += `Topic: ${meta.blogTopic}\n`;
+              ragExamples += `Key Takeaways: ${meta.keyTakeaways}\n`;
+              ragExamples += `\nContent (excerpt):\n${meta.blogContent.substring(0, 1000)}...\n`;
+              ragExamples += '\n---\n';
+            }
+          });
+
+          ragExamples += '\nIMPORTANT: Use these examples as reference for proven patterns, but adapt them to the user\'s specific request. Maintain the quality and structure demonstrated in these examples.\n';
+          ragExamples += '--- END REFERENCE EXAMPLES ---\n\n';
+
+          ragMetadata = {
+            used: true,
+            examplesCount: queryResponse.matches.length,
+            topScore: queryResponse.matches[0]?.score || 0,
+          };
+        }
+      } catch (error) {
+        console.error('RAG retrieval error (continuing without RAG):', error);
+        // Continue without RAG if there's an error
+      }
+    }
+
     // Enhanced user prompt with specific kinetic requirements
-    const userPrompt = `Create a kinetic email for: ${prompt}
+    const userPrompt = `${ragExamples}Create a kinetic email for: ${prompt}
 
 SPECIFIC REQUIREMENTS FOR THIS EMAIL:
 
@@ -361,7 +442,8 @@ Replace "<!-- KINETIC EMAIL CONTENT GOES HERE -->" with your kinetic email imple
           lightswitch: hasLightswitch,
           properStructure: hasInteractiveClass && hasFallbackClass,
           cssSelectors: hasProperSelectors
-        }
+        },
+        rag: ragMetadata
       }
     });
 

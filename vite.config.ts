@@ -5,13 +5,13 @@ import path from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  
+
   // Define the public directory explicitly
   publicDir: 'public',
-  
+
   // Set the base path
   base: '/',
-  
+
   // Configure asset handling
   resolve: {
     alias: {
@@ -19,7 +19,7 @@ export default defineConfig({
       '@public': path.resolve(__dirname, 'public')
     }
   },
-  
+
   // Ensure dev server handles paths correctly
   server: {
     fs: {
