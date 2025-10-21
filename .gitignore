@@ -28,3 +28,6 @@ dist-ssr
 .env.local
 .env.test
 .env.*
+
+# Internal documentation
+CONTEXT.md
