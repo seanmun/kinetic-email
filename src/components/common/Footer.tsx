@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Modal from '../common/Modal'; // Adjust the import path as needed
 
 const Footer: React.FC = () => {
@@ -29,7 +30,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div>
               <p className="text-gray-600 mb-4 md:mb-0">
-                © {currentYear} Kinetic.email. All rights reserved.
+                © {currentYear} Kinetic.email. <Link to="/admin" className="hover:text-gray-800 transition-colors">All rights reserved</Link>.
               </p>
             </div>
             

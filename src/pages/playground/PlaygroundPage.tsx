@@ -18,6 +18,7 @@ const PlaygroundPage = () => {
   const [viewMode, setViewMode] = useState<ViewMode>('preview');
   const [showExamples, setShowExamples] = useState(true);
   const [hasGenerated, setHasGenerated] = useState(false);
+  const [useRAG, setUseRAG] = useState(false);
 
   // Function to extract just the HTML from Claude's response
   const extractHTML = (responseText: string) => {
@@ -60,10 +61,11 @@ const PlaygroundPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           prompt,
           useTemplate: true,
-          complexity: 'intermediate'
+          complexity: 'intermediate',
+          useRAG
         }),
       });
 
@@ -153,7 +155,24 @@ const PlaygroundPage = () => {
                       placeholder="Example: Create a tabbed product showcase for running shoes with features, specs, and reviews"
                     />
                   </div>
-                  
+
+                  {/* RAG Toggle */}
+                  <div className="flex items-center justify-between p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
+                    <div className="flex items-center gap-3">
+                      <div className="flex-shrink-0">
+                        <div className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-200 ${useRAG ? 'bg-purple-600' : 'bg-gray-300'}`} onClick={() => setUseRAG(!useRAG)}>
+                          <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200 ${useRAG ? 'translate-x-6' : ''}`}></div>
+                        </div>
+                      </div>
+                      <div>
+                        <label className="text-sm font-semibold text-gray-900 cursor-pointer" onClick={() => setUseRAG(!useRAG)}>
+                          Use RAG Model <span className="text-purple-600 text-xs">(Beta)</span>
+                        </label>
+                        <p className="text-xs text-gray-600 mt-0.5">Enhanced with example-based learning</p>
+                      </div>
+                    </div>
+                  </div>
+
                   <button
                     onClick={generateEmail}
                     disabled={isLoading}
