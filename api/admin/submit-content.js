@@ -4,6 +4,10 @@
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Sheba';
 
 export default async function handler(req, res) {
+  console.log('=== SUBMIT CONTENT API CALLED ===');
+  console.log('Method:', req.method);
+  console.log('Body:', JSON.stringify(req.body).substring(0, 200));
+
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -12,17 +16,20 @@ export default async function handler(req, res) {
 
   // Handle preflight requests
   if (req.method === 'OPTIONS') {
+    console.log('OPTIONS request - returning');
     res.status(200).end();
     return;
   }
 
   // Only allow POST requests
   if (req.method !== 'POST') {
+    console.log('Invalid method:', req.method);
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
     const { uploadType, ...data } = req.body;
+    console.log('Upload type:', uploadType);
 
     if (!uploadType || (uploadType !== 'html' && uploadType !== 'blog')) {
       return res.status(400).json({ error: 'Invalid upload type' });
@@ -141,10 +148,15 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error('Submit content error:', error);
+    console.error('=== SUBMIT CONTENT ERROR ===');
+    console.error('Error message:', error.message);
+    console.error('Error stack:', error.stack);
+    console.error('Full error:', JSON.stringify(error, null, 2));
+
     res.status(500).json({
       error: 'Failed to submit content',
-      details: error.message
+      details: error.message,
+      stack: error.stack
     });
   }
 }
