@@ -1,21 +1,9 @@
 // api/generate.js - Updated with proper kinetic email instructions
 import Anthropic from '@anthropic-ai/sdk';
-import { Pinecone } from '@pinecone-database/pinecone';
-import OpenAI from 'openai';
 
 // Initialize Claude (Vercel will handle environment variables)
 const anthropic = new Anthropic({
   apiKey: process.env.CLAUDE_API_KEY
-});
-
-// Initialize Pinecone for RAG
-const pinecone = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY
-});
-
-// Initialize OpenAI for embeddings
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
 });
 
 // Your base template and prompts (same as before)
@@ -309,6 +297,18 @@ export default async function handler(req, res) {
     if (useRAG) {
       try {
         console.log('RAG mode enabled - querying Pinecone for similar examples...');
+
+        // Lazy load RAG dependencies only when needed
+        const { Pinecone } = await import('@pinecone-database/pinecone');
+        const OpenAI = (await import('openai')).default;
+
+        const pinecone = new Pinecone({
+          apiKey: process.env.PINECONE_API_KEY
+        });
+
+        const openai = new OpenAI({
+          apiKey: process.env.OPENAI_API_KEY
+        });
 
         // Generate embedding for user's prompt
         const embeddingResponse = await openai.embeddings.create({
