@@ -1,16 +1,4 @@
 // api/admin/submit-content.js - Upload content to Pinecone RAG
-import { Pinecone } from '@pinecone-database/pinecone';
-import OpenAI from 'openai';
-
-// Initialize Pinecone
-const pinecone = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY
-});
-
-// Initialize OpenAI for embeddings
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
 
 // Password from environment
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'Sheba';
@@ -108,6 +96,18 @@ export default async function handler(req, res) {
     }
 
     console.log('Creating embedding for:', embeddingText.substring(0, 100) + '...');
+
+    // Lazy load dependencies
+    const { Pinecone } = await import('@pinecone-database/pinecone');
+    const OpenAI = (await import('openai')).default;
+
+    const pinecone = new Pinecone({
+      apiKey: process.env.PINECONE_API_KEY
+    });
+
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
 
     // Generate embedding using OpenAI
     const embeddingResponse = await openai.embeddings.create({

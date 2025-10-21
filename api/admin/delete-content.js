@@ -1,10 +1,4 @@
 // api/admin/delete-content.js - Delete content from Pinecone
-import { Pinecone } from '@pinecone-database/pinecone';
-
-// Initialize Pinecone
-const pinecone = new Pinecone({
-  apiKey: process.env.PINECONE_API_KEY
-});
 
 export default async function handler(req, res) {
   // Set CORS headers
@@ -32,6 +26,13 @@ export default async function handler(req, res) {
     }
 
     console.log('Deleting content from Pinecone with ID:', id);
+
+    // Lazy load Pinecone
+    const { Pinecone } = await import('@pinecone-database/pinecone');
+
+    const pinecone = new Pinecone({
+      apiKey: process.env.PINECONE_API_KEY
+    });
 
     const index = pinecone.index(process.env.PINECONE_INDEX_NAME);
 
