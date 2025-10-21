@@ -842,13 +842,13 @@ const AdminPortal = () => {
       </PageLayout>
 
       {/* Preview Modal */}
-      <Modal isOpen={!!previewItem} onClose={() => setPreviewItem(null)}>
+      <Modal
+        isOpen={!!previewItem}
+        onClose={() => setPreviewItem(null)}
+        title={previewItem?.metadata.type === 'html' ? 'HTML Email Preview' : 'Blog Post Preview'}
+      >
         {previewItem && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              {previewItem.metadata.type === 'html' ? 'HTML Email Preview' : 'Blog Post Preview'}
-            </h2>
-
             {previewItem.metadata.type === 'html' ? (
               <div className="space-y-4">
                 <div>
@@ -891,10 +891,13 @@ const AdminPortal = () => {
       </Modal>
 
       {/* Delete Confirmation Modal */}
-      <Modal isOpen={!!deleteConfirmItem} onClose={() => setDeleteConfirmItem(null)}>
+      <Modal
+        isOpen={!!deleteConfirmItem}
+        onClose={() => setDeleteConfirmItem(null)}
+        title="Confirm Delete"
+      >
         {deleteConfirmItem && (
           <div className="p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Confirm Delete</h2>
             <p className="text-gray-600 mb-6">
               Are you sure you want to delete this item? This action cannot be undone.
             </p>
@@ -929,10 +932,12 @@ const AdminPortal = () => {
       </Modal>
 
       {/* How To Modal */}
-      <Modal isOpen={showHowToModal} onClose={() => setShowHowToModal(false)}>
+      <Modal
+        isOpen={showHowToModal}
+        onClose={() => setShowHowToModal(false)}
+        title="How to Build the Perfect RAG Knowledge Base"
+      >
         <div className="p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">How to Build the Perfect RAG Knowledge Base</h2>
-
           <div className="prose prose-sm max-w-none space-y-4 text-gray-700">
             <h3 className="text-lg font-semibold text-gray-900 mt-6">🎯 Goal</h3>
             <p>
