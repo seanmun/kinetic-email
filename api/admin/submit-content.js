@@ -57,7 +57,10 @@ export default async function handler(req, res) {
       }
 
       // Create rich embedding text combining all metadata
-      embeddingText = `${description}. ${technique} technique. ${emailPurpose} email. ${complexity} complexity. ${htmlType === 'complete' ? 'Complete email template' : 'Component module'}. Features: ${keyFeatures.join(', ')}. Best practices: ${bestPracticeTags.join(', ')}. ${notes || ''}`;
+      const featuresText = (keyFeatures && keyFeatures.length > 0) ? keyFeatures.join(', ') : 'none';
+      const practicesText = (bestPracticeTags && bestPracticeTags.length > 0) ? bestPracticeTags.join(', ') : 'none';
+
+      embeddingText = `${description}. ${technique} technique. ${emailPurpose} email. ${complexity} complexity. ${htmlType === 'complete' ? 'Complete email template' : 'Component module'}. Features: ${featuresText}. Best practices: ${practicesText}. ${notes || ''}`;
 
       metadata = {
         type: 'html',
@@ -88,7 +91,9 @@ export default async function handler(req, res) {
       }
 
       // Create embedding text from title, takeaways, and techniques
-      embeddingText = `${blogTitle}. ${keyTakeaways}. Topic: ${blogTopic}. Level: ${learningLevel}. Covers: ${techniquesCovered.join(', ')}. ${blogContent.substring(0, 500)}`;
+      const techniquesText = (techniquesCovered && techniquesCovered.length > 0) ? techniquesCovered.join(', ') : 'general';
+
+      embeddingText = `${blogTitle}. ${keyTakeaways}. Topic: ${blogTopic}. Level: ${learningLevel}. Covers: ${techniquesText}. ${blogContent.substring(0, 500)}`;
 
       metadata = {
         type: 'blog',
