@@ -356,8 +356,14 @@ export default async function handler(req, res) {
             }
           });
 
-          ragExamples += '\nIMPORTANT: Use these examples as reference for proven patterns, but adapt them to the user\'s specific request. Maintain the quality and structure demonstrated in these examples.\n';
-          ragExamples += '--- END REFERENCE EXAMPLES ---\n\n';
+          ragExamples += '\n⚠️ CRITICAL INSTRUCTIONS FOR USING THESE EXAMPLES:\n';
+          ragExamples += '1. Study the HTML structure, CSS selectors, and kinetic patterns in the examples above\n';
+          ragExamples += '2. REPLICATE the exact CSS selector patterns (especially ~* usage and !important)\n';
+          ragExamples += '3. COPY the lightswitch implementation exactly as shown\n';
+          ragExamples += '4. MAINTAIN the same table structure and MSO conditional patterns\n';
+          ragExamples += '5. Use these as your PRIMARY reference - they are proven working code\n';
+          ragExamples += '6. Adapt the content to match the user request, but keep the technical structure identical\n';
+          ragExamples += '\n--- END REFERENCE EXAMPLES ---\n\n';
 
           ragMetadata = {
             used: true,
