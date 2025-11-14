@@ -121,30 +121,47 @@ export default async function handler(req, res) {
       apiKey: process.env.OPENAI_API_KEY
     });
 
-    // Generate embedding using OpenAI
-    const embeddingResponse = await openai.embeddings.create({
-      model: 'text-embedding-3-small',
-      input: embeddingText,
-    });
+    // Generate BOTH embeddings (small + large)
+    console.log('Generating embeddings (small + large models)...');
 
-    const embedding = embeddingResponse.data[0].embedding;
+    const [smallEmbeddingResponse, largeEmbeddingResponse] = await Promise.all([
+      openai.embeddings.create({
+        model: 'text-embedding-3-small',
+        input: embeddingText,
+      }),
+      openai.embeddings.create({
+        model: 'text-embedding-3-large',
+        input: embeddingText,
+      })
+    ]);
 
-    console.log('Embedding created, storing in Pinecone...');
+    const smallEmbedding = smallEmbeddingResponse.data[0].embedding;
+    const largeEmbedding = largeEmbeddingResponse.data[0].embedding;
 
-    // Get Pinecone index
-    const index = pinecone.index(process.env.PINECONE_INDEX_NAME);
+    console.log('Embeddings created, storing in both Pinecone indexes...');
 
-    // Generate unique ID
+    // Get both Pinecone indexes
+    const smallIndex = pinecone.index(process.env.PINECONE_INDEX_NAME);
+    const largeIndex = pinecone.index(process.env.PINECONE_INDEX_NAME_LARGE);
+
+    // Generate unique ID (same for both indexes)
     const id = `${uploadType}-${Date.now()}-${Math.random().toString(36).substring(7)}`;
 
-    // Upsert to Pinecone
-    await index.upsert([{
-      id,
-      values: embedding,
-      metadata
-    }]);
+    // Upsert to BOTH Pinecone indexes in parallel
+    await Promise.all([
+      smallIndex.upsert([{
+        id,
+        values: smallEmbedding,
+        metadata
+      }]),
+      largeIndex.upsert([{
+        id,
+        values: largeEmbedding,
+        metadata
+      }])
+    ]);
 
-    console.log('Successfully stored in Pinecone with ID:', id);
+    console.log('Successfully stored in both Pinecone indexes with ID:', id);
 
     res.status(200).json({
       success: true,
