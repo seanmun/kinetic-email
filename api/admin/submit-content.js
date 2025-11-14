@@ -47,6 +47,7 @@ export default async function handler(req, res) {
         emailPurpose,
         complexity,
         htmlType,
+        exampleType = 'positive',
         keyFeatures,
         bestPracticeTags,
         notes
@@ -59,8 +60,9 @@ export default async function handler(req, res) {
       // Create rich embedding text combining all metadata
       const featuresText = (keyFeatures && keyFeatures.length > 0) ? keyFeatures.join(', ') : 'none';
       const practicesText = (bestPracticeTags && bestPracticeTags.length > 0) ? bestPracticeTags.join(', ') : 'none';
+      const exampleTypeText = exampleType === 'negative' ? 'NEGATIVE EXAMPLE - Anti-pattern to avoid' : 'POSITIVE EXAMPLE - Good pattern to follow';
 
-      embeddingText = `${description}. ${technique} technique. ${emailPurpose} email. ${complexity} complexity. ${htmlType === 'complete' ? 'Complete email template' : 'Component module'}. Features: ${featuresText}. Best practices: ${practicesText}. ${notes || ''}`;
+      embeddingText = `${description}. ${technique} technique. ${emailPurpose} email. ${complexity} complexity. ${htmlType === 'complete' ? 'Complete email template' : 'Component module'}. ${exampleTypeText}. Features: ${featuresText}. Best practices: ${practicesText}. ${notes || ''}`;
 
       metadata = {
         type: 'html',
@@ -70,6 +72,7 @@ export default async function handler(req, res) {
         emailPurpose,
         complexity,
         htmlType,
+        exampleType,
         keyFeatures,
         bestPracticeTags,
         notes: notes || '',
