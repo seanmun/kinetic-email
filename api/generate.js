@@ -284,7 +284,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { prompt, useTemplate = true, complexity = 'intermediate', useRAG = false, ragModel = 'small' } = req.body;
+    const {
+      prompt,
+      useTemplate = true,
+      complexity = 'intermediate',
+      useRAG = false,
+      ragModel = 'small',
+      metadataFilters = {} // New: optional metadata filters
+    } = req.body;
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
@@ -324,13 +331,43 @@ export default async function handler(req, res) {
 
         const queryEmbedding = embeddingResponse.data[0].embedding;
 
-        // Query Pinecone for top 10 similar examples
-        const index = pinecone.index(indexName);
-        const queryResponse = await index.query({
+        // Build Pinecone query with optional metadata filters
+        const queryOptions = {
           vector: queryEmbedding,
           topK: 10,
           includeMetadata: true,
-        });
+        };
+
+        // Add metadata filters if provided (hybrid search)
+        if (metadataFilters && Object.keys(metadataFilters).length > 0) {
+          queryOptions.filter = {};
+
+          // Filter by technique (tabs, accordion, carousel, etc.)
+          if (metadataFilters.technique) {
+            queryOptions.filter.technique = { $eq: metadataFilters.technique };
+          }
+
+          // Filter by complexity (beginner, intermediate, advanced)
+          if (metadataFilters.complexity) {
+            queryOptions.filter.complexity = { $eq: metadataFilters.complexity };
+          }
+
+          // Filter by email purpose (promotional, transactional, educational)
+          if (metadataFilters.emailPurpose) {
+            queryOptions.filter.emailPurpose = { $eq: metadataFilters.emailPurpose };
+          }
+
+          // Filter by type (html or blog)
+          if (metadataFilters.type) {
+            queryOptions.filter.type = { $eq: metadataFilters.type };
+          }
+
+          console.log('Applying metadata filters:', queryOptions.filter);
+        }
+
+        // Query Pinecone with hybrid search (vector + metadata)
+        const index = pinecone.index(indexName);
+        const queryResponse = await index.query(queryOptions);
 
         console.log(`Found ${queryResponse.matches.length} similar examples from ${ragModel} model`);
 
