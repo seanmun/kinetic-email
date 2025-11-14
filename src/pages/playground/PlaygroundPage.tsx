@@ -26,15 +26,22 @@ const PlaygroundPage = () => {
 
   // Function to extract just the HTML from Claude's response
   const extractHTML = (responseText: string) => {
-    // Look for HTML document pattern
+    // Claude should now return pure HTML, but let's handle both cases
+
+    // Check if response starts with DOCTYPE (pure HTML mode)
+    if (responseText.trim().startsWith('<!DOCTYPE')) {
+      return { html: responseText, explanation: '' };
+    }
+
+    // Look for HTML document pattern with explanation text before/after
     const htmlMatch = responseText.match(/<!DOCTYPE html>[\s\S]*?<\/html>/i);
-    
+
     if (htmlMatch) {
       const html = htmlMatch[0];
       const explanation = responseText.replace(htmlMatch[0], '').trim();
       return { html, explanation };
     }
-    
+
     // Fallback: if no DOCTYPE found, look for any <html> tag
     const htmlTagMatch = responseText.match(/<html[\s\S]*?<\/html>/i);
     if (htmlTagMatch) {
@@ -42,7 +49,7 @@ const PlaygroundPage = () => {
       const explanation = responseText.replace(htmlTagMatch[0], '').trim();
       return { html, explanation };
     }
-    
+
     // If no HTML structure found, treat entire response as explanation
     return { html: '', explanation: responseText };
   };
