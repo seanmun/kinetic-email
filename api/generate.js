@@ -323,10 +323,41 @@ export default async function handler(req, res) {
 
         console.log(`Using embedding model: ${embeddingModel}, index: ${indexName}`);
 
-        // Generate embedding for user's prompt
+        // Query Rewriting: Use Claude to reformulate the prompt for better retrieval
+        let searchQuery = prompt;
+        try {
+          console.log('Rewriting query with Claude for better retrieval...');
+          const rewriteResponse = await anthropic.messages.create({
+            model: "claude-sonnet-4-20250514",
+            max_tokens: 200,
+            temperature: 0.3,
+            messages: [{
+              role: "user",
+              content: `You are a search query optimizer for a kinetic email example database.
+
+The user wants: "${prompt}"
+
+Rewrite this into a concise search query (1-2 sentences) that captures:
+1. The kinetic technique needed (tabs, accordion, carousel, checkbox hack, etc.)
+2. The email purpose (promotional, educational, transactional, etc.)
+3. Key features or functionality
+
+Output ONLY the rewritten query, no explanations.`
+            }]
+          });
+
+          searchQuery = rewriteResponse.content[0].text.trim();
+          console.log('Original prompt:', prompt);
+          console.log('Rewritten query:', searchQuery);
+        } catch (error) {
+          console.error('Query rewriting failed, using original prompt:', error);
+          searchQuery = prompt;
+        }
+
+        // Generate embedding for the rewritten query
         const embeddingResponse = await openai.embeddings.create({
           model: embeddingModel,
-          input: prompt,
+          input: searchQuery,
         });
 
         const queryEmbedding = embeddingResponse.data[0].embedding;
