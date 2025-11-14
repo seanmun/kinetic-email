@@ -1127,6 +1127,17 @@ const AdminPortal = () => {
                 <li>Claude sees: "Here's how we built tabs before... now build this"</li>
                 <li>Output matches YOUR proven patterns and style</li>
               </ol>
+              <div className="mt-4 pt-4 border-t border-purple-200">
+                <a
+                  href="/how-it-works"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-purple-700 hover:text-purple-900 font-medium transition-colors"
+                >
+                  <FaQuestionCircle />
+                  Read Full Technical Deep Dive →
+                </a>
+              </div>
             </div>
 
             <h3 className="text-lg font-semibold text-gray-900 mt-6">⚠️ What NOT to Upload</h3>
