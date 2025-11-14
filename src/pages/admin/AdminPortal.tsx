@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PageLayout from '../../components/layout/PageLayout';
 import Modal from '../../components/common/Modal';
-import { FaLock, FaUpload, FaCheckCircle, FaQuestionCircle, FaCode, FaBook, FaList, FaTrash, FaEye, FaClock } from 'react-icons/fa';
+import { FaLock, FaUpload, FaCheckCircle, FaQuestionCircle, FaCode, FaBook, FaList, FaTrash, FaEye, FaClock, FaStar } from 'react-icons/fa';
 
 type UploadType = 'html' | 'blog';
 type TechniqueType = 'tabs' | 'accordion' | 'survey' | 'carousel' | 'toggle' | 'hybrid' | 'static';
@@ -82,6 +82,10 @@ const AdminPortal = () => {
   const [deleteConfirmItem, setDeleteConfirmItem] = useState<any>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  // Auto-tagging State
+  const [isAutoTagging, setIsAutoTagging] = useState(false);
+  const [autoTagError, setAutoTagError] = useState('');
+
   const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
     if (passwordInput === 'Sheba') {
@@ -89,6 +93,62 @@ const AdminPortal = () => {
       setAuthError('');
     } else {
       setAuthError('Incorrect password');
+    }
+  };
+
+  const handleAutoTag = async () => {
+    if (!htmlContent) {
+      setAutoTagError('Please paste HTML content first');
+      return;
+    }
+
+    setIsAutoTagging(true);
+    setAutoTagError('');
+
+    try {
+      const response = await fetch('/api/admin/auto-tag', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ htmlContent }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Auto-tagging failed');
+      }
+
+      const data = await response.json();
+
+      // Apply suggested tags
+      if (data.description) setDescription(data.description);
+      if (data.technique) setTechnique(data.technique);
+      if (data.emailPurpose) setEmailPurpose(data.emailPurpose);
+      if (data.complexity) setComplexity(data.complexity);
+      if (data.keyFeatures) {
+        setKeyFeatures({
+          lightswitch: data.keyFeatures.includes('lightswitch'),
+          mobileResponsive: data.keyFeatures.includes('mobileResponsive'),
+          ctaButtons: data.keyFeatures.includes('ctaButtons'),
+          productImages: data.keyFeatures.includes('productImages'),
+          progressiveDisclosure: data.keyFeatures.includes('progressiveDisclosure'),
+          cssAnimations: data.keyFeatures.includes('cssAnimations'),
+          multipleInteractions: data.keyFeatures.includes('multipleInteractions'),
+        });
+      }
+      if (data.bestPracticeTags) {
+        setBestPracticeTags({
+          tableStructure: data.bestPracticeTags.includes('tableStructure'),
+          msoConditionals: data.bestPracticeTags.includes('msoConditionals'),
+          inlineStyles: data.bestPracticeTags.includes('inlineStyles'),
+          fallbackContent: data.bestPracticeTags.includes('fallbackContent'),
+          accessibility: data.bestPracticeTags.includes('accessibility'),
+          darkMode: data.bestPracticeTags.includes('darkMode'),
+        });
+      }
+    } catch (error) {
+      console.error('Auto-tagging error:', error);
+      setAutoTagError('Failed to auto-tag. Please try again.');
+    } finally {
+      setIsAutoTagging(false);
     }
   };
 
@@ -417,6 +477,32 @@ const AdminPortal = () => {
                     className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
                     placeholder="Paste your full HTML email code here..."
                   />
+                  <div className="mt-3 flex items-center justify-between">
+                    <button
+                      type="button"
+                      onClick={handleAutoTag}
+                      disabled={isAutoTagging || !htmlContent}
+                      className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isAutoTagging ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          Analyzing...
+                        </>
+                      ) : (
+                        <>
+                          <FaStar />
+                          Auto-Tag with AI
+                        </>
+                      )}
+                    </button>
+                    {autoTagError && (
+                      <p className="text-sm text-red-600">{autoTagError}</p>
+                    )}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    AI will analyze your HTML and suggest description, technique, tags, and features
+                  </p>
                 </div>
 
                 <div>
