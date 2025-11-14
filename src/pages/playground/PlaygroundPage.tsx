@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
-import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaStar, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
+import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaDatabase, FaThumbsUp, FaThumbsDown, FaRocket } from 'react-icons/fa';
 
 type EmailClient = 'ios' | 'gmail';
 type ViewMode = 'preview' | 'code';
@@ -156,7 +156,7 @@ const PlaygroundPage = () => {
               Kinetic Email Playground (Beta)
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-3">
-              Generate interactive emails with AI. Test them in real email clients instantly.
+              Generate interactive emails with AI.
             </p>
             <p className="text-sm text-gray-500 max-w-3xl mx-auto">
               Currently working on fine-tuning a custom AI model for bullet-proof kinetic email builds. 
@@ -309,7 +309,7 @@ const PlaygroundPage = () => {
                     className="w-full p-4 bg-gradient-to-r from-purple-100 to-blue-100 hover:from-purple-200 hover:to-blue-200 transition-colors duration-200 flex items-center justify-between"
                   >
                     <div className="flex items-center gap-2">
-                      <FaStar className="text-purple-600" />
+                      <FaDatabase className="text-purple-600" />
                       <h3 className="text-base lg:text-lg font-semibold text-purple-900">
                         AI Referenced {ragMetadata.examplesCount} Similar Examples ({(ragMetadata.topScore * 100).toFixed(1)}% match)
                       </h3>
@@ -579,9 +579,7 @@ const PlaygroundPage = () => {
                             </div>
                             <ul className="text-green-600 space-y-2">
                               <li>• Apple Mail (macOS)</li>
-                              <li>• iOS Mail</li>
-                              <li>• Outlook for Mac</li>
-                              <li>• Outlook for iOS</li>
+                              <li>• iOS Mail and iPadOS Mail</li>
                             </ul>
                           </div>
                           <div className="bg-white rounded-xl p-4">
@@ -616,7 +614,9 @@ const PlaygroundPage = () => {
               ) : (
                 /* Empty State */
                 <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-12 text-center">
-                  <div className="text-6xl mb-6">🎪</div>
+                  <div className="text-6xl mb-6 flex justify-center">
+                    <FaRocket className="text-blue-600" />
+                  </div>
                   <div className="text-2xl font-semibold text-gray-900 mb-4">Ready to create kinetic emails!</div>
                   <p className="text-lg text-gray-600 max-w-md mx-auto">
                     Enter a prompt and click "Generate Email" to see your interactive email come to life.
