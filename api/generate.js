@@ -284,7 +284,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { prompt, useTemplate = true, complexity = 'intermediate', useRAG = false } = req.body;
+    const { prompt, useTemplate = true, complexity = 'intermediate', useRAG = false, ragModel = 'small' } = req.body;
 
     if (!prompt) {
       return res.status(400).json({ error: 'Prompt is required' });
@@ -292,11 +292,11 @@ export default async function handler(req, res) {
 
     // RAG: Retrieve similar examples from Pinecone if enabled
     let ragExamples = '';
-    let ragMetadata = { used: false, examplesCount: 0 };
+    let ragMetadata = { used: false, examplesCount: 0, model: ragModel };
 
     if (useRAG) {
       try {
-        console.log('RAG mode enabled - querying Pinecone for similar examples...');
+        console.log(`RAG mode enabled (${ragModel} model) - querying Pinecone for similar examples...`);
 
         // Lazy load RAG dependencies only when needed
         const { Pinecone } = await import('@pinecone-database/pinecone');
@@ -310,23 +310,29 @@ export default async function handler(req, res) {
           apiKey: process.env.OPENAI_API_KEY
         });
 
+        // Select embedding model and index based on ragModel parameter
+        const embeddingModel = ragModel === 'large' ? 'text-embedding-3-large' : 'text-embedding-3-small';
+        const indexName = ragModel === 'large' ? process.env.PINECONE_INDEX_NAME_LARGE : process.env.PINECONE_INDEX_NAME;
+
+        console.log(`Using embedding model: ${embeddingModel}, index: ${indexName}`);
+
         // Generate embedding for user's prompt
         const embeddingResponse = await openai.embeddings.create({
-          model: 'text-embedding-3-small',
+          model: embeddingModel,
           input: prompt,
         });
 
         const queryEmbedding = embeddingResponse.data[0].embedding;
 
         // Query Pinecone for top 5 similar examples
-        const index = pinecone.index(process.env.PINECONE_INDEX_NAME);
+        const index = pinecone.index(indexName);
         const queryResponse = await index.query({
           vector: queryEmbedding,
           topK: 5,
           includeMetadata: true,
         });
 
-        console.log(`Found ${queryResponse.matches.length} similar examples`);
+        console.log(`Found ${queryResponse.matches.length} similar examples from ${ragModel} model`);
 
         // Build RAG context from retrieved examples
         if (queryResponse.matches.length > 0) {
