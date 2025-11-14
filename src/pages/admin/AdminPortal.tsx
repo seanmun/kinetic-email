@@ -429,9 +429,18 @@ const AdminPortal = () => {
                     onChange={(e) => setDescription(e.target.value)}
                     required
                     className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    placeholder="e.g., Tabbed product showcase for running shoes"
+                    placeholder="e.g., Tabbed product showcase for running shoes with 3 color options, pricing, and features"
                   />
-                  <p className="text-xs text-gray-500 mt-1">What prompt would generate this email?</p>
+                  <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p className="text-xs font-semibold text-blue-900 mb-1.5">💡 Description Engineering Tips:</p>
+                    <ul className="text-xs text-blue-800 space-y-1">
+                      <li>• Be specific about the <strong>technique</strong> (tabs, accordion, carousel, etc.)</li>
+                      <li>• Include <strong>what content</strong> is displayed (products, survey, features, etc.)</li>
+                      <li>• Mention <strong>key details</strong> (number of options, specific features, purpose)</li>
+                      <li>• Good: "Tabbed product showcase for running shoes with 3 color options, pricing, and features"</li>
+                      <li>• Bad: "Product email" (too vague, won't match well)</li>
+                    </ul>
+                  </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
