@@ -420,12 +420,20 @@ SPECIFIC REQUIREMENTS FOR THIS EMAIL:
    - Fallback content: Must use table-based structure for email compatibility
    - Both versions should serve the same purpose
 
-YOU MUST OUTPUT THE COMPLETE MODIFIED HTML TEMPLATE - NO INSTRUCTIONS OR EXPLANATIONS!
+CRITICAL OUTPUT REQUIREMENTS:
+- Output ONLY the complete HTML document starting with <!DOCTYPE html>
+- DO NOT include any explanatory text before or after the HTML
+- DO NOT include any markdown formatting or code blocks
+- The first line of your response MUST be <!DOCTYPE html>
+- The last line of your response MUST be </html>
+- NO additional text, explanations, or commentary
 
 Base template to modify:
 ${BASE_TEMPLATE}
 
-Replace "<!-- KINETIC EMAIL CONTENT GOES HERE -->" with your kinetic email implementation.`;
+Replace "<!-- KINETIC EMAIL CONTENT GOES HERE -->" with your kinetic email implementation.
+
+BEGIN OUTPUT NOW - HTML ONLY:`;
 
     console.log('Generating kinetic email for:', prompt);
 
