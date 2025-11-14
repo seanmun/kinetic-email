@@ -172,7 +172,7 @@ const PlaygroundPage = () => {
               <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 lg:p-6">
                   <h2 className="text-lg lg:text-xl font-semibold text-white flex items-center gap-2">
-                    <FaStar className="text-yellow-300" />
+                    <FaRocket className="text-yellow-300" />
                     Generate Email
                   </h2>
                 </div>
@@ -287,7 +287,7 @@ const PlaygroundPage = () => {
                       </div>
                     ) : (
                       <div className="flex items-center justify-center gap-2">
-                        <FaStar />
+                        <FaRocket />
                         Generate Email
                       </div>
                     )}
