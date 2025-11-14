@@ -27,6 +27,7 @@ const AdminPortal = () => {
   const [emailPurpose, setEmailPurpose] = useState<EmailPurpose>('promotional');
   const [complexity, setComplexity] = useState<ComplexityLevel>('intermediate');
   const [htmlType, setHtmlType] = useState<HTMLType>('complete');
+  const [exampleType, setExampleType] = useState<'positive' | 'negative'>('positive');
   const [notes, setNotes] = useState('');
 
   // Key Features (multi-select)
@@ -167,6 +168,7 @@ const AdminPortal = () => {
         emailPurpose,
         complexity,
         htmlType,
+        exampleType,
         keyFeatures: Object.entries(keyFeatures)
           .filter(([_, value]) => value)
           .map(([key]) => key),
@@ -205,6 +207,7 @@ const AdminPortal = () => {
         setHtmlContent('');
         setDescription('');
         setNotes('');
+        setExampleType('positive');
         setKeyFeatures({
           lightswitch: false,
           mobileResponsive: false,
@@ -610,6 +613,44 @@ const AdminPortal = () => {
                       </label>
                     </div>
                   </div>
+                </div>
+
+                {/* Example Type - Positive/Negative */}
+                <div className="bg-gradient-to-r from-green-50 to-red-50 border-2 border-gray-200 rounded-xl p-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Example Type
+                  </label>
+                  <div className="flex gap-4">
+                    <label className="flex items-center gap-2 cursor-pointer px-4 py-3 bg-white rounded-lg border-2 border-green-300 hover:border-green-500 transition-colors">
+                      <input
+                        type="radio"
+                        value="positive"
+                        checked={exampleType === 'positive'}
+                        onChange={(e) => setExampleType(e.target.value as 'positive' | 'negative')}
+                        className="w-4 h-4 text-green-600"
+                      />
+                      <div>
+                        <span className="text-sm font-semibold text-green-800">✓ Positive Example</span>
+                        <p className="text-xs text-green-600">Good pattern to follow</p>
+                      </div>
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer px-4 py-3 bg-white rounded-lg border-2 border-red-300 hover:border-red-500 transition-colors">
+                      <input
+                        type="radio"
+                        value="negative"
+                        checked={exampleType === 'negative'}
+                        onChange={(e) => setExampleType(e.target.value as 'positive' | 'negative')}
+                        className="w-4 h-4 text-red-600"
+                      />
+                      <div>
+                        <span className="text-sm font-semibold text-red-800">✗ Negative Example</span>
+                        <p className="text-xs text-red-600">Anti-pattern to avoid</p>
+                      </div>
+                    </label>
+                  </div>
+                  <p className="text-xs text-gray-600 mt-3">
+                    Negative examples help the AI learn what NOT to do. They won't be used as reference, but will help avoid bad patterns.
+                  </p>
                 </div>
 
                 <div>

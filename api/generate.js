@@ -402,10 +402,14 @@ Output ONLY the rewritten query, no explanations.`
 
         console.log(`Found ${queryResponse.matches.length} similar examples from ${ragModel} model`);
 
-        // Filter by similarity threshold (>0.7)
-        const relevantMatches = queryResponse.matches.filter(match => match.score > 0.7);
+        // Filter by similarity threshold (>0.7) and exclude negative examples
+        const relevantMatches = queryResponse.matches.filter(match => {
+          const isAboveThreshold = match.score > 0.7;
+          const isPositiveExample = !match.metadata.exampleType || match.metadata.exampleType === 'positive';
+          return isAboveThreshold && isPositiveExample;
+        });
 
-        console.log(`Filtered to ${relevantMatches.length} examples above 0.7 similarity threshold`);
+        console.log(`Filtered to ${relevantMatches.length} positive examples above 0.7 similarity threshold`);
 
         // Build RAG context from retrieved examples
         if (relevantMatches.length > 0) {
