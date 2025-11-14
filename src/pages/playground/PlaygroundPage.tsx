@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
-import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaStar } from 'react-icons/fa';
+import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaStar, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 type EmailClient = 'ios' | 'gmail';
 type ViewMode = 'preview' | 'code';
@@ -20,6 +20,9 @@ const PlaygroundPage = () => {
   const [hasGenerated, setHasGenerated] = useState(false);
   const [useRAG, setUseRAG] = useState(false);
   const [ragModel, setRagModel] = useState<'small' | 'large'>('small');
+  const [ragMetadata, setRagMetadata] = useState<any>(null);
+  const [showRagExamples, setShowRagExamples] = useState(false);
+  const [feedbackGiven, setFeedbackGiven] = useState(false);
 
   // Function to extract just the HTML from Claude's response
   const extractHTML = (responseText: string) => {
@@ -55,6 +58,7 @@ const PlaygroundPage = () => {
     setExplanationText('');
     setHasGenerated(true);
     setShowExamples(false); // Hide examples after first generation
+    setFeedbackGiven(false); // Reset feedback for new generation
 
     try {
       const response = await fetch('/api/generate', {
@@ -77,9 +81,10 @@ const PlaygroundPage = () => {
 
       const data = await response.json();
       const { html, explanation } = extractHTML(data.html);
-      
+
       setGeneratedHTML(html);
       setExplanationText(explanation);
+      setRagMetadata(data.metadata?.rag || null);
       setViewMode('preview');
     } catch (err) {
       console.error('Error generating email:', err);
@@ -95,6 +100,28 @@ const PlaygroundPage = () => {
       // Simple visual feedback - you could add a toast here
     } catch (err) {
       console.error('Failed to copy to clipboard:', err);
+    }
+  };
+
+  const submitFeedback = async (rating: 'positive' | 'negative') => {
+    try {
+      await fetch('/api/admin/submit-feedback', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          prompt,
+          rating,
+          ragUsed: useRAG,
+          ragModel,
+          ragExamplesCount: ragMetadata?.examplesCount || 0,
+          generatedHtmlPreview: generatedHTML.substring(0, 500)
+        }),
+      });
+      setFeedbackGiven(true);
+    } catch (error) {
+      console.error('Failed to submit feedback:', error);
     }
   };
 
@@ -148,6 +175,40 @@ const PlaygroundPage = () => {
                     <label htmlFor="prompt" className="block text-sm font-medium text-gray-700 mb-3">
                       Describe your kinetic email:
                     </label>
+
+                    {/* Prompt Suggestions */}
+                    {!prompt && (
+                      <div className="mb-3">
+                        <p className="text-xs text-gray-600 mb-2">Try these examples:</p>
+                        <div className="flex flex-wrap gap-2">
+                          <button
+                            onClick={() => setPrompt("Tabbed product showcase for running shoes with 3 color options, pricing, and features")}
+                            className="text-xs bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full hover:bg-blue-100 transition-colors border border-blue-200"
+                          >
+                            Tabbed Product Email
+                          </button>
+                          <button
+                            onClick={() => setPrompt("Accordion FAQ email with 5 expandable questions about shipping and returns")}
+                            className="text-xs bg-purple-50 text-purple-700 px-3 py-1.5 rounded-full hover:bg-purple-100 transition-colors border border-purple-200"
+                          >
+                            Accordion FAQ
+                          </button>
+                          <button
+                            onClick={() => setPrompt("Interactive survey email asking customers about their fitness goals with progressive questions")}
+                            className="text-xs bg-green-50 text-green-700 px-3 py-1.5 rounded-full hover:bg-green-100 transition-colors border border-green-200"
+                          >
+                            Survey Email
+                          </button>
+                          <button
+                            onClick={() => setPrompt("Product carousel showcasing 4 new arrivals with images and buy now buttons")}
+                            className="text-xs bg-orange-50 text-orange-700 px-3 py-1.5 rounded-full hover:bg-orange-100 transition-colors border border-orange-200"
+                          >
+                            Carousel Showcase
+                          </button>
+                        </div>
+                      </div>
+                    )}
+
                     <textarea
                       id="prompt"
                       value={prompt}
@@ -232,6 +293,55 @@ const PlaygroundPage = () => {
                   )}
                 </div>
               </div>
+
+              {/* RAG Examples Display */}
+              {ragMetadata && ragMetadata.used && ragMetadata.examples && ragMetadata.examples.length > 0 && (
+                <div className="bg-purple-50 rounded-2xl shadow-lg border border-purple-200 overflow-hidden transition-all duration-300">
+                  <button
+                    onClick={() => setShowRagExamples(!showRagExamples)}
+                    className="w-full p-4 bg-gradient-to-r from-purple-100 to-blue-100 hover:from-purple-200 hover:to-blue-200 transition-colors duration-200 flex items-center justify-between"
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaStar className="text-purple-600" />
+                      <h3 className="text-base lg:text-lg font-semibold text-purple-900">
+                        AI Referenced {ragMetadata.examplesCount} Similar Examples ({(ragMetadata.topScore * 100).toFixed(1)}% match)
+                      </h3>
+                    </div>
+                    {showRagExamples ? (
+                      <FaChevronUp className="text-purple-700" />
+                    ) : (
+                      <FaChevronDown className="text-purple-700" />
+                    )}
+                  </button>
+
+                  {showRagExamples && (
+                    <div className="p-4 space-y-2 animate-in slide-in-from-top duration-200">
+                      <p className="text-xs text-purple-700 mb-3 italic">
+                        These examples from your knowledge base influenced the generated email:
+                      </p>
+                      {ragMetadata.examples.map((example: any, index: number) => (
+                        <div
+                          key={index}
+                          className="bg-white p-3 rounded-lg border border-purple-200"
+                        >
+                          <div className="flex items-start justify-between gap-2 mb-1">
+                            <div className="text-sm font-medium text-gray-900 flex-1">
+                              {example.description}
+                            </div>
+                            <div className="text-xs font-semibold text-purple-600 whitespace-nowrap">
+                              {(example.score * 100).toFixed(1)}%
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs text-gray-600">
+                            <span className="px-2 py-0.5 bg-gray-100 rounded-full">{example.technique}</span>
+                            <span className="px-2 py-0.5 bg-gray-100 rounded-full">{example.type}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
 
               {/* Example Prompts - Collapsible */}
               {!hasGenerated || showExamples ? (
@@ -423,6 +533,34 @@ const PlaygroundPage = () => {
                         </div>
                       </div>
                       
+                      {/* Feedback Section */}
+                      {!feedbackGiven && (
+                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6">
+                          <h4 className="font-semibold text-green-900 mb-3 text-lg">Was this helpful?</h4>
+                          <p className="text-sm text-gray-600 mb-4">Your feedback helps improve the AI's email generation quality</p>
+                          <div className="flex items-center gap-4">
+                            <button
+                              onClick={() => submitFeedback('positive')}
+                              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
+                            >
+                              <FaThumbsUp /> Yes, great!
+                            </button>
+                            <button
+                              onClick={() => submitFeedback('negative')}
+                              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
+                            >
+                              <FaThumbsDown /> Needs work
+                            </button>
+                          </div>
+                        </div>
+                      )}
+
+                      {feedbackGiven && (
+                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-4">
+                          <p className="text-blue-900 font-medium text-center">✓ Thank you for your feedback!</p>
+                        </div>
+                      )}
+
                       {/* Compatibility Note */}
                       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6">
                         <h4 className="font-semibold text-blue-900 mb-4 text-lg">Email Client Compatibility</h4>

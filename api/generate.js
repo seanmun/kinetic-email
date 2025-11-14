@@ -324,22 +324,27 @@ export default async function handler(req, res) {
 
         const queryEmbedding = embeddingResponse.data[0].embedding;
 
-        // Query Pinecone for top 5 similar examples
+        // Query Pinecone for top 10 similar examples
         const index = pinecone.index(indexName);
         const queryResponse = await index.query({
           vector: queryEmbedding,
-          topK: 5,
+          topK: 10,
           includeMetadata: true,
         });
 
         console.log(`Found ${queryResponse.matches.length} similar examples from ${ragModel} model`);
 
+        // Filter by similarity threshold (>0.7)
+        const relevantMatches = queryResponse.matches.filter(match => match.score > 0.7);
+
+        console.log(`Filtered to ${relevantMatches.length} examples above 0.7 similarity threshold`);
+
         // Build RAG context from retrieved examples
-        if (queryResponse.matches.length > 0) {
+        if (relevantMatches.length > 0) {
           ragExamples = '\n\n--- REFERENCE EXAMPLES FROM KNOWLEDGE BASE ---\n\n';
           ragExamples += 'Here are proven examples similar to what the user is requesting. Use these as reference for structure, patterns, and best practices:\n\n';
 
-          queryResponse.matches.forEach((match, index) => {
+          relevantMatches.forEach((match, index) => {
             const meta = match.metadata;
             ragExamples += `\nEXAMPLE ${index + 1} (Similarity: ${(match.score * 100).toFixed(1)}%):\n`;
 
@@ -373,8 +378,14 @@ export default async function handler(req, res) {
 
           ragMetadata = {
             used: true,
-            examplesCount: queryResponse.matches.length,
-            topScore: queryResponse.matches[0]?.score || 0,
+            examplesCount: relevantMatches.length,
+            topScore: relevantMatches[0]?.score || 0,
+            examples: relevantMatches.map(match => ({
+              description: match.metadata.description || match.metadata.blogTitle || 'Untitled',
+              score: match.score,
+              technique: match.metadata.technique || match.metadata.blogTopic || 'N/A',
+              type: match.metadata.type
+            }))
           };
         }
       } catch (error) {
