@@ -17,6 +17,7 @@ import SurveyExample from './pages/examples/SurveyExample';
 import PlaygroundPage from './pages/playground/PlaygroundPage';
 import BlogPage from './pages/blog/BlogPage';
 import AdminPortal from './pages/admin/AdminPortal';
+import HowItWorksPage from './pages/about/HowItWorksPage';
 
 // Import portfolio components
 import PortfolioPage from './pages/portfolio/PortfolioPage';
@@ -52,6 +53,7 @@ const router = createBrowserRouter([
       { path: 'playground', element: <PlaygroundPage /> },
       { path: 'blog', element: <BlogPage /> },
       { path: 'admin', element: <AdminPortal /> },
+      { path: 'how-it-works', element: <HowItWorksPage /> },
 
       // Portfolio section
       { path: 'portfolio',
