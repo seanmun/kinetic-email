@@ -251,7 +251,7 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
               title="Email Content"
               className="w-full h-full border-0"
               style={{ border: 'none', height: '100%' }}
-              sandbox="allow-same-origin"
+              sandbox="allow-same-origin allow-scripts"
             />
           </div>
           

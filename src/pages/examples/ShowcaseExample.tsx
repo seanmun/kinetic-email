@@ -4,6 +4,7 @@ import React from 'react';
 import InteractiveExample from '../../components/email-examples/InteractiveExample';
 import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
+import { ArrowLeft, CheckCircle, XCircle, HelpCircle, ShoppingBag, Calendar, Building2, Eye, Image, Sliders, AlertTriangle, Sparkles, Grid3x3 } from 'lucide-react';
 
 const ShowcaseExample: React.FC = () => {
   // HTML code for the product showcase
@@ -452,25 +453,47 @@ input[type="radio"] { display: none; }
     <PageLayout>
       <div className="mb-6">
         <Link to="/examples" className="text-blue-600 hover:text-blue-800 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+          <ArrowLeft className="h-4 w-4 mr-1" />
           Back to Examples
         </Link>
       </div>
-      
-      <h1 className="text-3xl font-bold mb-6">Product Showcase Carousel</h1>
-      
-      <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <p className="text-lg text-gray-700 mb-4">
-          This example demonstrates a product showcase carousel using kinetic email techniques. 
-          It allows recipients to browse through multiple products without leaving their inbox,
-          creating an interactive shopping experience that can significantly boost engagement and conversions.
-        </p>
-        <p className="text-gray-700">
-          The technique uses the same principles as the tabbed interface but adapts them to create a 
-          carousel-like experience with navigation arrows and indicator dots.
-        </p>
+
+      {/* Hero Section */}
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 p-12 text-white">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-600 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+              <ShoppingBag className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-emerald-100 uppercase tracking-wide">E-commerce • Carousel</div>
+              <h1 className="text-4xl md:text-5xl font-black leading-tight">Product Showcase Carousel</h1>
+            </div>
+          </div>
+
+          <p className="text-xl text-emerald-50 leading-relaxed max-w-3xl">
+            This example demonstrates a product showcase carousel using kinetic email techniques.
+            It allows recipients to browse through multiple products without leaving their inbox,
+            creating an interactive shopping experience that can significantly boost engagement and conversions.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              Interactive Shopping
+            </div>
+            <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              Product Display
+            </div>
+            <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              Navigation Arrows
+            </div>
+          </div>
+        </div>
       </div>
 
       <InteractiveExample
@@ -512,27 +535,19 @@ input[type="radio"] { display: none; }
               <h3 className="text-lg font-semibold text-blue-700 mb-3">Benefits for Email Marketing</h3>
               <ul className="space-y-3 text-blue-800">
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" />
                   <span>Showcase multiple products in the space of one</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" />
                   <span>Increase engagement through interactivity</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" />
                   <span>Create a mini-catalog experience inside the inbox</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-blue-600" />
                   <span>Track which products receive the most interaction</span>
                 </li>
               </ul>
@@ -546,33 +561,27 @@ input[type="radio"] { display: none; }
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
               <div className="text-blue-600 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                </svg>
+                <ShoppingBag className="h-8 w-8" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">E-commerce</h3>
               <p className="text-gray-700">
                 Showcase products from your latest collection or featured sale items with prices and direct buy links.
               </p>
             </div>
-            
+
             <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
               <div className="text-blue-600 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
+                <Calendar className="h-8 w-8" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Event Promotion</h3>
               <p className="text-gray-700">
                 Display different event dates, featured speakers, or venue details in a scrollable format.
               </p>
             </div>
-            
+
             <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
               <div className="text-blue-600 mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                </svg>
+                <Building2 className="h-8 w-8" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">Real Estate</h3>
               <p className="text-gray-700">
@@ -588,40 +597,33 @@ input[type="radio"] { display: none; }
           <div className="space-y-6">
             <div className="flex items-start">
               <div className="bg-blue-100 rounded-full p-2 text-blue-600 mr-4 flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                  <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
-                </svg>
+                <Eye className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Auto-Advancing Showcase</h3>
                 <p className="text-gray-700">
-                  While pure CSS animations can't be triggered by user interaction in emails, you can use CSS animations to create 
+                  While pure CSS animations can't be triggered by user interaction in emails, you can use CSS animations to create
                   a carousel that automatically advances through products on supported email clients.
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start">
               <div className="bg-blue-100 rounded-full p-2 text-blue-600 mr-4 flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4 2a2 2 0 00-2 2v11a2 2 0 002 2h12a2 2 0 002-2V4a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
-                </svg>
+                <Image className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Thumbnail Navigation</h3>
                 <p className="text-gray-700">
-                  Instead of (or in addition to) dot indicators, you can use small thumbnail images as navigation to preview 
+                  Instead of (or in addition to) dot indicators, you can use small thumbnail images as navigation to preview
                   the products in the carousel.
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start">
               <div className="bg-blue-100 rounded-full p-2 text-blue-600 mr-4 flex-shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
-                </svg>
+                <Sliders className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Feature Comparison</h3>
@@ -642,27 +644,19 @@ input[type="radio"] { display: none; }
               <h3 className="text-lg font-semibold text-blue-700 mb-3">Best Practices</h3>
               <ul className="space-y-3 text-gray-700">
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" />
                   <span>Limit the number of products to 3-5 for optimal performance</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" />
                   <span>Ensure navigation elements are large enough for mobile tapping</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" />
                   <span>Include clear visual indicators for navigation controls</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-5 w-5 mr-2 flex-shrink-0 text-green-600" />
                   <span>Optimize images for fast loading in email clients</span>
                 </li>
               </ul>
@@ -670,34 +664,24 @@ input[type="radio"] { display: none; }
             
             <div className="bg-yellow-50 p-6 rounded-lg border border-yellow-100">
               <h3 className="text-lg font-semibold text-yellow-800 mb-3 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-                </svg>
+                <AlertTriangle className="h-5 w-5 mr-2" />
                 Common Pitfalls to Avoid
               </h3>
               <ul className="space-y-3 text-yellow-800">
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
+                  <AlertTriangle className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" />
                   <span>Overcomplicated CSS that might break in email clients</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
+                  <AlertTriangle className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" />
                   <span>Not providing a good fallback experience</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
+                  <AlertTriangle className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" />
                   <span>Using too many high-resolution images that slow loading</span>
                 </li>
                 <li className="flex items-start">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                  </svg>
+                  <AlertTriangle className="h-5 w-5 mr-2 flex-shrink-0 text-yellow-600" />
                   <span>Trying to implement too many slides in a single carousel</span>
                 </li>
               </ul>
@@ -711,79 +695,57 @@ input[type="radio"] { display: none; }
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-green-50 p-4 rounded-lg border border-green-100">
               <h3 className="font-semibold text-green-800 flex items-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
+                <CheckCircle className="h-5 w-5 mr-2" />
                 Supported Clients
               </h3>
               <ul className="space-y-2 text-green-800">
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Apple Mail (macOS)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Mail (iOS)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Outlook for Mac
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Outlook for iOS
                 </li>
               </ul>
             </div>
-            
+
             <div className="bg-red-50 p-4 rounded-lg border border-red-100">
               <h3 className="font-semibold text-red-800 flex items-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
+                <XCircle className="h-5 w-5 mr-2" />
                 Unsupported Clients
               </h3>
               <ul className="space-y-2 text-red-800">
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  <XCircle className="h-4 w-4 mr-2" />
                   Gmail (Web)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  <XCircle className="h-4 w-4 mr-2" />
                   Outlook (Windows)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  <XCircle className="h-4 w-4 mr-2" />
                   Yahoo Mail
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  <XCircle className="h-4 w-4 mr-2" />
                   Gmail (Mobile App)
                 </li>
               </ul>
             </div>
-            
+
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
               <h3 className="font-semibold text-blue-800 flex items-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
+                <HelpCircle className="h-5 w-5 mr-2" />
                 Fallback Strategy
               </h3>
               <p className="text-blue-800 text-sm mb-3">
@@ -808,9 +770,7 @@ input[type="radio"] { display: none; }
           <div className="grid md:grid-cols-2 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="text-blue-600 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
-                </svg>
+                <Sparkles className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Animation Effects</h3>
               <p className="text-gray-700 mb-4">
@@ -832,9 +792,7 @@ input[type="radio"] { display: none; }
             
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <div className="text-blue-600 mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                </svg>
+                <Grid3x3 className="h-8 w-8" />
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-3">Thumbnail Navigation</h3>
               <p className="text-gray-700 mb-4">
