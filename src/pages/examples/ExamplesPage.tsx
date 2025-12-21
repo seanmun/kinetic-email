@@ -81,7 +81,7 @@ const ExamplesPage = () => {
               to={example.path}
               className="group relative block"
             >
-              <div className="absolute -inset-1 bg-gradient-to-r opacity-25 group-hover:opacity-40 rounded-2xl blur transition-opacity" style={{ backgroundImage: `linear-gradient(to right, var(--tw-gradient-stops))` }} className={`absolute -inset-1 bg-gradient-to-r ${example.color} opacity-25 group-hover:opacity-40 rounded-2xl blur transition-opacity`}></div>
+              <div className={`absolute -inset-1 bg-gradient-to-r ${example.color} opacity-25 group-hover:opacity-40 rounded-2xl blur transition-opacity`}></div>
 
               <div className="relative bg-white rounded-2xl overflow-hidden border-2 border-gray-200 group-hover:border-gray-300 transition-all shadow-lg">
                 {/* Icon Header */}
