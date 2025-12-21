@@ -620,27 +620,13 @@ const HomePage = () => {
               {/* Email Simulator */}
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative bg-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/10">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-2">
-                      <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                      <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                      <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-blue-200">
-                      <FaApple />
-                      <span>This email is LIVE - click the tabs!</span>
-                    </div>
-                  </div>
-
-                  <div className="transform scale-95 origin-top">
-                    <IOSMailSimulator
-                      sender="Kinetic.email Demo"
-                      subject="This isn't a video. It's an EMAIL ⚡"
-                      htmlContent={heroKineticEmail}
-                      date="Just now"
-                    />
-                  </div>
+                <div className="relative">
+                  <IOSMailSimulator
+                    sender="Kinetic.email Demo"
+                    subject="This isn't a video. It's an EMAIL ⚡"
+                    htmlContent={heroKineticEmail}
+                    date="Just now"
+                  />
                 </div>
               </div>
             </div>
