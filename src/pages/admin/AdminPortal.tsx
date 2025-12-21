@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PageLayout from '../../components/layout/PageLayout';
 import Modal from '../../components/common/Modal';
-import { FaLock, FaUpload, FaCheckCircle, FaQuestionCircle, FaCode, FaBook, FaList, FaTrash, FaEye, FaClock, FaStar } from 'react-icons/fa';
+import { FaLock, FaUpload, FaCheckCircle, FaQuestionCircle, FaCode, FaBook, FaList, FaTrash, FaEye, FaClock, FaStar, FaClipboardCheck, FaPlay, FaFilter } from 'react-icons/fa';
 
 type UploadType = 'html' | 'blog';
 type TechniqueType = 'tabs' | 'accordion' | 'survey' | 'carousel' | 'toggle' | 'hybrid' | 'static';
@@ -73,7 +73,7 @@ const AdminPortal = () => {
   const [showHowToModal, setShowHowToModal] = useState(false);
 
   // Library/Tab State
-  const [activeTab, setActiveTab] = useState<'upload' | 'library'>('upload');
+  const [activeTab, setActiveTab] = useState<'upload' | 'library' | 'evaluations'>('upload');
   const [libraryItems, setLibraryItems] = useState<any[]>([]);
   const [isLoadingLibrary, setIsLoadingLibrary] = useState(false);
   const [libraryError, setLibraryError] = useState('');
@@ -86,6 +86,14 @@ const AdminPortal = () => {
   // Auto-tagging State
   const [isAutoTagging, setIsAutoTagging] = useState(false);
   const [autoTagError, setAutoTagError] = useState('');
+
+  // Evaluations State
+  const [evaluations, setEvaluations] = useState<any[]>([]);
+  const [isLoadingEvaluations, setIsLoadingEvaluations] = useState(false);
+  const [evaluationsError, setEvaluationsError] = useState('');
+  const [selectedSubmission, setSelectedSubmission] = useState<any>(null);
+  const [isRunningEval, setIsRunningEval] = useState(false);
+  const [evalFilter, setEvalFilter] = useState<'all' | 'pending' | 'evaluated'>('pending');
 
   const handleAuth = (e: React.FormEvent) => {
     e.preventDefault();
@@ -268,6 +276,13 @@ const AdminPortal = () => {
     }
   }, [activeTab, isAuthenticated]);
 
+  // Load evaluations when switching to evaluations tab
+  useEffect(() => {
+    if (activeTab === 'evaluations' && isAuthenticated) {
+      loadEvaluations();
+    }
+  }, [activeTab, isAuthenticated, evalFilter]);
+
   const loadLibrary = async () => {
     setIsLoadingLibrary(true);
     setLibraryError('');
@@ -309,6 +324,57 @@ const AdminPortal = () => {
       alert('Failed to delete item. Please try again.');
     } finally {
       setIsDeleting(false);
+    }
+  };
+
+  // Evaluation functions
+  const loadEvaluations = async () => {
+    setIsLoadingEvaluations(true);
+    setEvaluationsError('');
+    try {
+      const statusParam = evalFilter === 'all' ? '' : `?status=${evalFilter}`;
+      const response = await fetch(`/api/admin/list-evaluations${statusParam}`);
+      if (!response.ok) {
+        throw new Error('Failed to load evaluations');
+      }
+      const data = await response.json();
+      setEvaluations(data.submissions || []);
+    } catch (error) {
+      console.error('Evaluations load error:', error);
+      setEvaluationsError('Failed to load evaluations.');
+    } finally {
+      setIsLoadingEvaluations(false);
+    }
+  };
+
+  const runEvaluation = async (submissionId: string) => {
+    setIsRunningEval(true);
+    try {
+      const response = await fetch('/api/admin/run-evaluation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ submissionId }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to run evaluation');
+      }
+
+      const data = await response.json();
+
+      // Reload evaluations to get updated status
+      await loadEvaluations();
+
+      // Show the results
+      alert(`Evaluation complete!\nOverall Score: ${data.evaluation.score_overall}/100`);
+      setSelectedSubmission(null);
+    } catch (error) {
+      console.error('Evaluation error:', error);
+      alert('Failed to run evaluation. Please try again.');
+    } finally {
+      setIsRunningEval(false);
     }
   };
 
@@ -426,6 +492,17 @@ const AdminPortal = () => {
             >
               <FaList />
               Library ({libraryItems.length})
+            </button>
+            <button
+              onClick={() => setActiveTab('evaluations')}
+              className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
+                activeTab === 'evaluations'
+                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg'
+                  : 'bg-white text-gray-600 hover:bg-gray-50 shadow border border-gray-200'
+              }`}
+            >
+              <FaClipboardCheck />
+              Evaluations ({evaluations.length})
             </button>
           </div>
 
@@ -974,6 +1051,160 @@ const AdminPortal = () => {
             </div>
           )}
 
+          {/* Evaluations Tab Content */}
+          {activeTab === 'evaluations' && (
+            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-gray-900 mb-2">Evaluation Queue</h2>
+                <p className="text-gray-600">Review and evaluate playground submissions to improve the AI model</p>
+              </div>
+
+              {/* Filter Buttons */}
+              <div className="flex gap-3 mb-6">
+                <button
+                  onClick={() => setEvalFilter('pending')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                    evalFilter === 'pending'
+                      ? 'bg-orange-600 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  <FaFilter /> Pending
+                </button>
+                <button
+                  onClick={() => setEvalFilter('evaluated')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                    evalFilter === 'evaluated'
+                      ? 'bg-green-600 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  <FaFilter /> Evaluated
+                </button>
+                <button
+                  onClick={() => setEvalFilter('all')}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                    evalFilter === 'all'
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                  }`}
+                >
+                  <FaFilter /> All
+                </button>
+              </div>
+
+              {/* Loading State */}
+              {isLoadingEvaluations && (
+                <div className="text-center py-12">
+                  <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+                  <p className="text-gray-600 mt-4">Loading evaluations...</p>
+                </div>
+              )}
+
+              {/* Error State */}
+              {evaluationsError && (
+                <div className="bg-red-50 border border-red-200 rounded-xl p-4 text-red-700">
+                  {evaluationsError}
+                </div>
+              )}
+
+              {/* Empty State */}
+              {!isLoadingEvaluations && evaluations.length === 0 && (
+                <div className="text-center py-12">
+                  <FaClipboardCheck className="text-gray-300 text-6xl mx-auto mb-4" />
+                  <p className="text-gray-600 text-lg">No submissions {evalFilter !== 'all' ? `with status "${evalFilter}"` : ''}</p>
+                  <p className="text-gray-500 text-sm mt-2">Submissions from the playground will appear here</p>
+                </div>
+              )}
+
+              {/* Submissions List */}
+              {!isLoadingEvaluations && evaluations.length > 0 && (
+                <div className="space-y-4">
+                  {evaluations.map((submission: any) => (
+                    <div key={submission.id} className="border border-gray-200 rounded-xl p-5 hover:border-purple-300 transition-all duration-200">
+                      <div className="flex justify-between items-start mb-4">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                              submission.status === 'pending' ? 'bg-orange-100 text-orange-700' :
+                              submission.status === 'evaluated' ? 'bg-green-100 text-green-700' :
+                              'bg-gray-100 text-gray-700'
+                            }`}>
+                              {submission.status}
+                            </span>
+                            <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                              submission.model_used === 'large' ? 'bg-blue-100 text-blue-700' : 'bg-purple-100 text-purple-700'
+                            }`}>
+                              {submission.model_used === 'large' ? 'Large Model' : 'Small Model'}
+                            </span>
+                            {submission.rag_used && (
+                              <span className="px-3 py-1 rounded-full text-xs font-semibold bg-indigo-100 text-indigo-700">
+                                RAG ({submission.rag_examples_count} examples)
+                              </span>
+                            )}
+                          </div>
+                          <p className="text-sm text-gray-500 flex items-center gap-2">
+                            <FaClock />
+                            {formatDate(submission.created_at)}
+                          </p>
+                        </div>
+
+                        {/* Actions */}
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => setSelectedSubmission(submission)}
+                            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-all duration-200 flex items-center gap-2"
+                          >
+                            <FaEye /> View
+                          </button>
+                          {submission.status === 'pending' && (
+                            <button
+                              onClick={() => runEvaluation(submission.id)}
+                              disabled={isRunningEval}
+                              className="px-4 py-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-lg font-medium transition-all duration-200 flex items-center gap-2 disabled:opacity-50"
+                            >
+                              <FaPlay /> {isRunningEval ? 'Running...' : 'Run Eval AI'}
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* User Intent Preview */}
+                      <div className="bg-gray-50 rounded-lg p-4">
+                        <p className="text-sm font-semibold text-gray-700 mb-1">User Intent:</p>
+                        <p className="text-gray-600 text-sm">{submission.user_intent}</p>
+                      </div>
+
+                      {/* Evaluation Results (if evaluated) */}
+                      {submission.evaluations && submission.evaluations.length > 0 && (
+                        <div className="mt-4 bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4">
+                          <div className="flex items-center justify-between">
+                            <p className="font-semibold text-green-900">Overall Score:</p>
+                            <p className="text-2xl font-bold text-green-700">{submission.evaluations[0].score_overall}/100</p>
+                          </div>
+                          <div className="grid grid-cols-3 gap-2 mt-3 text-sm">
+                            <div>
+                              <p className="text-gray-600">Code Quality:</p>
+                              <p className="font-semibold">{submission.evaluations[0].score_code_quality}/100</p>
+                            </div>
+                            <div>
+                              <p className="text-gray-600">Functionality:</p>
+                              <p className="font-semibold">{submission.evaluations[0].score_functionality}/100</p>
+                            </div>
+                            <div>
+                              <p className="text-gray-600">Fallback:</p>
+                              <p className="font-semibold">{submission.evaluations[0].score_fallback_quality}/100</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
         </div>
       </PageLayout>
 
@@ -1063,6 +1294,142 @@ const AdminPortal = () => {
                 {isDeleting ? 'Deleting...' : 'Delete'}
               </button>
             </div>
+          </div>
+        )}
+      </Modal>
+
+      {/* Submission Detail Modal */}
+      <Modal
+        isOpen={!!selectedSubmission}
+        onClose={() => setSelectedSubmission(null)}
+        title="Submission Details"
+      >
+        {selectedSubmission && (
+          <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
+            {/* Header Info */}
+            <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg p-4">
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="text-gray-600 font-medium">Model Used:</p>
+                  <p className="text-gray-900">{selectedSubmission.model_used === 'large' ? 'Large Model' : 'Small Model'}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600 font-medium">Status:</p>
+                  <p className="text-gray-900 capitalize">{selectedSubmission.status}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600 font-medium">RAG Used:</p>
+                  <p className="text-gray-900">{selectedSubmission.rag_used ? `Yes (${selectedSubmission.rag_examples_count} examples)` : 'No'}</p>
+                </div>
+                <div>
+                  <p className="text-gray-600 font-medium">Submitted:</p>
+                  <p className="text-gray-900">{formatDate(selectedSubmission.created_at)}</p>
+                </div>
+              </div>
+            </div>
+
+            {/* User Intent */}
+            <div>
+              <h3 className="font-semibold text-gray-700 mb-2">User Intent:</h3>
+              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <p className="text-gray-700">{selectedSubmission.user_intent}</p>
+              </div>
+            </div>
+
+            {/* User Feedback */}
+            {selectedSubmission.user_feedback && (
+              <div>
+                <h3 className="font-semibold text-gray-700 mb-2">User Feedback:</h3>
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <p className="text-gray-700">{selectedSubmission.user_feedback}</p>
+                </div>
+              </div>
+            )}
+
+            {/* User Prompt */}
+            <div>
+              <h3 className="font-semibold text-gray-700 mb-2">User Prompt:</h3>
+              <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <p className="text-gray-700">{selectedSubmission.user_prompt}</p>
+              </div>
+            </div>
+
+            {/* Generated Code */}
+            <div>
+              <h3 className="font-semibold text-gray-700 mb-2">Generated Code:</h3>
+              <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto text-xs max-h-96 overflow-y-auto">
+                <code>{selectedSubmission.generated_code}</code>
+              </pre>
+            </div>
+
+            {/* Evaluation Results */}
+            {selectedSubmission.evaluations && selectedSubmission.evaluations.length > 0 && (
+              <div>
+                <h3 className="font-semibold text-gray-700 mb-3">Evaluation Results:</h3>
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-lg p-4 space-y-4">
+                  <div className="text-center">
+                    <p className="text-sm text-gray-600 mb-1">Overall Score</p>
+                    <p className="text-4xl font-bold text-green-700">{selectedSubmission.evaluations[0].score_overall}/100</p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div className="bg-white rounded p-3">
+                      <p className="text-gray-600">Code Quality</p>
+                      <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_code_quality}/100</p>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <p className="text-gray-600">Kinetic Integration</p>
+                      <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_kinetic_integration}/100</p>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <p className="text-gray-600">Functionality</p>
+                      <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_functionality}/100</p>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <p className="text-gray-600">Fallback Quality</p>
+                      <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_fallback_quality}/100</p>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <p className="text-gray-600">User Intent Match</p>
+                      <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_user_intent_match}/100</p>
+                    </div>
+                    <div className="bg-white rounded p-3">
+                      <p className="text-gray-600">Creativity & Design</p>
+                      <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_creativity_design}/100</p>
+                    </div>
+                  </div>
+
+                  {selectedSubmission.evaluations[0].overall_assessment && (
+                    <div className="bg-white rounded p-3">
+                      <p className="font-semibold text-gray-700 mb-2">Overall Assessment:</p>
+                      <p className="text-gray-600 text-sm">{selectedSubmission.evaluations[0].overall_assessment}</p>
+                    </div>
+                  )}
+
+                  {selectedSubmission.evaluations[0].top_issues && selectedSubmission.evaluations[0].top_issues.length > 0 && (
+                    <div className="bg-white rounded p-3">
+                      <p className="font-semibold text-gray-700 mb-2">Top Issues:</p>
+                      <ul className="list-disc pl-5 text-gray-600 text-sm space-y-1">
+                        {selectedSubmission.evaluations[0].top_issues.map((issue: string, idx: number) => (
+                          <li key={idx}>{issue}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {selectedSubmission.evaluations[0].strengths && selectedSubmission.evaluations[0].strengths.length > 0 && (
+                    <div className="bg-white rounded p-3">
+                      <p className="font-semibold text-gray-700 mb-2">Strengths:</p>
+                      <ul className="list-disc pl-5 text-gray-600 text-sm space-y-1">
+                        {selectedSubmission.evaluations[0].strengths.map((strength: string, idx: number) => (
+                          <li key={idx}>{strength}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </Modal>

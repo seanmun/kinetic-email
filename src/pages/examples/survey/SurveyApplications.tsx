@@ -1,6 +1,7 @@
 // src/components/examples/survey/SurveyApplications.tsx
 
 import React from 'react';
+import { ClipboardList, Megaphone, Clock } from 'lucide-react';
 
 export const SurveyApplications: React.FC = () => {
   return (
@@ -10,33 +11,27 @@ export const SurveyApplications: React.FC = () => {
       <div className="grid md:grid-cols-3 gap-6">
         <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
           <div className="text-blue-600 mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-            </svg>
+            <ClipboardList className="h-8 w-8" />
           </div>
           <h3 className="font-semibold text-gray-900 mb-2">Preference Collection</h3>
           <p className="text-gray-700">
             Gather customer preferences for content, products, or communication frequency to improve segmentation.
           </p>
         </div>
-        
+
         <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
           <div className="text-blue-600 mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-            </svg>
+            <Megaphone className="h-8 w-8" />
           </div>
           <h3 className="font-semibold text-gray-900 mb-2">Feedback Collection</h3>
           <p className="text-gray-700">
             Gather quick feedback on products, services, or recent purchases directly within the email.
           </p>
         </div>
-        
+
         <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
           <div className="text-blue-600 mb-3">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+            <Clock className="h-8 w-8" />
           </div>
           <h3 className="font-semibold text-gray-900 mb-2">Quick Polls</h3>
           <p className="text-gray-700">

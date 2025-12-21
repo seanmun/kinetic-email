@@ -1,9 +1,10 @@
 // src/pages/playground/PlaygroundPage.tsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
-import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaDatabase, FaThumbsUp, FaThumbsDown, FaRocket } from 'react-icons/fa';
+import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaDatabase, FaThumbsUp, FaThumbsDown, FaRocket, FaInfoCircle } from 'react-icons/fa';
 
 type EmailClient = 'ios' | 'gmail';
 type ViewMode = 'preview' | 'code';
@@ -23,6 +24,13 @@ const PlaygroundPage = () => {
   const [ragMetadata, setRagMetadata] = useState<any>(null);
   const [showRagExamples, setShowRagExamples] = useState(false);
   const [feedbackGiven, setFeedbackGiven] = useState(false);
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [submissionData, setSubmissionData] = useState({
+    userIntent: '',
+    userFeedback: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   // Function to extract just the HTML from Claude's response
   const extractHTML = (responseText: string) => {
@@ -132,6 +140,51 @@ const PlaygroundPage = () => {
     }
   };
 
+  const handleSubmitForEvaluation = async () => {
+    if (!submissionData.userIntent.trim()) {
+      alert('Please describe what you were trying to achieve');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch('/api/admin/submit-evaluation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userIntent: submissionData.userIntent,
+          userFeedback: submissionData.userFeedback,
+          userPrompt: prompt,
+          generatedCode: generatedHTML,
+          modelUsed: ragModel,
+          ragUsed: useRAG,
+          ragExamplesCount: ragMetadata?.examplesCount || 0
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit evaluation');
+      }
+
+      setSubmitSuccess(true);
+      setShowSubmitModal(false);
+      setFeedbackGiven(true);
+
+      // Reset form after successful submission
+      setTimeout(() => {
+        setSubmissionData({ userIntent: '', userFeedback: '' });
+        setSubmitSuccess(false);
+      }, 3000);
+    } catch (error) {
+      console.error('Failed to submit for evaluation:', error);
+      alert('Failed to submit. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const examplePrompts = [
     'Create a tabbed product showcase for running shoes',
     'Make an interactive survey about customer preferences',
@@ -158,10 +211,17 @@ const PlaygroundPage = () => {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-3">
               Generate interactive emails with AI.
             </p>
-            <p className="text-sm text-gray-500 max-w-3xl mx-auto">
-              Currently working on fine-tuning a custom AI model for bullet-proof kinetic email builds. 
+            <p className="text-sm text-gray-500 max-w-3xl mx-auto mb-4">
+              Currently working on fine-tuning a custom AI model for bullet-proof kinetic email builds.
               This beta version uses general AI - expect improvements soon!
             </p>
+            <Link
+              to="/how-it-works"
+              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
+            >
+              <FaInfoCircle />
+              How the RAG System Works
+            </Link>
           </div>
           
           {/* Main Content - Responsive Layout */}
@@ -540,31 +600,25 @@ const PlaygroundPage = () => {
                         </div>
                       </div>
                       
-                      {/* Feedback Section */}
-                      {!feedbackGiven && (
-                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-6">
-                          <h4 className="font-semibold text-green-900 mb-3 text-lg">Was this helpful?</h4>
-                          <p className="text-sm text-gray-600 mb-4">Your feedback helps improve the AI's email generation quality</p>
-                          <div className="flex items-center gap-4">
-                            <button
-                              onClick={() => submitFeedback('positive')}
-                              className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
-                            >
-                              <FaThumbsUp /> Yes, great!
-                            </button>
-                            <button
-                              onClick={() => submitFeedback('negative')}
-                              className="flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105"
-                            >
-                              <FaThumbsDown /> Needs work
-                            </button>
-                          </div>
+                      {/* Submit for Evaluation Section */}
+                      {!feedbackGiven && !submitSuccess && (
+                        <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-2xl p-6">
+                          <h4 className="font-semibold text-purple-900 mb-3 text-lg">Help Improve Kinetic Email</h4>
+                          <p className="text-sm text-gray-600 mb-4">
+                            Submit this build for AI evaluation and help us improve the model!
+                          </p>
+                          <button
+                            onClick={() => setShowSubmitModal(true)}
+                            className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
+                          >
+                            <FaRocket /> Submit for Evaluation
+                          </button>
                         </div>
                       )}
 
-                      {feedbackGiven && (
-                        <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-4">
-                          <p className="text-blue-900 font-medium text-center">✓ Thank you for your feedback!</p>
+                      {submitSuccess && (
+                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-4">
+                          <p className="text-green-900 font-medium text-center">✓ Submitted successfully! Thank you for helping improve Kinetic Email!</p>
                         </div>
                       )}
 
@@ -627,6 +681,77 @@ const PlaygroundPage = () => {
           </div>
         </div>
       </PageLayout>
+
+      {/* Submission Modal */}
+      {showSubmitModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 rounded-t-2xl">
+              <h3 className="text-2xl font-bold text-white">Submit for AI Evaluation</h3>
+              <p className="text-purple-100 mt-2">Help us improve Kinetic Email by sharing your feedback</p>
+            </div>
+
+            <div className="p-6 space-y-6">
+              {/* User Intent */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  What were you trying to achieve? <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  value={submissionData.userIntent}
+                  onChange={(e) => setSubmissionData({ ...submissionData, userIntent: e.target.value })}
+                  placeholder="e.g., I wanted to create a product showcase with tabs for different shoe models..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                  rows={4}
+                />
+              </div>
+
+              {/* User Feedback */}
+              <div>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  Any feedback on the result? (Optional)
+                </label>
+                <textarea
+                  value={submissionData.userFeedback}
+                  onChange={(e) => setSubmissionData({ ...submissionData, userFeedback: e.target.value })}
+                  placeholder="e.g., The tabs worked great, but the fallback content could be better..."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                  rows={4}
+                />
+              </div>
+
+              {/* Consent Info */}
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-sm text-blue-900">
+                  <strong>Privacy:</strong> By submitting, you consent to this email build being used for training data.
+                  Your submission will help our AI learn to generate better kinetic emails.
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 justify-end">
+                <button
+                  onClick={() => {
+                    setShowSubmitModal(false);
+                    setSubmissionData({ userIntent: '', userFeedback: '' });
+                  }}
+                  disabled={isSubmitting}
+                  className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors disabled:opacity-50"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleSubmitForEvaluation}
+                  disabled={isSubmitting || !submissionData.userIntent.trim()}
+                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white rounded-lg font-medium transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit'}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

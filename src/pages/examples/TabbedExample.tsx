@@ -4,6 +4,7 @@ import React from 'react';
 import InteractiveExample from '../../components/email-examples/InteractiveExample';
 import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
+import { ArrowLeft, CheckCircle, XCircle, HelpCircle, Layout, Monitor, RotateCcw, FileText } from 'lucide-react';
 
 const TabbedExample: React.FC = () => {
   // HTML code for the tabbed example
@@ -243,25 +244,47 @@ label {
     <PageLayout>
       <div className="mb-6">
         <Link to="/examples" className="text-blue-600 hover:text-blue-800 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+          <ArrowLeft className="h-4 w-4 mr-1" />
           Back to Examples
         </Link>
       </div>
-      
-      <h1 className="text-3xl font-bold mb-6">Tabbed Email Interface</h1>
-      
-      <div className="prose max-w-none mb-8">
-        <p>
-          This example demonstrates a basic tabbed interface using the checkbox hack—the foundation 
-          of kinetic emails. It leverages HTML radio inputs and labels combined with CSS selectors 
-          to create interactive tabs without JavaScript.
-        </p>
-        <p>
-          This interactive component allows recipients to navigate between different content sections
-          without leaving their inbox, significantly increasing engagement compared to traditional static emails.
-        </p>
+
+      {/* Hero Section */}
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-orange-500 via-amber-500 to-yellow-500 p-12 text-white">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-600 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+              <Layout className="w-8 h-8 text-white" />
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-orange-100 uppercase tracking-wide">Basic Technique</div>
+              <h1 className="text-4xl md:text-5xl font-black leading-tight">Tabbed Email Interface</h1>
+            </div>
+          </div>
+
+          <p className="text-xl text-orange-50 leading-relaxed max-w-3xl">
+            This example demonstrates a basic tabbed interface using the checkbox hack—the foundation
+            of kinetic emails. It leverages HTML radio inputs and labels combined with CSS selectors
+            to create interactive tabs without JavaScript.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              Navigation
+            </div>
+            <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              Core Technique
+            </div>
+            <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium">
+              Beginner Friendly
+            </div>
+          </div>
+        </div>
       </div>
 
       <InteractiveExample
@@ -359,34 +382,24 @@ label {
           <div className="grid md:grid-cols-3 gap-6">
             <div className="bg-green-50 p-4 rounded-lg border border-green-100">
               <h3 className="font-semibold text-green-800 flex items-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
+                <CheckCircle className="h-5 w-5 mr-2" />
                 Supported Clients
               </h3>
               <ul className="space-y-2 text-green-800">
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Apple Mail (macOS)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Mail (iOS)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Outlook for Mac
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
+                  <CheckCircle className="h-4 w-4 mr-2" />
                   Outlook for iOS
                 </li>
               </ul>
@@ -394,28 +407,20 @@ label {
             
             <div className="bg-red-50 p-4 rounded-lg border border-red-100">
               <h3 className="font-semibold text-red-800 flex items-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                </svg>
+                <XCircle className="h-5 w-5 mr-2" />
                 Unsupported Clients
               </h3>
               <ul className="space-y-2 text-red-800">
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  <XCircle className="h-4 w-4 mr-2" />
                   Gmail (Web)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  <XCircle className="h-4 w-4 mr-2" />
                   Outlook (Windows)
                 </li>
                 <li className="flex items-center">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
+                  <XCircle className="h-4 w-4 mr-2" />
                   Yahoo Mail
                 </li>
               </ul>
@@ -423,9 +428,7 @@ label {
             
             <div className="bg-blue-50 p-4 rounded-lg border border-blue-100">
               <h3 className="font-semibold text-blue-800 flex items-center mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-                </svg>
+                <HelpCircle className="h-5 w-5 mr-2" />
                 Why the Difference?
               </h3>
               <p className="text-blue-800 text-sm mb-3">
@@ -444,9 +447,7 @@ label {
           <div className="space-y-4">
             <div className="flex items-start">
               <div className="bg-blue-100 rounded-full p-2 text-blue-600 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
-                </svg>
+                <Layout className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Keep your HTML structure simple</h3>
@@ -456,9 +457,7 @@ label {
             
             <div className="flex items-start">
               <div className="bg-blue-100 rounded-full p-2 text-blue-600 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clipRule="evenodd" />
-                </svg>
+                <Monitor className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Place inputs at the beginning</h3>
@@ -468,9 +467,7 @@ label {
             
             <div className="flex items-start">
               <div className="bg-blue-100 rounded-full p-2 text-blue-600 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clipRule="evenodd" />
-                </svg>
+                <RotateCcw className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Always implement fallbacks</h3>
@@ -480,9 +477,7 @@ label {
             
             <div className="flex items-start">
               <div className="bg-blue-100 rounded-full p-2 text-blue-600 mr-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clipRule="evenodd" />
-                </svg>
+                <FileText className="h-5 w-5" />
               </div>
               <div>
                 <h3 className="font-semibold text-gray-900 mb-1">Test thoroughly</h3>
