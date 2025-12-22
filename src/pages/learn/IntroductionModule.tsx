@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import ModuleCompletionButton from '../../components/common/ModuleCompletionButton';
-import { ArrowLeft, Zap, Rocket, CheckCircle, AlertTriangle, Code, Palette, Database, Apple, XCircle, Lightbulb, Mail } from 'lucide-react';
+import { ArrowLeft, Zap, Rocket, CheckCircle, AlertTriangle, Code, Palette, Database, Apple, XCircle, Lightbulb, Mail, TrendingUp, GlassWater } from 'lucide-react';
 
 // Icon aliases for compatibility
 const FaRocket = Rocket;
@@ -174,7 +174,7 @@ const IntroductionModule: React.FC = () => {
           </div>
         </section>
 
-        {/* Benefits Section - Completely Redesigned */}
+        {/* Why Kinetic Emails Work - Psychology + Design */}
         <section className="relative">
           <div className="absolute -inset-2 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-3xl blur-2xl"></div>
           <div className="relative bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
@@ -184,8 +184,8 @@ const IntroductionModule: React.FC = () => {
                   <FaRocket className="text-white text-xl" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900">Why Use Kinetic Emails?</h2>
-                  <p className="text-sm text-gray-600">The compelling advantages</p>
+                  <h2 className="text-3xl font-bold text-gray-900">Why Kinetic Emails Work</h2>
+                  <p className="text-sm text-gray-600">Psychology meets design</p>
                 </div>
               </div>
             </div>
@@ -197,12 +197,24 @@ const IntroductionModule: React.FC = () => {
                   <div className="relative bg-white p-6 rounded-xl border-2 border-green-200 hover:border-green-300 transition-all">
                     <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4">
                       <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
                       </svg>
                     </div>
-                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Enhanced UX</h3>
-                    <p className="text-gray-700 leading-relaxed">Seamless interaction inside the inbox, eliminating the need to visit external websites.</p>
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg">The Zeigarnik Effect</h3>
+                    <p className="text-gray-700 leading-relaxed">When people start interacting—clicking tabs, completing surveys—they're more likely to finish and take action due to psychological tension from incomplete tasks.</p>
+                  </div>
+                </div>
+
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                  <div className="relative bg-white p-6 rounded-xl border-2 border-green-200 hover:border-green-300 transition-all">
+                    <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Kinesthetic Learning</h3>
+                    <p className="text-gray-700 leading-relaxed">Physical interaction through clicking and tapping creates stronger memory formation and emotional connection to your brand than passive reading.</p>
                   </div>
                 </div>
 
@@ -212,19 +224,26 @@ const IntroductionModule: React.FC = () => {
                     <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4">
                       <Zap className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Higher Engagement</h3>
-                    <p className="text-gray-700 leading-relaxed">Users navigate content and engage with your brand directly in their email client.</p>
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Reduced Friction</h3>
+                    <p className="text-gray-700 leading-relaxed">No scrolling through long emails or clicking multiple links. Everything users need is right there, organized and interactive.</p>
                   </div>
                 </div>
+              </div>
 
-                <div className="group relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-xl blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
-                  <div className="relative bg-white p-6 rounded-xl border-2 border-green-200 hover:border-green-300 transition-all">
-                    <div className="w-14 h-14 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center mb-4">
-                      <Database className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Rich Data</h3>
-                    <p className="text-gray-700 leading-relaxed">Track kinetic interactions for better segmentation and personalization insights.</p>
+              {/* Better Data Collection Callout */}
+              <div className="bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl p-6 text-white">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Database className="w-5 h-5 text-yellow-300" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">Better Data Collection</h3>
+                    <p className="text-green-100 leading-relaxed">
+                      Capture <strong>granular engagement data</strong> that traditional emails can't provide. Track which tabs were clicked,
+                      survey responses, product interests, and user preferences—all without leaving the email. This rich behavioral data
+                      helps you understand what resonates with your audience and personalize future communications, leading to higher
+                      conversion rates and better ROI on your email campaigns.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -232,88 +251,96 @@ const IntroductionModule: React.FC = () => {
           </div>
         </section>
 
-        {/* Limitations & Considerations - Modern Warning Design */}
+        {/* The Glass Half Full - Positive Framing */}
         <section className="relative">
-          <div className="absolute -inset-2 bg-gradient-to-r from-amber-500/10 to-orange-500/10 rounded-3xl blur-2xl"></div>
+          <div className="absolute -inset-2 bg-gradient-to-r from-orange-500/10 to-amber-500/10 rounded-3xl blur-2xl"></div>
           <div className="relative bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="bg-gradient-to-r from-amber-50 to-orange-50 px-8 py-6 border-b border-amber-100">
+            <div className="bg-gradient-to-r from-orange-50 to-amber-50 px-8 py-6 border-b border-orange-100">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 bg-amber-500 rounded-xl flex items-center justify-center">
-                  <AlertTriangle className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-orange-600 rounded-xl flex items-center justify-center">
+                  <GlassWater className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-3xl font-bold text-gray-900">Limitations & Considerations</h2>
-                  <p className="text-sm text-gray-600">Important things to know before you start</p>
+                  <h2 className="text-3xl font-bold text-gray-900">The Glass Half Full</h2>
+                  <p className="text-sm text-gray-600">51% enhanced experience vs. 0% without kinetic</p>
                 </div>
               </div>
             </div>
 
             <div className="p-8">
-              <div className="bg-gradient-to-r from-yellow-500 to-amber-500 rounded-xl p-6 mb-8 text-white">
+              <div className="bg-gradient-to-r from-orange-600 to-amber-600 rounded-xl p-6 mb-8 text-white">
                 <div className="flex items-start gap-4">
-                  <AlertTriangle className="w-6 h-6 flex-shrink-0" />
+                  <svg className="w-6 h-6 flex-shrink-0 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                   <div>
-                    <h3 className="font-bold text-lg mb-2">Important</h3>
-                    <p className="text-yellow-100">
-                      While kinetic emails offer powerful interactivity, they do have some limitations
-                      you should be aware of before implementation.
+                    <h3 className="font-bold text-lg mb-2">The Smart Choice</h3>
+                    <p className="text-orange-100">
+                      Without kinetic emails, <strong>0%</strong> of your audience gets an interactive experience.
+                      With kinetic emails, <strong>~51%</strong> get an enhanced, engaging experience while the other 49%
+                      receive the same fallback email you would have designed anyway. It's a pure win.
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="grid md:grid-cols-3 gap-6 mb-8">
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-xl border-2 border-amber-200">
-                  <div className="w-14 h-14 bg-amber-500 rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                  <div className="relative bg-white p-6 rounded-xl border-2 border-orange-200 hover:border-orange-300 transition-all">
+                    <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center mb-4">
+                      <Apple className="w-7 h-7 text-white" />
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Works on Apple Mail</h3>
+                    <p className="text-gray-700">
+                      Fully supported on Apple Mail (iOS, macOS, iPadOS)—representing 51% of all email opens.
+                    </p>
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-2 text-lg">Client Compatibility</h3>
-                  <p className="text-gray-700">
-                    Not supported in all email clients. Primarily works in Apple Mail products and some versions of Outlook for Mac.
-                  </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-xl border-2 border-amber-200">
-                  <div className="w-14 h-14 bg-amber-500 rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                  <div className="relative bg-white p-6 rounded-xl border-2 border-orange-200 hover:border-orange-300 transition-all">
+                    <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center mb-4">
+                      <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Graceful Fallbacks</h3>
+                    <p className="text-gray-700">
+                      Design once with fallback content—the other 49% see your beautiful static email, no extra work required.
+                    </p>
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-2 text-lg">Rendering Differences</h3>
-                  <p className="text-gray-700">
-                    Some email clients strip out specific CSS properties, requiring careful testing and fallback strategies.
-                  </p>
                 </div>
 
-                <div className="bg-gradient-to-br from-amber-50 to-orange-50 p-6 rounded-xl border-2 border-amber-200">
-                  <div className="w-14 h-14 bg-amber-500 rounded-xl flex items-center justify-center mb-4">
-                    <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                    </svg>
+                <div className="group relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
+                  <div className="relative bg-white p-6 rounded-xl border-2 border-orange-200 hover:border-orange-300 transition-all">
+                    <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center mb-4">
+                      <Zap className="w-7 h-7 text-white" />
+                    </div>
+                    <h3 className="font-bold text-gray-900 mb-2 text-lg">Pure Upside</h3>
+                    <p className="text-gray-700">
+                      Zero downside risk. Those who can't see kinetic features get the exact same email you'd send without kinetic—no one loses.
+                    </p>
                   </div>
-                  <h3 className="font-bold text-gray-900 mb-2 text-lg">AMP Alternative</h3>
-                  <p className="text-gray-700">
-                    Gmail and Yahoo offer AMP for Email, which provides similar interactivity but requires separate implementation.
-                  </p>
                 </div>
               </div>
 
               {/* Client Support */}
-              <div className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+              <div className="bg-gradient-to-br from-orange-50 to-amber-50 rounded-xl p-6 border-2 border-orange-200">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Email Client Support</h3>
                 <p className="text-gray-700 mb-6">
-                  Kinetic emails work in WebKit-based email clients, which represent approximately <strong className="text-blue-600">51% of all email opens</strong>.
+                  Kinetic emails work in WebKit-based email clients, which represent approximately <strong className="text-orange-600">51% of all email opens</strong>.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white rounded-xl p-6 border-2 border-green-200">
+                  <div className="bg-white rounded-xl p-6 border-2 border-orange-300">
                     <div className="flex items-center gap-2 mb-4">
-                      <div className="w-8 h-8 bg-green-600 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-orange-600 rounded-lg flex items-center justify-center">
                         <CheckCircle className="w-5 h-5 text-white" />
                       </div>
-                      <h4 className="font-bold text-green-800">Supported Clients</h4>
+                      <h4 className="font-bold text-orange-800">Supported Clients</h4>
                     </div>
                     <ul className="space-y-2 text-gray-700">
                       <li className="flex items-center gap-2">
@@ -327,6 +354,10 @@ const IntroductionModule: React.FC = () => {
                       <li className="flex items-center gap-2">
                         <Apple className="w-5 h-5 text-gray-500" />
                         Apple Mail (iPadOS)
+                      </li>
+                      <li className="flex items-center gap-2">
+                        <Mail className="w-5 h-5 text-gray-500" />
+                        Samsung Mail
                       </li>
                       <li className="flex items-center gap-2">
                         <Rocket className="w-5 h-5 text-gray-500" />

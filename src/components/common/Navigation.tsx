@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaRobot } from 'react-icons/fa';
+import { Zap } from 'lucide-react';
 
 const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,8 +40,13 @@ const Navigation = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link to="/" className="flex items-center space-x-2">
-          <span className="text-2xl font-bold text-blue-600">Kinetic.email</span>
+        <Link to="/" className="flex items-center space-x-3 group">
+          <div className="transition-transform duration-200 group-hover:scale-110 group-hover:rotate-12">
+            <Zap className="w-6 h-6 text-yellow-500 fill-yellow-500" />
+          </div>
+          <span className="text-2xl bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.3)] transition-all duration-200 group-hover:drop-shadow-[0_0_12px_rgba(6,182,212,0.4)] tracking-tight" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900 }}>
+            KINETIC<span className="font-normal tracking-normal" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 400 }}>.email</span>
+          </span>
         </Link>
         
         {/* Mobile menu button */}
@@ -92,9 +98,9 @@ const Navigation = () => {
       </div>
       
       {/* Mobile Navigation */}
-      <div 
+      <div
         className={`md:hidden absolute top-full left-0 right-0 bg-white shadow-md transition-all duration-200 ${
-          isMenuOpen ? 'max-h-64 border-t' : 'max-h-0 overflow-hidden'
+          isMenuOpen ? 'max-h-96 border-t' : 'max-h-0 overflow-hidden'
         }`}
       >
         <div className="container mx-auto px-4 py-2">
