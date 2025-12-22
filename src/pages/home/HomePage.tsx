@@ -509,11 +509,11 @@ const HomePage = () => {
                   <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
-                  to="/how-it-works"
+                  to="/learn"
                   className="px-8 py-4 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   <FaMagic />
-                  How It Works
+                  Learn About Kinetic
                 </Link>
               </div>
 
@@ -851,42 +851,55 @@ const HomePage = () => {
         </div>
       </div>
 
-      {/* Portfolio Showcase */}
+      {/* AI Technology Showcase */}
       <div className="bg-white py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Real Campaigns, Real Results
+              Powered by Advanced AI
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See how leading brands use kinetic emails to drive engagement
+              RAG-based generation with continuous evaluation and quality improvement
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
             {[
-              { brand: 'Daylight Computer', type: 'Educational Series', emails: 4, color: 'from-orange-500 to-red-500' },
-              { brand: 'Chroma Lighting', type: 'Product Showcase', emails: 6, color: 'from-blue-500 to-purple-500' },
-              { brand: 'The Grounded Athlete', type: 'Product Tutorials', emails: 5, color: 'from-green-500 to-emerald-500' }
-            ].map((project, idx) => (
-              <div key={idx} className="group bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 border border-slate-200">
-                <div className={`w-12 h-12 bg-gradient-to-br ${project.color} rounded-xl mb-4 transform group-hover:scale-110 transition-transform`}></div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.brand}</h3>
-                <p className="text-gray-600 mb-4">{project.type}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-500">{project.emails} emails</span>
-                  <FaCheckCircle className="text-green-500" />
+              {
+                title: 'RAG System',
+                description: 'Retrieval-Augmented Generation pulls proven examples from our knowledge base to ensure accurate, tested code.',
+                icon: '🔍',
+                color: 'from-purple-500 to-indigo-500'
+              },
+              {
+                title: 'AI Evaluations',
+                description: 'Every generation is evaluated for correctness, fallback implementation, and email client compatibility.',
+                icon: '✅',
+                color: 'from-blue-500 to-cyan-500'
+              },
+              {
+                title: 'Continuous Learning',
+                description: 'Our system learns from every generation, improving quality and expanding the knowledge base over time.',
+                icon: '📈',
+                color: 'from-green-500 to-emerald-500'
+              }
+            ].map((feature, idx) => (
+              <div key={idx} className="group bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-slate-200">
+                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl mb-6 flex items-center justify-center text-3xl transform group-hover:scale-110 transition-transform`}>
+                  {feature.icon}
                 </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
 
           <div className="text-center">
             <Link
-              to="/portfolio"
+              to="/how-it-works"
               className="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-lg transition-colors"
             >
-              View Full Portfolio
+              Learn How It Works
               <FaArrowRight />
             </Link>
           </div>

@@ -304,20 +304,47 @@ const CheckboxHackModule: React.FC = () => {
                 </p>
 
                 <div className="p-8 bg-white rounded-lg border-2 border-emerald-300 shadow-lg">
-                  <div>
-                    <input type="checkbox" id="demo-toggle" className="sr-only peer" />
-                    <label
-                      htmlFor="demo-toggle"
-                      className="cursor-pointer py-3 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 inline-block rounded-lg text-white font-bold hover:from-emerald-600 hover:to-teal-600 peer-checked:from-teal-600 peer-checked:to-cyan-600 transition-all transform hover:scale-105 shadow-lg"
-                    >
-                      Toggle Content
-                    </label>
+                  <style>{`
+                    #demo-toggle:checked ~ .toggle-label {
+                      background: linear-gradient(to right, rgb(20 184 166), rgb(6 182 212)) !important;
+                    }
 
-                    <div className="overflow-hidden max-h-0 peer-checked:max-h-40 transition-all duration-500">
-                      <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 mt-6 rounded-lg border-2 border-emerald-200">
-                        <p className="text-emerald-900 font-medium">This content is now visible because you clicked the toggle button!</p>
-                        <p className="text-emerald-800 mt-2">In a real email, this could contain additional information, images, or other content.</p>
-                      </div>
+                    #demo-toggle:checked ~ .toggle-content {
+                      max-height: 200px !important;
+                    }
+                  `}</style>
+
+                  {/* The actual checkbox must be at the top level for sibling selectors to work */}
+                  <input type="checkbox" id="demo-toggle" />
+
+                  {/* Educational note about the checkbox */}
+                  <div className="mb-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Code className="w-4 h-4 text-blue-600" />
+                      <p className="text-sm font-bold text-blue-900">The Hidden Checkbox (normally hidden, but visible here for learning):</p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <label htmlFor="demo-toggle" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-gray-400 rounded inline-block relative">
+                          <span className="absolute inset-0 bg-blue-500 scale-0" style={{ transition: 'transform 0.2s' }}></span>
+                        </span>
+                        id="demo-toggle" (click the checkbox above or the button below)
+                      </label>
+                    </div>
+                    <p className="text-xs text-blue-700 mt-2">The real checkbox is above. Try clicking it directly, or use the styled button below - both control the same state!</p>
+                  </div>
+
+                  <label
+                    htmlFor="demo-toggle"
+                    className="toggle-label cursor-pointer py-3 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 inline-block rounded-lg text-white font-bold hover:from-emerald-600 hover:to-teal-600 transition-all transform hover:scale-105 shadow-lg"
+                  >
+                    Toggle Content
+                  </label>
+
+                  <div className="toggle-content overflow-hidden max-h-0 transition-all duration-500">
+                    <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 mt-6 rounded-lg border-2 border-emerald-200">
+                      <p className="text-emerald-900 font-medium">This content is now visible because you clicked the toggle button!</p>
+                      <p className="text-emerald-800 mt-2">In a real email, this could contain additional information, images, or other content.</p>
                     </div>
                   </div>
                 </div>
@@ -493,6 +520,125 @@ label {
                       </li>
                     </ul>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Live Demo */}
+            <div className="relative mb-8">
+              <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-xl blur opacity-20"></div>
+              <div className="relative bg-gradient-to-br from-gray-50 to-emerald-50 p-8 rounded-xl border-2 border-emerald-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-4">Live Example</h3>
+                <p className="text-gray-700 mb-6 leading-relaxed">
+                  This demonstrates a fully functional tabbed interface. Click the tabs to switch between different content sections:
+                </p>
+
+                <div className="p-8 bg-white rounded-lg border-2 border-emerald-300 shadow-lg">
+                  <style>{`
+                    #demo-tab1:checked ~ .tab-labels .tab-label-1,
+                    #demo-tab2:checked ~ .tab-labels .tab-label-2,
+                    #demo-tab3:checked ~ .tab-labels .tab-label-3 {
+                      background: linear-gradient(to right, rgb(16 185 129), rgb(20 184 166)) !important;
+                      color: white !important;
+                      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+                    }
+
+                    #demo-tab1:checked ~ .tab-content .content-1,
+                    #demo-tab2:checked ~ .tab-content .content-2,
+                    #demo-tab3:checked ~ .tab-content .content-3 {
+                      display: block !important;
+                    }
+                  `}</style>
+
+                  {/* The actual radio buttons must be at the top level for sibling selectors to work */}
+                  <input type="radio" id="demo-tab1" name="demo-tabs" defaultChecked />
+                  <input type="radio" id="demo-tab2" name="demo-tabs" />
+                  <input type="radio" id="demo-tab3" name="demo-tabs" />
+
+                  {/* Educational note about the radio buttons */}
+                  <div className="mb-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Code className="w-4 h-4 text-blue-600" />
+                      <p className="text-sm font-bold text-blue-900">The Hidden Radio Buttons (normally hidden, but visible here for learning):</p>
+                    </div>
+                    <div className="flex gap-4 items-center">
+                      <label htmlFor="demo-tab1" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-gray-400 rounded-full inline-block"></span>
+                        id="demo-tab1"
+                      </label>
+                      <label htmlFor="demo-tab2" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-gray-400 rounded-full inline-block"></span>
+                        id="demo-tab2"
+                      </label>
+                      <label htmlFor="demo-tab3" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
+                        <span className="w-4 h-4 border-2 border-gray-400 rounded-full inline-block"></span>
+                        id="demo-tab3"
+                      </label>
+                    </div>
+                    <p className="text-xs text-blue-700 mt-2">The real radio buttons are above. Try clicking them directly, or use the styled tabs below - both control the same state!</p>
+                  </div>
+
+                  <div className="tab-labels flex gap-2 mb-6">
+                      <label
+                        htmlFor="demo-tab1"
+                        className="tab-label-1 cursor-pointer flex-1 text-center py-3 px-6 bg-gray-200 text-gray-700 font-bold rounded-lg transition-all hover:bg-gray-300"
+                      >
+                        Tab 1
+                      </label>
+                      <label
+                        htmlFor="demo-tab2"
+                        className="tab-label-2 cursor-pointer flex-1 text-center py-3 px-6 bg-gray-200 text-gray-700 font-bold rounded-lg transition-all hover:bg-gray-300"
+                      >
+                        Tab 2
+                      </label>
+                      <label
+                        htmlFor="demo-tab3"
+                        className="tab-label-3 cursor-pointer flex-1 text-center py-3 px-6 bg-gray-200 text-gray-700 font-bold rounded-lg transition-all hover:bg-gray-300"
+                      >
+                        Tab 3
+                      </label>
+                    </div>
+
+                    <div className="tab-content">
+                      <div className="content-1 hidden">
+                        <div className="p-6 bg-gradient-to-br from-emerald-50 to-teal-50 rounded-lg border-2 border-emerald-200">
+                          <h4 className="text-xl font-bold text-emerald-900 mb-3">Content for Tab 1</h4>
+                          <p className="text-emerald-800 mb-3">This is the content for the first tab. In a real email, this could contain:</p>
+                          <ul className="space-y-2 text-emerald-800">
+                            <li className="flex items-start gap-2">
+                              <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                              <span>Product details and descriptions</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                              <span>Images and media</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                              <CheckCircle className="w-5 h-5 text-emerald-600 mt-0.5 flex-shrink-0" />
+                              <span>Call-to-action buttons</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <div className="content-2 hidden">
+                        <div className="p-6 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-lg border-2 border-teal-200">
+                          <h4 className="text-xl font-bold text-teal-900 mb-3">Content for Tab 2</h4>
+                          <p className="text-teal-800 mb-3">This is the second tab's content. Notice how it completely replaces the first tab's content.</p>
+                          <p className="text-teal-800">Only one tab's content is visible at a time, thanks to radio buttons all sharing the same name attribute!</p>
+                        </div>
+                      </div>
+
+                      <div className="content-3 hidden">
+                        <div className="p-6 bg-gradient-to-br from-cyan-50 to-emerald-50 rounded-lg border-2 border-cyan-200">
+                          <h4 className="text-xl font-bold text-cyan-900 mb-3">Content for Tab 3</h4>
+                          <p className="text-cyan-800 mb-3">And here's the third tab! This demonstrates how you can have as many tabs as needed.</p>
+                          <div className="bg-white p-4 rounded-lg border border-cyan-300 mt-4">
+                            <p className="text-cyan-900 font-medium">Pro tip: Keep the number of tabs reasonable (3-5) for the best user experience in emails.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>
