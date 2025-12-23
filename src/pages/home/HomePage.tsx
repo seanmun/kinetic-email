@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
-import { FaRocket, FaCode, FaPaperPlane, FaChartLine, FaApple, FaMagic, FaCheckCircle, FaBolt, FaArrowRight } from 'react-icons/fa';
+import { FaBook, FaCode, FaPaperPlane, FaChartLine, FaApple, FaMagic, FaCheckCircle, FaBolt, FaArrowRight } from 'react-icons/fa';
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState<'static' | 'kinetic'>('kinetic');
@@ -502,7 +502,7 @@ const HomePage = () => {
                   to="/playground"
                   className="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-bold rounded-xl shadow-lg shadow-blue-500/50 transition-all duration-200 transform hover:scale-105 flex items-center justify-center gap-2"
                 >
-                  <FaRocket className="group-hover:animate-bounce" />
+                  <FaMagic className="group-hover:animate-bounce" />
                   Generate Your First Email
                   <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </Link>
@@ -510,7 +510,7 @@ const HomePage = () => {
                   to="/learn"
                   className="px-8 py-4 bg-white/10 backdrop-blur-sm hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl transition-all duration-200 flex items-center justify-center gap-2"
                 >
-                  <FaMagic />
+                  <FaBook />
                   Learn About Kinetic
                 </Link>
               </div>
@@ -838,7 +838,7 @@ const HomePage = () => {
               to="/playground"
               className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-200 transform hover:scale-105"
             >
-              <FaRocket />
+              <FaMagic />
               Try It Now - It's Free
               <FaArrowRight />
             </Link>
@@ -928,7 +928,7 @@ const HomePage = () => {
               to="/playground"
               className="group px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-white font-bold rounded-xl shadow-2xl shadow-blue-500/50 transition-all duration-200 transform hover:scale-105 flex items-center gap-3 text-lg"
             >
-              <FaRocket className="text-2xl group-hover:animate-bounce" />
+              <FaMagic className="text-2xl group-hover:animate-bounce" />
               Start Generating Now
               <FaArrowRight className="group-hover:translate-x-2 transition-transform" />
             </Link>

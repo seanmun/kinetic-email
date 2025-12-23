@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
-import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaDatabase, FaRocket, FaInfoCircle } from 'react-icons/fa';
+import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaDatabase, FaMagic, FaInfoCircle } from 'react-icons/fa';
 
 type EmailClient = 'ios' | 'gmail';
 type ViewMode = 'preview' | 'code';
@@ -187,23 +187,13 @@ const PlaygroundPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-400/30 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-indigo-400/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <PageLayout>
         <div className="max-w-[95%] mx-auto py-8 relative z-10">
-          {/* Hero Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_15px_rgba(6,182,212,0.3)] tracking-tight animate-gradient" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, backgroundSize: '200% auto' }}>
-              KINETIC EMAIL PLAYGROUND
-            </h1>
-            <span className="inline-block bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-bold px-4 py-1.5 rounded-full">
-              BETA
-            </span>
-          </div>
-          
           {/* Main Content - Responsive Layout */}
           <div className="grid lg:grid-cols-12 xl:grid-cols-12 gap-6 lg:gap-8">
             {/* Left Panel - Input Section */}
@@ -212,7 +202,7 @@ const PlaygroundPage = () => {
               <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:border-blue-200 transition-all duration-300">
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 lg:p-6">
                   <h2 className="text-lg lg:text-xl font-semibold text-white flex items-center gap-2">
-                    <FaRocket className="text-yellow-300" />
+                    <FaMagic className="text-yellow-300" />
                     Generate Email
                   </h2>
                 </div>
@@ -332,7 +322,7 @@ const PlaygroundPage = () => {
                         </div>
                       ) : (
                         <div className="flex items-center justify-center gap-2">
-                          <FaRocket className="group-hover:animate-bounce" />
+                          <FaMagic className="group-hover:animate-bounce" />
                           Generate Email
                         </div>
                       )}
@@ -557,7 +547,7 @@ const PlaygroundPage = () => {
                             onClick={() => setShowSubmitModal(true)}
                             className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
                           >
-                            <FaRocket /> Submit for Evaluation
+                            <FaMagic /> Submit for Evaluation
                           </button>
                         </div>
                       )}
@@ -620,7 +610,7 @@ const PlaygroundPage = () => {
                   <div className="absolute bottom-10 left-1/4 w-2 h-2 bg-indigo-400 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
 
                   <div className="text-6xl mb-6 flex justify-center relative">
-                    <FaRocket className="text-blue-600 animate-float" />
+                    <FaMagic className="text-blue-600 animate-float" />
                   </div>
                   <div className="text-2xl font-semibold text-gray-900 mb-4">Ready to create kinetic emails!</div>
                   <p className="text-lg text-gray-600 max-w-md mx-auto mb-4">
