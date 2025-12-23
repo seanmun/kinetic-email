@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
-import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaDatabase, FaThumbsUp, FaThumbsDown, FaRocket, FaInfoCircle } from 'react-icons/fa';
+import { FaApple, FaGoogle, FaCopy, FaCode, FaEye, FaChevronDown, FaChevronUp, FaDatabase, FaRocket, FaInfoCircle } from 'react-icons/fa';
 
 type EmailClient = 'ios' | 'gmail';
 type ViewMode = 'preview' | 'code';
@@ -17,7 +17,6 @@ const PlaygroundPage = () => {
   const [error, setError] = useState('');
   const [emailClient, setEmailClient] = useState<EmailClient>('ios');
   const [viewMode, setViewMode] = useState<ViewMode>('preview');
-  const [showExamples, setShowExamples] = useState(true);
   const [hasGenerated, setHasGenerated] = useState(false);
   const [useRAG, setUseRAG] = useState(false);
   const [ragModel, setRagModel] = useState<'small' | 'large'>('small');
@@ -72,7 +71,6 @@ const PlaygroundPage = () => {
     setError('');
     setExplanationText('');
     setHasGenerated(true);
-    setShowExamples(false); // Hide examples after first generation
     setFeedbackGiven(false); // Reset feedback for new generation
 
     try {
@@ -185,43 +183,25 @@ const PlaygroundPage = () => {
     }
   };
 
-  const examplePrompts = [
-    'Create a tabbed product showcase for running shoes',
-    'Make an interactive survey about customer preferences',
-    'Build a carousel showing 3 different laptops',
-    'Create a toggle for product specifications',
-    'Design size guides for a clothing brand',
-    'Make a survey about vacation destinations'
-  ];
-
-  const handleExampleClick = (example: string) => {
-    setPrompt(example);
-    setShowExamples(false);
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan-400/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
+
       <PageLayout>
-        <div className="max-w-[95%] mx-auto py-8">
+        <div className="max-w-[95%] mx-auto py-8 relative z-10">
           {/* Hero Header */}
           <div className="text-center mb-12">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
-              Kinetic Email Playground (Beta)
+            <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4 drop-shadow-[0_0_15px_rgba(6,182,212,0.3)] tracking-tight animate-gradient" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900, backgroundSize: '200% auto' }}>
+              KINETIC EMAIL PLAYGROUND
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-3">
-              Generate interactive emails with AI.
-            </p>
-            <p className="text-sm text-gray-500 max-w-3xl mx-auto mb-4">
-              Currently working on fine-tuning a custom AI model for bullet-proof kinetic email builds.
-              This beta version uses general AI - expect improvements soon!
-            </p>
-            <Link
-              to="/how-it-works"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-200 transform hover:scale-105 shadow-lg"
-            >
-              <FaInfoCircle />
-              How the RAG System Works
-            </Link>
+            <span className="inline-block bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-sm font-bold px-4 py-1.5 rounded-full">
+              BETA
+            </span>
           </div>
           
           {/* Main Content - Responsive Layout */}
@@ -229,7 +209,7 @@ const PlaygroundPage = () => {
             {/* Left Panel - Input Section */}
             <div className="lg:col-span-5 xl:col-span-4 space-y-6">
               {/* Prompt Input Card */}
-              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+              <div className="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden hover:shadow-2xl hover:border-blue-200 transition-all duration-300">
                 <div className="bg-gradient-to-r from-blue-600 to-indigo-600 p-4 lg:p-6">
                   <h2 className="text-lg lg:text-xl font-semibold text-white flex items-center gap-2">
                     <FaRocket className="text-yellow-300" />
@@ -281,7 +261,7 @@ const PlaygroundPage = () => {
                       value={prompt}
                       onChange={(e) => setPrompt(e.target.value)}
                       rows={4}
-                      className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 resize-none text-sm lg:text-base"
+                      className="w-full border-2 border-gray-300 rounded-xl px-4 py-3 focus:ring-4 focus:ring-cyan-500/20 focus:border-cyan-500 focus:shadow-[0_0_20px_rgba(6,182,212,0.3)] transition-all duration-300 resize-y text-sm lg:text-base"
                       placeholder="Example: Create a tabbed product showcase for running shoes with features, specs, and reviews"
                     />
                   </div>
@@ -338,19 +318,25 @@ const PlaygroundPage = () => {
                   <button
                     onClick={generateEmail}
                     disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 lg:py-4 px-4 lg:px-6 rounded-xl hover:from-blue-700 hover:to-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-base lg:text-lg transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+                    className="group relative w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 text-white py-3 lg:py-4 px-4 lg:px-6 rounded-xl hover:shadow-[0_0_30px_rgba(6,182,212,0.5)] disabled:opacity-50 disabled:cursor-not-allowed font-bold text-base lg:text-lg transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg overflow-hidden"
+                    style={{ backgroundSize: '200% auto' }}
                   >
-                    {isLoading ? (
-                      <div className="flex items-center justify-center gap-3">
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Generating Magic...
-                      </div>
-                    ) : (
-                      <div className="flex items-center justify-center gap-2">
-                        <FaRocket />
-                        Generate Email
-                      </div>
-                    )}
+                    {/* Animated shine effect on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+
+                    <div className="relative">
+                      {isLoading ? (
+                        <div className="flex items-center justify-center gap-3">
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          Generating Magic...
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-center gap-2">
+                          <FaRocket className="group-hover:animate-bounce" />
+                          Generate Email
+                        </div>
+                      )}
+                    </div>
                   </button>
                   
                   {error && (
@@ -410,49 +396,6 @@ const PlaygroundPage = () => {
                 </div>
               )}
 
-              {/* Example Prompts - Collapsible */}
-              {!hasGenerated || showExamples ? (
-                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300">
-                  <button 
-                    onClick={() => setShowExamples(!showExamples)}
-                    className="w-full p-4 bg-gray-50 hover:bg-gray-100 transition-colors duration-200 flex items-center justify-between"
-                  >
-                    <h3 className="text-base lg:text-lg font-semibold text-gray-900">
-                      Try These Examples
-                    </h3>
-                    {showExamples ? (
-                      <FaChevronUp className="text-gray-500" />
-                    ) : (
-                      <FaChevronDown className="text-gray-500" />
-                    )}
-                  </button>
-                  
-                  {showExamples && (
-                    <div className="p-4 space-y-2 animate-in slide-in-from-top duration-200">
-                      {examplePrompts.map((example, index) => (
-                        <button
-                          key={index}
-                          onClick={() => handleExampleClick(example)}
-                          className="block w-full text-left text-xs lg:text-sm bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 text-blue-700 py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.02]"
-                        >
-                          "{example}"
-                        </button>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ) : (
-                /* Collapsed state after generation */
-                <button 
-                  onClick={() => setShowExamples(true)}
-                  className="w-full p-4 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-200 flex items-center justify-between group"
-                >
-                  <span className="text-sm lg:text-base text-gray-600 group-hover:text-gray-900 transition-colors">
-                    Show example prompts
-                  </span>
-                  <FaChevronDown className="text-gray-400 group-hover:text-gray-600 transition-colors" />
-                </button>
-              )}
 
               {/* Claude's Explanation Text */}
               {explanationText && (
@@ -552,9 +495,9 @@ const PlaygroundPage = () => {
 
                   {/* Preview Content */}
                   {viewMode === 'preview' ? (
-                    <div className="space-y-6">
+                    <div className="space-y-6 animate-in fade-in duration-500">
                       {/* Email Client Preview */}
-                      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 lg:p-8">
+                      <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 lg:p-8 hover:shadow-2xl transition-shadow duration-300">
                         <div className="text-center mb-4 lg:mb-6">
                           <div className="flex items-center justify-center gap-2 lg:gap-3 text-sm lg:text-lg font-medium text-gray-700 mb-2">
                             {emailClient === 'ios' ? (
@@ -579,8 +522,11 @@ const PlaygroundPage = () => {
                           </div>
                         </div>
                         
-                        <div className="flex justify-center">
-                          <div className="transform scale-90 sm:scale-95 lg:scale-100 origin-top">
+                        <div className="flex justify-center relative animate-in fade-in slide-in-from-bottom-4 duration-700">
+                          {/* Glow effect around simulator */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 blur-3xl rounded-3xl animate-pulse"></div>
+
+                          <div className="relative">
                             {emailClient === 'ios' ? (
                               <IOSMailSimulator
                                 sender="Kinetic Email"
@@ -667,14 +613,31 @@ const PlaygroundPage = () => {
                 </>
               ) : (
                 /* Empty State */
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-12 text-center">
-                  <div className="text-6xl mb-6 flex justify-center">
-                    <FaRocket className="text-blue-600" />
+                <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-2xl shadow-xl border border-blue-100 p-12 text-center relative overflow-hidden">
+                  {/* Sparkle effects */}
+                  <div className="absolute top-10 left-10 w-2 h-2 bg-cyan-400 rounded-full animate-ping"></div>
+                  <div className="absolute top-20 right-20 w-2 h-2 bg-blue-400 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
+                  <div className="absolute bottom-10 left-1/4 w-2 h-2 bg-indigo-400 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+
+                  <div className="text-6xl mb-6 flex justify-center relative">
+                    <FaRocket className="text-blue-600 animate-float" />
                   </div>
                   <div className="text-2xl font-semibold text-gray-900 mb-4">Ready to create kinetic emails!</div>
-                  <p className="text-lg text-gray-600 max-w-md mx-auto">
+                  <p className="text-lg text-gray-600 max-w-md mx-auto mb-4">
                     Enter a prompt and click "Generate Email" to see your interactive email come to life.
                   </p>
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <p className="text-xs text-gray-500 max-w-lg mx-auto mb-2">
+                      Currently working on fine-tuning a custom AI model for bullet-proof kinetic email builds.
+                      This beta version uses general AI - expect improvements soon!
+                    </p>
+                    <Link
+                      to="/how-it-works"
+                      className="text-blue-600 hover:text-blue-700 underline text-xs"
+                    >
+                      How the RAG System Works
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
@@ -752,6 +715,78 @@ const PlaygroundPage = () => {
           </div>
         </div>
       )}
+
+      {/* Custom Animations */}
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
+        }
+
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+
+        .animate-gradient {
+          animation: gradient 6s ease infinite;
+        }
+
+        @keyframes slide-in-from-bottom-4 {
+          from {
+            transform: translateY(1rem);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .animate-in {
+          animation-fill-mode: both;
+        }
+
+        .fade-in {
+          animation-name: fade-in;
+        }
+
+        .slide-in-from-bottom-4 {
+          animation-name: slide-in-from-bottom-4;
+        }
+
+        .duration-500 {
+          animation-duration: 500ms;
+        }
+
+        .duration-700 {
+          animation-duration: 700ms;
+        }
+      `}</style>
     </div>
   );
 };

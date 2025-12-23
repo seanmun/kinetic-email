@@ -489,9 +489,7 @@ const HomePage = () => {
               </h1>
 
               <p className="text-xl md:text-2xl mb-4 text-blue-100 leading-relaxed">
-                Generate interactive kinetic emails with AI.
-                <br />
-                No coding required. Just describe what you want.
+                Generate interactive kinetic emails with AI. No coding required. Just describe what you want.
               </p>
 
               <p className="text-base text-blue-200 mb-8 max-w-xl">
@@ -698,7 +696,7 @@ const HomePage = () => {
                   </span>
                 </div>
               </div>
-              <div className="p-4">
+              <div className="p-2">
                 <div className="transform scale-90 origin-top">
                   <IOSMailSimulator
                     sender="Old School Marketing"
@@ -734,12 +732,9 @@ const HomePage = () => {
               <div className="bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-4 border-b border-blue-400">
                 <div className="flex items-center justify-between">
                   <h3 className="text-lg font-bold text-white">Kinetic Interactive Email</h3>
-                  <span className="bg-green-400 text-green-900 text-xs font-bold px-3 py-1 rounded-full">
-                    ✅ Interactive
-                  </span>
                 </div>
               </div>
-              <div className="p-4">
+              <div className="p-2">
                 <div className="transform scale-90 origin-top">
                   <IOSMailSimulator
                     sender="Kinetic.email"

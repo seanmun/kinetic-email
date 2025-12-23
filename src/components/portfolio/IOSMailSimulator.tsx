@@ -123,6 +123,9 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
                 <head>
                   <meta charset="utf-8">
                   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+                  <link rel="preconnect" href="https://fonts.googleapis.com">
+                  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
                   <style>
                     body {
                       margin: 0;
@@ -163,13 +166,16 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
                       width: 32px;
                       height: 32px;
                       border-radius: 50%;
-                      background-color: #3b82f6;
+                      background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
                       color: white;
                       display: flex;
                       align-items: center;
                       justify-content: center;
-                      font-size: 12px;
+                      font-size: 13px;
                       margin-right: 8px;
+                      font-family: 'Orbitron', sans-serif;
+                      font-weight: 900;
+                      letter-spacing: -0.5px;
                     }
                     .sender-info {
                       font-size: 14px;
@@ -228,7 +234,9 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
                     </div>
                     <h2 class="subject">${subject}</h2>
                     <div class="sender-wrapper">
-                      <div class="sender-avatar">${sender.charAt(0)}</div>
+                      <div class="sender-avatar">
+                        K.e
+                      </div>
                       <div class="sender-info">
                         <div class="sender-name">${sender}</div>
                         <div class="receiver">To: me</div>
