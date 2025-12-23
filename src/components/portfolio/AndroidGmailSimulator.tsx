@@ -79,7 +79,7 @@ const AndroidGmailSimulator: React.FC<AndroidGmailSimulatorProps> = ({
   }, [htmlPath, initialHtmlContent]);
 
   return (
-    <div className="mx-auto w-full max-w-[402px]">
+    <div className="mx-auto max-w-[402px]">
       {/* Android phone frame */}
       <div className="bg-[#202124] rounded-[28px] p-2 shadow-xl">
         {/* Status bar */}
