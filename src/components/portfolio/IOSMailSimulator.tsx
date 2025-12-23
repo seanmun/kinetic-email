@@ -66,7 +66,7 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
   }, [htmlPath, initialHtmlContent]);
 
   return (
-    <div className="mx-auto max-w-[402px]">
+    <div className="mx-auto w-[402px]">
       {/* iPhone frame - using iPhone 16 Pro dimensions with proper radius */}
       <div className="bg-[#1A1A1C] rounded-[50px] p-2 shadow-xl">
         {/* Dynamic Island */}
