@@ -526,7 +526,7 @@ const PlaygroundPage = () => {
                           {/* Glow effect around simulator */}
                           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 blur-3xl rounded-3xl animate-pulse"></div>
 
-                          <div className="relative">
+                          <div className="relative" style={{ minWidth: '402px', width: '402px' }}>
                             {emailClient === 'ios' ? (
                               <IOSMailSimulator
                                 sender="Kinetic Email"
