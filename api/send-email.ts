@@ -32,15 +32,48 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({ error: 'Email service not configured' });
     }
 
+    // Convert relative image paths to absolute URLs
+    const baseUrl = 'https://www.kinetic.email';
+    let processedHtml = html;
+
+    // Replace relative paths with absolute URLs
+    // Matches: src="../images/..." or src="/images/..." or src="images/..."
+    processedHtml = processedHtml.replace(
+      /src=["'](?!https?:\/\/|data:)([^"']+)["']/gi,
+      (match, path) => {
+        // Remove leading ../ or ./
+        let cleanPath = path.replace(/^(\.\.\/|\.\/)+/, '');
+
+        // Ensure path starts with /
+        if (!cleanPath.startsWith('/')) {
+          cleanPath = '/' + cleanPath;
+        }
+
+        return `src="${baseUrl}${cleanPath}"`;
+      }
+    );
+
+    // Also handle background-image in inline styles
+    processedHtml = processedHtml.replace(
+      /url\(["']?(?!https?:\/\/|data:)([^"')]+)["']?\)/gi,
+      (match, path) => {
+        let cleanPath = path.replace(/^(\.\.\/|\.\/)+/, '');
+        if (!cleanPath.startsWith('/')) {
+          cleanPath = '/' + cleanPath;
+        }
+        return `url("${baseUrl}${cleanPath}")`;
+      }
+    );
+
     // Initialize Resend
     const resend = new Resend(apiKey);
 
-    // Send email
+    // Send email with processed HTML
     const { data, error } = await resend.emails.send({
       from: process.env.EMAIL_FROM || 'Kinetic Email <onboarding@resend.dev>',
       to: [to],
       subject: subject || 'Your Kinetic Email',
-      html,
+      html: processedHtml,
     });
 
     if (error) {
