@@ -235,7 +235,7 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
                     <h2 class="subject">${subject}</h2>
                     <div class="sender-wrapper">
                       <div class="sender-avatar">
-                        K.e
+                        K.<span style="font-weight: 400;">e</span>
                       </div>
                       <div class="sender-info">
                         <div class="sender-name">${sender}</div>

@@ -512,7 +512,8 @@ const PlaygroundPage = () => {
                           </div>
                         </div>
                         
-                        <div className="flex justify-center relative animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        {/* Desktop/Tablet: Show phone simulator (≥450px) */}
+                        <div className="hidden min-[450px]:flex justify-center relative animate-in fade-in slide-in-from-bottom-4 duration-700">
                           {/* Glow effect around simulator */}
                           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-blue-500/20 to-indigo-500/20 blur-3xl rounded-3xl animate-pulse"></div>
 
@@ -532,6 +533,19 @@ const PlaygroundPage = () => {
                                 date="Just now"
                               />
                             )}
+                          </div>
+                        </div>
+
+                        {/* Mobile: Show full-width email without simulator (<450px) */}
+                        <div className="min-[450px]:hidden w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
+                          <div className="w-full max-w-full overflow-hidden shadow-lg">
+                            <iframe
+                              srcDoc={generatedHTML}
+                              title="Generated Email Preview"
+                              className="w-full border-0"
+                              style={{ height: '600px' }}
+                              sandbox="allow-same-origin allow-scripts"
+                            />
                           </div>
                         </div>
                       </div>

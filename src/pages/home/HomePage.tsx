@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import { FaBook, FaCode, FaPaperPlane, FaChartLine, FaApple, FaMagic, FaCheckCircle, FaBolt, FaArrowRight } from 'react-icons/fa';
+import { Search, CheckCircle2, TrendingUp } from 'lucide-react';
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState<'static' | 'kinetic'>('kinetic');
@@ -36,7 +37,7 @@ const HomePage = () => {
 
     const event = {
       userId: visitorId,
-      emailName: 'Product Showcase Demo',
+      emailName: 'Showcase',
       action: action,
       timestamp: timestamp
     };
@@ -97,10 +98,10 @@ const HomePage = () => {
       submitLabel.addEventListener('click', function() {
         // Check which features are selected and fire tracking for each
         const featureNames = {
-          'feature1': 'survey_features_tabs_navigation',
-          'feature2': 'survey_features_product_carousels',
-          'feature3': 'survey_features_email_surveys',
-          'feature4': 'survey_features_tracking_analytics'
+          'feature1': 'survey_features_tabs',
+          'feature2': 'survey_features_carousels',
+          'feature3': 'survey_features_surveys',
+          'feature4': 'survey_features_analytics'
         };
 
         Object.keys(featureNames).forEach(function(featureId) {
@@ -494,7 +495,7 @@ const HomePage = () => {
 
               <p className="text-base text-blue-200 mb-8 max-w-xl">
                 Create tabbed interfaces, product showcases, surveys, and carousels that work
-                directly in the inbox. Used by leading brands to boost engagement by 5-10x.
+                directly in the inbox. Used by leading brands to boost engagement and capture valuable actionable data.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -579,8 +580,8 @@ const HomePage = () => {
                         <div className="grid grid-cols-12 gap-1 pb-1 mb-1 border-b border-green-500/30 text-green-500 font-semibold text-[10px]">
                           <div className="col-span-3">TIMESTAMP</div>
                           <div className="col-span-2">USER</div>
-                          <div className="col-span-4">EMAIL</div>
-                          <div className="col-span-3">ACTION</div>
+                          <div className="col-span-3">EMAIL NAME</div>
+                          <div className="col-span-4">ACTION</div>
                         </div>
 
                         {/* Data Rows */}
@@ -589,8 +590,8 @@ const HomePage = () => {
                             <div key={idx} className="grid grid-cols-12 gap-1 text-green-400 animate-in fade-in slide-in-from-left-2 duration-300 text-[10px] leading-tight">
                               <div className="col-span-3 text-green-600">{event.timestamp}</div>
                               <div className="col-span-2 text-green-300">{event.userId.replace('visitor_', '')}</div>
-                              <div className="col-span-4 text-cyan-400">{event.emailName}</div>
-                              <div className="col-span-3 text-yellow-300">{event.action.replace('clicked_tab_', '').replace('survey_features_', '')}</div>
+                              <div className="col-span-3 text-cyan-400">{event.emailName}</div>
+                              <div className="col-span-4 text-yellow-300">{event.action}</div>
                             </div>
                           ))}
                         </div>
@@ -615,16 +616,39 @@ const HomePage = () => {
 
             {/* Right: Interactive Demo */}
             <div>
+              {/* Callout Message */}
+              <div className="mb-6 text-center animate-in fade-in slide-in-from-top-4 duration-700 delay-300">
+                <p className="text-lg font-bold text-white flex items-center justify-center gap-2" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.2)' }}>
+                  <span className="inline-block w-3 h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></span>
+                  Live Email - Try It Out!
+                </p>
+              </div>
+
               {/* Email Simulator */}
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative">
+                <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-3xl blur-2xl opacity-30 animate-pulse -z-10"></div>
+
+                {/* Desktop/Tablet: Show phone simulator (≥450px) */}
+                <div className="hidden min-[450px]:block relative z-10">
                   <IOSMailSimulator
                     sender="Kinetic.email Demo"
                     subject="This isn't a video. It's an EMAIL ⚡"
                     htmlContent={heroKineticEmail}
                     date="Just now"
                   />
+                </div>
+
+                {/* Mobile: Show full-width email without simulator (<450px) */}
+                <div className="min-[450px]:hidden w-full relative z-10">
+                  <div className="w-full max-w-full overflow-hidden shadow-lg">
+                    <iframe
+                      srcDoc={heroKineticEmail}
+                      title="Kinetic Email Demo"
+                      className="w-full border-0"
+                      style={{ height: '600px' }}
+                      sandbox="allow-same-origin allow-scripts"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -697,13 +721,27 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="p-2">
-                <div className="transform scale-90 origin-top">
+                {/* Desktop/Tablet: Show phone simulator (≥450px) */}
+                <div className="hidden min-[450px]:block transform scale-90 origin-top">
                   <IOSMailSimulator
                     sender="Old School Marketing"
                     subject="Check out our products"
                     htmlContent={staticEmailHTML}
                     date="Yesterday"
                   />
+                </div>
+
+                {/* Mobile: Show full-width email without simulator (<450px) */}
+                <div className="min-[450px]:hidden">
+                  <div className="w-full overflow-hidden shadow-lg">
+                    <iframe
+                      srcDoc={staticEmailHTML}
+                      title="Static Email Preview"
+                      className="w-full border-0"
+                      style={{ height: '500px' }}
+                      sandbox="allow-same-origin allow-scripts"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
@@ -735,13 +773,27 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="p-2">
-                <div className="transform scale-90 origin-top">
+                {/* Desktop/Tablet: Show phone simulator (≥450px) */}
+                <div className="hidden min-[450px]:block transform scale-90 origin-top">
                   <IOSMailSimulator
                     sender="Kinetic.email"
                     subject="Interactive product showcase ⚡"
                     htmlContent={heroKineticEmail}
                     date="Today"
                   />
+                </div>
+
+                {/* Mobile: Show full-width email without simulator (<450px) */}
+                <div className="min-[450px]:hidden">
+                  <div className="w-full overflow-hidden shadow-lg">
+                    <iframe
+                      srcDoc={heroKineticEmail}
+                      title="Kinetic Email Preview"
+                      className="w-full border-0"
+                      style={{ height: '500px' }}
+                      sandbox="allow-same-origin allow-scripts"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4 border-t border-blue-200">
@@ -764,11 +816,6 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-lg text-gray-600 mb-6">
-            👆 The kinetic email above is fully functional - click the tabs to see it in action!
-          </p>
-        </div>
       </PageLayout>
 
       {/* 3-Step Pitch - Bento Grid */}
@@ -863,24 +910,24 @@ const HomePage = () => {
               {
                 title: 'RAG System',
                 description: 'Retrieval-Augmented Generation pulls proven examples from our knowledge base to ensure accurate, tested code.',
-                icon: '🔍',
+                icon: <Search className="w-8 h-8 text-white" />,
                 color: 'from-purple-500 to-indigo-500'
               },
               {
                 title: 'AI Evaluations',
                 description: 'Every generation is evaluated for correctness, fallback implementation, and email client compatibility.',
-                icon: '✅',
+                icon: <CheckCircle2 className="w-8 h-8 text-white" />,
                 color: 'from-blue-500 to-cyan-500'
               },
               {
                 title: 'Continuous Learning',
                 description: 'Our system learns from every generation, improving quality and expanding the knowledge base over time.',
-                icon: '📈',
+                icon: <TrendingUp className="w-8 h-8 text-white" />,
                 color: 'from-green-500 to-emerald-500'
               }
             ].map((feature, idx) => (
               <div key={idx} className="group bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 border border-slate-200">
-                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl mb-6 flex items-center justify-center text-3xl transform group-hover:scale-110 transition-transform`}>
+                <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl mb-6 flex items-center justify-center transform group-hover:scale-110 transition-transform`}>
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
