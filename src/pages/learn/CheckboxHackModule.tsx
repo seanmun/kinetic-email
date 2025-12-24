@@ -1,8 +1,8 @@
 // src/pages/learn/CheckboxHackModule.tsx
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, Code, Lightbulb, Wand2, Settings, AlertTriangle, Zap, Apple, XCircle, Box, Layers, Rocket } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Code, Lightbulb, Wand2, Settings, AlertTriangle, Zap, Apple, XCircle, Box, Layers, Rocket, Mail } from 'lucide-react';
 
 // Icon aliases for compatibility
 const FaCheckCircle = CheckCircle;
@@ -10,8 +10,12 @@ const FaMagic = Wand2;
 import PageLayout from '../../components/layout/PageLayout';
 import CodeBlock from '../../components/common/CodeBlock';
 import ModuleCompletionButton from '../../components/common/ModuleCompletionButton';
+import SendEmailModal from '../../components/common/SendEmailModal';
+import { checkboxToggleHTML } from './emailExamples';
 
 const CheckboxHackModule: React.FC = () => {
+  const [showSendModal, setShowSendModal] = useState(false);
+
   return (
     <PageLayout>
       {/* Back Button */}
@@ -298,7 +302,16 @@ const CheckboxHackModule: React.FC = () => {
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-xl blur opacity-20"></div>
               <div className="relative bg-gradient-to-br from-gray-50 to-emerald-50 p-8 rounded-xl border-2 border-emerald-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Live Example</h3>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-gray-900">Live Example</h3>
+                  <button
+                    onClick={() => setShowSendModal(true)}
+                    className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
+                  >
+                    <Mail className="w-4 h-4" />
+                    Send to Inbox
+                  </button>
+                </div>
                 <p className="text-gray-700 mb-6 leading-relaxed">
                   This demonstrates the basic checkbox hack in action. Click the button to toggle the content visibility:
                 </p>
@@ -951,6 +964,15 @@ label {
           nextModuleTitle="The Kinetic Lightswitch"
         />
       </div>
+
+      {/* Send Email Modal */}
+      <SendEmailModal
+        isOpen={showSendModal}
+        onClose={() => setShowSendModal(false)}
+        emailHTML={checkboxToggleHTML}
+        defaultSubject="Learn Kinetic Emails - Checkbox Toggle Example"
+        emailType="learning"
+      />
     </PageLayout>
   );
 };
