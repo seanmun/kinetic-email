@@ -5,11 +5,12 @@ import React, { useState, useEffect, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from './data/projectsData';
 import { getProjectEmails, getEmailComponent, getEmailHTML, EmailMetadata } from './data/emailsData';
-import { FaSun, FaHandHoldingMedical, FaEyeDropper, FaEnvelope, FaDownload, FaApple, FaAndroid } from 'react-icons/fa';
+import { FaSun, FaHandHoldingMedical, FaEyeDropper, FaEnvelope, FaDownload, FaApple, FaAndroid, FaPaperPlane } from 'react-icons/fa';
 import { TbCircuitGround, TbBulbFilled } from "react-icons/tb";
 import { BsFillHeartPulseFill } from "react-icons/bs";
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
+import SendEmailModal from '../../components/common/SendEmailModal';
 
 // Map project IDs to icons
 const projectIcons: Record<string, React.ReactNode> = {
@@ -33,6 +34,7 @@ const [EmailComponent, setEmailComponent] = useState<React.ComponentType | null>
   const [emailHtml, setEmailHtml] = useState<string | null>(null);
   const [emailView, setEmailView] = useState<EmailView>('both');
   const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
+  const [showSendModal, setShowSendModal] = useState<boolean>(false);
   
   // Find project data
   const project = projects.find(p => p.id === projectId);
@@ -253,13 +255,22 @@ const [EmailComponent, setEmailComponent] = useState<React.ComponentType | null>
             )}
             
             {selectedEmail && (
-              <button 
-                onClick={handleExportEmail}
-                className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition"
-              >
-                <FaDownload size={16} />
-                <span>Export HTML</span>
-              </button>
+              <>
+                <button
+                  onClick={() => setShowSendModal(true)}
+                  className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded transition"
+                >
+                  <FaPaperPlane size={16} />
+                  <span>Send to Inbox</span>
+                </button>
+                <button
+                  onClick={handleExportEmail}
+                  className="flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition"
+                >
+                  <FaDownload size={16} />
+                  <span>Export HTML</span>
+                </button>
+              </>
             )}
           </div>
         </div>
@@ -358,6 +369,18 @@ const [EmailComponent, setEmailComponent] = useState<React.ComponentType | null>
           ))}
         </div>
       </div>
+
+      {/* Send Email Modal */}
+      {selectedEmail && emailHtml && (
+        <SendEmailModal
+          isOpen={showSendModal}
+          onClose={() => setShowSendModal(false)}
+          emailHTML={emailHtml}
+          defaultSubject={selectedEmail.subject}
+          emailType="portfolio"
+          projectName={project?.name}
+        />
+      )}
     </div>
   );
 };
