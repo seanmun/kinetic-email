@@ -1,11 +1,25 @@
 // src/pages/learn/advanced/ProductShowcaseExample.tsx
 
-import React from 'react';
+import React, { useState } from 'react';
+import { Mail } from 'lucide-react';
+import SendEmailModal from '../../../components/common/SendEmailModal';
+import { productShowcaseHTML } from '../emailExamples';
 
 const ProductShowcaseExample: React.FC = () => {
+  const [showSendModal, setShowSendModal] = useState(false);
+
   return (
     <section className="bg-white rounded-lg shadow-md p-8">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">Interactive Product Showcases</h2>
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-2xl font-bold text-gray-900">Interactive Product Showcases</h2>
+        <button
+          onClick={() => setShowSendModal(true)}
+          className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
+        >
+          <Mail className="w-4 h-4" />
+          Send to Inbox
+        </button>
+      </div>
       
       <p className="text-gray-700 mb-4">
         Product showcases are one of the most effective uses of kinetic email techniques. They allow
@@ -333,6 +347,15 @@ const ProductShowcaseExample: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Send Email Modal */}
+      <SendEmailModal
+        isOpen={showSendModal}
+        onClose={() => setShowSendModal(false)}
+        emailHTML={productShowcaseHTML}
+        defaultSubject="Learn Kinetic Emails - Product Showcase Example"
+        emailType="learning"
+      />
     </section>
   );
 };

@@ -1,11 +1,14 @@
 // src/pages/learn/tabs/TabbedBasicExample.tsx
 
 import React, { useState } from 'react';
-import { Code, Settings, Lightbulb } from 'lucide-react';
+import { Code, Settings, Lightbulb, Mail } from 'lucide-react';
 import CodeBlock from '../../../components/common/CodeBlock';
+import SendEmailModal from '../../../components/common/SendEmailModal';
+import { tabbedInterfaceHTML } from '../emailExamples';
 
 const TabbedBasicExample: React.FC = () => {
   const [activeTab, setActiveTab] = useState(1);
+  const [showSendModal, setShowSendModal] = useState(false);
 
   return (
     <section className="relative">
@@ -171,7 +174,16 @@ label {
         <div className="relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-amber-400 rounded-xl blur opacity-20"></div>
           <div className="relative bg-gradient-to-br from-gray-50 to-orange-50 p-8 rounded-xl border-2 border-orange-200">
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Live Interactive Example</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-gray-900">Live Interactive Example</h3>
+              <button
+                onClick={() => setShowSendModal(true)}
+                className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
+              >
+                <Mail className="w-4 h-4" />
+                Send to Inbox
+              </button>
+            </div>
             <p className="text-gray-700 mb-6 leading-relaxed">
               Click on the tabs below to see how a basic tabbed interface works:
             </p>
@@ -240,6 +252,15 @@ label {
           </div>
         </div>
       </div>
+
+      {/* Send Email Modal */}
+      <SendEmailModal
+        isOpen={showSendModal}
+        onClose={() => setShowSendModal(false)}
+        emailHTML={tabbedInterfaceHTML}
+        defaultSubject="Learn Kinetic Emails - Tabbed Interface Example"
+        emailType="learning"
+      />
     </section>
   );
 };
