@@ -13,7 +13,7 @@ const AccordionExample: React.FC = () => {
   return (
     <section className="relative">
       <div className="absolute -inset-4 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-3xl blur-2xl"></div>
-      <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-rose-200 shadow-xl">
+      <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-rose-200 shadow-xl">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-500 rounded-xl flex items-center justify-center">
             <Menu className="text-white w-6 h-6" />
@@ -39,7 +39,7 @@ const AccordionExample: React.FC = () => {
         </div>
 
         <div className="mt-8 grid md:grid-cols-2 gap-8 mb-8">
-          <div>
+          <div className="min-w-0">
             <h3 className="text-2xl font-bold text-rose-900 mb-4">How It Works</h3>
 
             <ol className="space-y-4">
@@ -98,7 +98,7 @@ const AccordionExample: React.FC = () => {
             </div>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3 className="text-2xl font-bold text-rose-900 mb-4">Live Demo</h3>
 
             <div className="relative">
@@ -226,7 +226,7 @@ const AccordionExample: React.FC = () => {
           <h3 className="text-2xl font-bold text-gray-900 mb-6">Implementation Code</h3>
 
           <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div>
+            <div className="min-w-0">
               <h4 className="text-xl font-bold text-rose-900 mb-4 flex items-center gap-2">
                 <Code className="text-rose-600 w-5 h-5" />
                 HTML Structure
@@ -312,7 +312,7 @@ const AccordionExample: React.FC = () => {
               />
             </div>
 
-            <div>
+            <div className="min-w-0">
               <h4 className="text-xl font-bold text-pink-900 mb-4 flex items-center gap-2">
                 <Settings className="text-pink-600 w-5 h-5" />
                 CSS for Animation

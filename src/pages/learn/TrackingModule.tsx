@@ -53,7 +53,7 @@ const TrackingModule: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-600 p-12 text-white">
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-blue-600 to-cyan-600 p-4 sm:p-8 md:p-10 lg:p-12 text-white">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-400 rounded-full blur-3xl"></div>
@@ -87,7 +87,7 @@ const TrackingModule: React.FC = () => {
         {/* Introduction Section */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-indigo-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-indigo-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <BarChart3 className="w-6 h-6 text-white" />
@@ -164,7 +164,7 @@ const TrackingModule: React.FC = () => {
         {/* Basic Implementation */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-indigo-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-indigo-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <Code className="w-6 h-6 text-white" />
@@ -177,7 +177,7 @@ const TrackingModule: React.FC = () => {
             </p>
 
             <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div>
+              <div className="min-w-0">
                 <h3 className="text-xl font-bold text-indigo-900 mb-4 flex items-center gap-2">
                   <Code className="w-5 h-5 text-indigo-600" />
                   HTML Structure with Tracking
@@ -253,7 +253,7 @@ const TrackingModule: React.FC = () => {
                 />
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h3>
                 <ol className="space-y-4">
                   <div className="flex gap-4">
@@ -325,7 +325,7 @@ const TrackingModule: React.FC = () => {
         {/* Live Demo */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-indigo-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-indigo-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <Activity className="w-6 h-6 text-white" />
@@ -501,7 +501,7 @@ const TrackingModule: React.FC = () => {
         {/* Analytics Backend Requirements */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-indigo-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-indigo-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <Database className="w-6 h-6 text-white" />
@@ -514,7 +514,7 @@ const TrackingModule: React.FC = () => {
             </p>
 
             <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div className="space-y-4">
+              <div className="space-y-4 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Wrench className="w-5 h-5 text-indigo-600" />
                   Core System Components
@@ -551,7 +551,7 @@ const TrackingModule: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <BarChart3 className="w-5 h-5 text-cyan-600" />
                   Key Data Processing Needs
@@ -636,7 +636,7 @@ const TrackingModule: React.FC = () => {
         {/* Privacy & Compliance */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-indigo-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-indigo-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <Shield className="w-6 h-6 text-white" />
@@ -649,7 +649,7 @@ const TrackingModule: React.FC = () => {
             </p>
 
             <div className="grid md:grid-cols-2 gap-8">
-              <div className="space-y-4">
+              <div className="space-y-4 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Shield className="w-5 h-5 text-indigo-600" />
                   Privacy Best Practices
@@ -686,7 +686,7 @@ const TrackingModule: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-4 min-w-0">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
                   <Scale className="w-5 h-5 text-cyan-600" />
                   Regulatory Compliance
@@ -747,7 +747,7 @@ const TrackingModule: React.FC = () => {
         {/* Implementation Checklist */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-cyan-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-indigo-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-indigo-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-indigo-500 to-cyan-500 rounded-xl flex items-center justify-center">
                 <CheckCircle className="w-6 h-6 text-white" />

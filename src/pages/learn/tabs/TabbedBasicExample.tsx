@@ -13,7 +13,7 @@ const TabbedBasicExample: React.FC = () => {
   return (
     <section className="relative">
       <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-3xl blur-2xl"></div>
-      <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-orange-200 shadow-xl">
+      <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-orange-200 shadow-xl">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
             <Code className="text-white w-6 h-6" />
@@ -26,7 +26,7 @@ const TabbedBasicExample: React.FC = () => {
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 mb-8">
-          <div>
+          <div className="min-w-0">
             <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center gap-2">
               <Code className="text-orange-600 w-5 h-5" />
               HTML Structure
@@ -111,7 +111,7 @@ label {
             />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center gap-2">
               <Lightbulb className="text-orange-600 w-5 h-5" />
               How It Works
@@ -173,7 +173,7 @@ label {
         {/* Live Example */}
         <div className="relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-amber-400 rounded-xl blur opacity-20"></div>
-          <div className="relative bg-gradient-to-br from-gray-50 to-orange-50 p-8 rounded-xl border-2 border-orange-200">
+          <div className="relative bg-gradient-to-br from-gray-50 to-orange-50 p-3 sm:p-6 md:p-8 rounded-xl border-2 border-orange-200">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-xl font-bold text-gray-900">Live Interactive Example</h3>
               <button
@@ -185,69 +185,82 @@ label {
               </button>
             </div>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              Click on the tabs below to see how a basic tabbed interface works:
+              Click the tabs below to see how the content changes. The radio buttons are hidden but control which content is displayed:
             </p>
 
-            <div className="bg-white p-6 rounded-lg border-2 border-orange-300 shadow-lg">
+            <div className="bg-white p-3 sm:p-6 rounded-lg border-2 border-orange-300 shadow-lg">
+              <style>{`
+                /* Hide radio buttons */
+                input[type="radio"][name="demo-tabs"] {
+                  position: absolute;
+                  opacity: 0;
+                  pointer-events: none;
+                }
+
+                /* Hide all content by default */
+                .tab-content > div {
+                  display: none;
+                }
+
+                /* Active tab styling */
+                #demo-tab1:checked ~ .tab-labels .tab-label-1,
+                #demo-tab2:checked ~ .tab-labels .tab-label-2,
+                #demo-tab3:checked ~ .tab-labels .tab-label-3 {
+                  background: linear-gradient(to right, rgb(249 115 22), rgb(251 146 60)) !important;
+                  color: white !important;
+                  border-bottom-color: rgb(249 115 22) !important;
+                }
+
+                /* Show content based on checked radio */
+                #demo-tab1:checked ~ .tab-content .content-1,
+                #demo-tab2:checked ~ .tab-content .content-2,
+                #demo-tab3:checked ~ .tab-content .content-3 {
+                  display: block !important;
+                }
+              `}</style>
+
+              {/* Radio buttons (hidden) */}
+              <input type="radio" id="demo-tab1" name="demo-tabs" defaultChecked />
+              <input type="radio" id="demo-tab2" name="demo-tabs" />
+              <input type="radio" id="demo-tab3" name="demo-tabs" />
+
               {/* Tab navigation */}
-              <div className="flex border-b border-orange-200 mb-4">
-                <button
-                  className={`px-6 py-3 font-medium transition-all ${
-                    activeTab === 1
-                      ? 'text-orange-600 border-b-2 border-orange-600 bg-orange-50'
-                      : 'text-gray-500 hover:text-gray-700 border-b-2 border-transparent'
-                  }`}
-                  onClick={() => setActiveTab(1)}
+              <div className="tab-labels flex border-b border-orange-200 mb-4">
+                <label
+                  htmlFor="demo-tab1"
+                  className="tab-label-1 cursor-pointer px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-3 font-medium transition-all text-gray-500 hover:text-gray-700 border-b-2 border-transparent text-sm sm:text-base flex-1 text-center"
                 >
                   Products
-                </button>
-                <button
-                  className={`px-6 py-3 font-medium transition-all ${
-                    activeTab === 2
-                      ? 'text-orange-600 border-b-2 border-orange-600 bg-orange-50'
-                      : 'text-gray-500 hover:text-gray-700 border-b-2 border-transparent'
-                  }`}
-                  onClick={() => setActiveTab(2)}
+                </label>
+                <label
+                  htmlFor="demo-tab2"
+                  className="tab-label-2 cursor-pointer px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-3 font-medium transition-all text-gray-500 hover:text-gray-700 border-b-2 border-transparent text-sm sm:text-base flex-1 text-center"
                 >
                   Features
-                </button>
-                <button
-                  className={`px-6 py-3 font-medium transition-all ${
-                    activeTab === 3
-                      ? 'text-orange-600 border-b-2 border-orange-600 bg-orange-50'
-                      : 'text-gray-500 hover:text-gray-700 border-b-2 border-transparent'
-                  }`}
-                  onClick={() => setActiveTab(3)}
+                </label>
+                <label
+                  htmlFor="demo-tab3"
+                  className="tab-label-3 cursor-pointer px-3 py-2 sm:px-4 sm:py-3 md:px-6 md:py-3 font-medium transition-all text-gray-500 hover:text-gray-700 border-b-2 border-transparent text-sm sm:text-base flex-1 text-center"
                 >
                   Support
-                </button>
+                </label>
               </div>
 
               {/* Tab content */}
-              <div className="p-4 bg-orange-50 rounded-md">
-                {activeTab === 1 && (
-                  <div>
-                    <h3 className="text-lg font-bold text-orange-900 mb-2">Our Products</h3>
-                    <p className="text-gray-700">Explore our range of products designed to meet your needs.</p>
-                  </div>
-                )}
-                {activeTab === 2 && (
-                  <div>
-                    <h3 className="text-lg font-bold text-orange-900 mb-2">Key Features</h3>
-                    <p className="text-gray-700">Discover the powerful features that set our products apart.</p>
-                  </div>
-                )}
-                {activeTab === 3 && (
-                  <div>
-                    <h3 className="text-lg font-bold text-orange-900 mb-2">Customer Support</h3>
-                    <p className="text-gray-700">We're here to help. Get in touch with our support team.</p>
-                  </div>
-                )}
+              <div className="tab-content">
+                <div className="content-1 p-4 bg-orange-50 rounded-md">
+                  <h3 className="text-lg font-bold text-orange-900 mb-2">Our Products</h3>
+                  <p className="text-gray-700">Explore our range of products designed to meet your needs.</p>
+                </div>
+                <div className="content-2 p-4 bg-orange-50 rounded-md">
+                  <h3 className="text-lg font-bold text-orange-900 mb-2">Key Features</h3>
+                  <p className="text-gray-700">Discover the powerful features that set our products apart.</p>
+                </div>
+                <div className="content-3 p-4 bg-orange-50 rounded-md">
+                  <h3 className="text-lg font-bold text-orange-900 mb-2">Customer Support</h3>
+                  <p className="text-gray-700">We're here to help. Get in touch with our support team.</p>
+                </div>
               </div>
-            </div>
-
-            <div className="mt-4 text-xs text-orange-900 p-3 bg-orange-50 rounded border border-orange-200">
-              <strong>Note:</strong> This interactive example uses React for demonstration purposes. In an actual email, the tabs would work using only HTML and CSS as shown in the code examples above.
             </div>
           </div>
         </div>

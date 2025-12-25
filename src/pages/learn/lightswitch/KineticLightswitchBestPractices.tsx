@@ -7,7 +7,7 @@ const KineticLightswitchBestPractices: React.FC = () => {
   return (
     <section className="relative">
       <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/20 to-violet-500/20 rounded-3xl blur-2xl"></div>
-      <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-purple-200 shadow-xl">
+      <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-purple-200 shadow-xl">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-500 rounded-xl flex items-center justify-center">
             <Lightbulb className="w-6 h-6 text-white" />
@@ -17,7 +17,7 @@ const KineticLightswitchBestPractices: React.FC = () => {
 
         <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Implementation Tips */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute -inset-1 bg-gradient-to-r from-purple-500 to-violet-500 rounded-xl blur opacity-25"></div>
             <div className="relative bg-gradient-to-br from-purple-50 to-violet-50 p-6 rounded-xl border-2 border-purple-200">
               <h3 className="text-xl font-bold text-purple-900 mb-6 flex items-center gap-2">
@@ -58,7 +58,7 @@ const KineticLightswitchBestPractices: React.FC = () => {
           </div>
 
           {/* Common Pitfalls */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute -inset-1 bg-gradient-to-r from-red-500 to-orange-500 rounded-xl blur opacity-25"></div>
             <div className="relative bg-gradient-to-br from-red-50 to-orange-50 p-6 rounded-xl border-2 border-red-200">
               <h3 className="text-xl font-bold text-red-900 mb-6 flex items-center gap-2">

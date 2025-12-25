@@ -22,7 +22,7 @@ const AdvancedTechniquesModule: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-rose-600 via-pink-600 to-fuchsia-600 p-12 text-white">
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-rose-600 via-pink-600 to-fuchsia-600 p-4 sm:p-8 md:p-10 lg:p-12 text-white">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-rose-400 rounded-full blur-3xl"></div>
@@ -56,7 +56,7 @@ const AdvancedTechniquesModule: React.FC = () => {
         {/* Introduction Section */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-rose-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-rose-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-500 rounded-xl flex items-center justify-center">
                 <Rocket className="text-white w-6 h-6" />
@@ -146,7 +146,7 @@ const AdvancedTechniquesModule: React.FC = () => {
         {/* Best Practices Section */}
         <section className="relative">
           <div className="absolute -inset-4 bg-gradient-to-r from-rose-500/20 to-pink-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-rose-200 shadow-xl">
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-rose-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-500 rounded-xl flex items-center justify-center">
                 <Gauge className="text-white w-6 h-6" />
