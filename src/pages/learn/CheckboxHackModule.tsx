@@ -11,10 +11,11 @@ import PageLayout from '../../components/layout/PageLayout';
 import CodeBlock from '../../components/common/CodeBlock';
 import ModuleCompletionButton from '../../components/common/ModuleCompletionButton';
 import SendEmailModal from '../../components/common/SendEmailModal';
-import { checkboxToggleHTML } from './emailExamples';
+import { checkboxToggleHTML, tabbedInterfaceHTML } from './emailExamples';
 
 const CheckboxHackModule: React.FC = () => {
   const [showSendModal, setShowSendModal] = useState(false);
+  const [showTabsSendModal, setShowTabsSendModal] = useState(false);
 
   return (
     <PageLayout>
@@ -30,7 +31,7 @@ const CheckboxHackModule: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 p-12 text-white">
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 p-4 sm:p-8 md:p-10 lg:p-12 text-white">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-emerald-400 rounded-full blur-3xl"></div>
@@ -63,8 +64,8 @@ const CheckboxHackModule: React.FC = () => {
       <div className="space-y-12">
         {/* What is the Checkbox Hack */}
         <section className="relative">
-          <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-emerald-200 shadow-xl">
+          <div className="absolute -inset-2 sm:-inset-3 md:-inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-emerald-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
                 <Lightbulb className="w-6 h-6 text-white" />
@@ -97,7 +98,7 @@ const CheckboxHackModule: React.FC = () => {
               This technique is the foundation of kinetic emails because it allows us to create interactive elements that respond to user clicks without relying on JavaScript, which is typically stripped out by email clients.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
               {/* Building Blocks Card */}
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl blur opacity-25 group-hover:opacity-40 transition-opacity"></div>
@@ -138,19 +139,19 @@ const CheckboxHackModule: React.FC = () => {
                   <ul className="space-y-3 text-emerald-800">
                     <li className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-emerald-600 mt-1 flex-shrink-0" />
-                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">:checked</code> pseudo-class to detect checked state</span>
+                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">:checked</code> pseudo-class to detect checked state</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-emerald-600 mt-1 flex-shrink-0" />
-                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">+</code> adjacent sibling selector</span>
+                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">+</code> adjacent sibling selector</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-emerald-600 mt-1 flex-shrink-0" />
-                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">~</code> general sibling selector</span>
+                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">~</code> general sibling selector</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle className="w-5 h-5 text-emerald-600 mt-1 flex-shrink-0" />
-                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">~*</code> to reach nested elements</span>
+                      <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">~*</code> to reach nested elements</span>
                     </li>
                   </ul>
                 </div>
@@ -161,8 +162,8 @@ const CheckboxHackModule: React.FC = () => {
 
         {/* Basic Example Section */}
         <section className="relative">
-          <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-emerald-200 shadow-xl">
+          <div className="absolute -inset-2 sm:-inset-3 md:-inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-emerald-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
                 <Rocket className="w-6 h-6 text-white" />
@@ -174,8 +175,8 @@ const CheckboxHackModule: React.FC = () => {
               Let's start with a simple example: a checkbox that shows or hides content when clicked.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div>
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
+              <div className="min-w-0">
                 <h3 className="text-xl font-bold text-emerald-900 mb-4 flex items-center gap-2">
                   <Code className="w-5 h-5 text-emerald-600" />
                   HTML Structure
@@ -226,7 +227,7 @@ const CheckboxHackModule: React.FC = () => {
                 />
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <h3 className="text-xl font-bold text-emerald-900 mb-4 flex items-center gap-2">
                   <Layers className="w-5 h-5 text-emerald-600" />
                   How It Works
@@ -252,7 +253,7 @@ const CheckboxHackModule: React.FC = () => {
                     <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full text-white flex items-center justify-center font-bold flex-shrink-0">3</div>
                     <div>
                       <p className="font-bold text-gray-900 mb-1">The Content</p>
-                      <p className="text-gray-700 leading-relaxed">Initially hidden with <code className="bg-gray-100 px-2 py-0.5 rounded font-mono text-sm">display: none</code>.</p>
+                      <p className="text-gray-700 leading-relaxed">Initially hidden with <code className="bg-gray-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">display: none</code>.</p>
                     </div>
                   </div>
 
@@ -260,7 +261,7 @@ const CheckboxHackModule: React.FC = () => {
                     <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-full text-white flex items-center justify-center font-bold flex-shrink-0">4</div>
                     <div>
                       <p className="font-bold text-gray-900 mb-1">The CSS Magic</p>
-                      <p className="text-gray-700 leading-relaxed"><code className="bg-gray-100 px-2 py-0.5 rounded font-mono text-sm">#toggle:checked ~ .content</code> selects the content element when the checkbox is checked, and makes it visible.</p>
+                      <p className="text-gray-700 leading-relaxed"><code className="bg-gray-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">#toggle:checked ~ .content</code> selects the content element when the checkbox is checked, and makes it visible.</p>
                     </div>
                   </div>
                 </ol>
@@ -273,24 +274,24 @@ const CheckboxHackModule: React.FC = () => {
                       The CSS Selector Explained
                     </h4>
                     <p className="text-emerald-800 mb-3">
-                      <code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">#toggle:checked ~ .content</code> breaks down as:
+                      <code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">#toggle:checked ~ .content</code> breaks down as:
                     </p>
                     <ul className="space-y-2 text-emerald-800">
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-600">•</span>
-                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">#toggle</code> - Targets the input with ID "toggle"</span>
+                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">#toggle</code> - Targets the input with ID "toggle"</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-600">•</span>
-                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">:checked</code> - Only applies when the input is checked</span>
+                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">:checked</code> - Only applies when the input is checked</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-600">•</span>
-                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">~</code> - General sibling selector (selects elements after the input)</span>
+                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">~</code> - General sibling selector (selects elements after the input)</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span className="text-emerald-600">•</span>
-                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">.content</code> - Targets elements with class "content"</span>
+                        <span><code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">.content</code> - Targets elements with class "content"</span>
                       </li>
                     </ul>
                   </div>
@@ -301,7 +302,7 @@ const CheckboxHackModule: React.FC = () => {
             {/* Live Demo */}
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-xl blur opacity-20"></div>
-              <div className="relative bg-gradient-to-br from-gray-50 to-emerald-50 p-8 rounded-xl border-2 border-emerald-200">
+              <div className="relative bg-gradient-to-br from-gray-50 to-emerald-50 p-3 sm:p-6 md:p-8 rounded-xl border-2 border-emerald-200">
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="text-xl font-bold text-gray-900">Live Example</h3>
                   <button
@@ -313,10 +314,10 @@ const CheckboxHackModule: React.FC = () => {
                   </button>
                 </div>
                 <p className="text-gray-700 mb-6 leading-relaxed">
-                  This demonstrates the basic checkbox hack in action. Click the button to toggle the content visibility:
+                  This demonstrates the basic checkbox hack in action. Notice the actual checkbox is exposed above the button - you can click either one to see how they're connected. In a real email, the checkbox would be hidden, and users would only interact with the styled button:
                 </p>
 
-                <div className="p-8 bg-white rounded-lg border-2 border-emerald-300 shadow-lg">
+                <div className="p-3 sm:p-6 md:p-8 bg-white rounded-lg border-2 border-emerald-300 shadow-lg">
                   <style>{`
                     #demo-toggle:checked ~ .toggle-label {
                       background: linear-gradient(to right, rgb(20 184 166), rgb(6 182 212)) !important;
@@ -328,24 +329,7 @@ const CheckboxHackModule: React.FC = () => {
                   `}</style>
 
                   {/* The actual checkbox must be at the top level for sibling selectors to work */}
-                  <input type="checkbox" id="demo-toggle" />
-
-                  {/* Educational note about the checkbox */}
-                  <div className="mb-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Code className="w-4 h-4 text-blue-600" />
-                      <p className="text-sm font-bold text-blue-900">The Hidden Checkbox (normally hidden, but visible here for learning):</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <label htmlFor="demo-toggle" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-gray-400 rounded inline-block relative">
-                          <span className="absolute inset-0 bg-blue-500 scale-0" style={{ transition: 'transform 0.2s' }}></span>
-                        </span>
-                        id="demo-toggle" (click the checkbox above or the button below)
-                      </label>
-                    </div>
-                    <p className="text-xs text-blue-700 mt-2">The real checkbox is above. Try clicking it directly, or use the styled button below - both control the same state!</p>
-                  </div>
+                  <input type="checkbox" id="demo-toggle" className="mr-2" />
 
                   <label
                     htmlFor="demo-toggle"
@@ -368,8 +352,8 @@ const CheckboxHackModule: React.FC = () => {
 
         {/* Advanced Example: Tabbed Interface */}
         <section className="relative">
-          <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-emerald-200 shadow-xl">
+          <div className="absolute -inset-2 sm:-inset-3 md:-inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-emerald-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
                 <Layers className="w-6 h-6 text-white" />
@@ -381,8 +365,8 @@ const CheckboxHackModule: React.FC = () => {
               Now let's create something more complex and useful: a tabbed interface. This is one of the most common applications of the checkbox hack in kinetic emails.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
-              <div>
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
+              <div className="min-w-0">
                 <h3 className="text-xl font-bold text-emerald-900 mb-4 flex items-center gap-2">
                   <Code className="w-5 h-5 text-emerald-600" />
                   HTML Structure
@@ -455,24 +439,24 @@ label {
                 />
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <h3 className="text-xl font-bold text-emerald-900 mb-4">Key Differences</h3>
                 <div className="space-y-4">
                   <div className="group relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                    <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
                     <div className="relative bg-white p-4 rounded-lg border-2 border-emerald-200">
                       <div className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
                         <div>
                           <strong className="text-gray-900">Radio Buttons Instead of Checkboxes</strong>
-                          <p className="text-gray-700 mt-1">We use radio buttons with the same <code className="bg-gray-100 px-2 py-0.5 rounded font-mono text-sm">name</code> attribute, which ensures only one can be selected at a time.</p>
+                          <p className="text-gray-700 mt-1">We use radio buttons with the same <code className="bg-gray-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">name</code> attribute, which ensures only one can be selected at a time.</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
                   <div className="group relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                    <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
                     <div className="relative bg-white p-4 rounded-lg border-2 border-emerald-200">
                       <div className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
@@ -485,7 +469,7 @@ label {
                   </div>
 
                   <div className="group relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                    <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
                     <div className="relative bg-white p-4 rounded-lg border-2 border-emerald-200">
                       <div className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
@@ -498,7 +482,7 @@ label {
                   </div>
 
                   <div className="group relative">
-                    <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
+                    <div className="absolute -inset-0.5 sm:-inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
                     <div className="relative bg-white p-4 rounded-lg border-2 border-emerald-200">
                       <div className="flex items-start gap-3">
                         <CheckCircle className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
@@ -521,11 +505,11 @@ label {
                     <ul className="space-y-3 text-emerald-800">
                       <li className="flex items-start gap-3">
                         <FaCheckCircle className="text-emerald-600 mt-0.5 flex-shrink-0" />
-                        <span>Use the <code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">checked</code> attribute to set a default active tab</span>
+                        <span>Use the <code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">checked</code> attribute to set a default active tab</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <FaCheckCircle className="text-emerald-600 mt-0.5 flex-shrink-0" />
-                        <span>Use <code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-sm">!important</code> for display properties to ensure they work in email clients</span>
+                        <span>Use <code className="bg-emerald-100 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">!important</code> for display properties to ensure they work in email clients</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <FaCheckCircle className="text-emerald-600 mt-0.5 flex-shrink-0" />
@@ -540,13 +524,22 @@ label {
             {/* Live Demo */}
             <div className="relative mb-8">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-xl blur opacity-20"></div>
-              <div className="relative bg-gradient-to-br from-gray-50 to-emerald-50 p-8 rounded-xl border-2 border-emerald-200">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Live Example</h3>
+              <div className="relative bg-gradient-to-br from-gray-50 to-emerald-50 p-3 sm:p-6 md:p-8 rounded-xl border-2 border-emerald-200">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-bold text-gray-900">Live Example</h3>
+                  <button
+                    onClick={() => setShowTabsSendModal(true)}
+                    className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
+                  >
+                    <Mail className="w-4 h-4" />
+                    Send to Inbox
+                  </button>
+                </div>
                 <p className="text-gray-700 mb-6 leading-relaxed">
-                  This demonstrates a fully functional tabbed interface. Click the tabs to switch between different content sections:
+                  This demonstrates a fully functional tabbed interface. The raw radio buttons are exposed at the top to show how they control the tab state. Try clicking either the radio buttons or the styled tabs below - both control the same content:
                 </p>
 
-                <div className="p-8 bg-white rounded-lg border-2 border-emerald-300 shadow-lg">
+                <div className="p-3 sm:p-6 md:p-8 bg-white rounded-lg border-2 border-emerald-300 shadow-lg">
                   <style>{`
                     #demo-tab1:checked ~ .tab-labels .tab-label-1,
                     #demo-tab2:checked ~ .tab-labels .tab-label-2,
@@ -564,32 +557,12 @@ label {
                   `}</style>
 
                   {/* The actual radio buttons must be at the top level for sibling selectors to work */}
-                  <input type="radio" id="demo-tab1" name="demo-tabs" defaultChecked />
-                  <input type="radio" id="demo-tab2" name="demo-tabs" />
+                  <input type="radio" id="demo-tab1" name="demo-tabs" defaultChecked className="mr-2" />
+                  <input type="radio" id="demo-tab2" name="demo-tabs" className="mr-2" />
                   <input type="radio" id="demo-tab3" name="demo-tabs" />
 
-                  {/* Educational note about the radio buttons */}
-                  <div className="mb-4 p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
-                    <div className="flex items-center gap-2 mb-2">
-                      <Code className="w-4 h-4 text-blue-600" />
-                      <p className="text-sm font-bold text-blue-900">The Hidden Radio Buttons (normally hidden, but visible here for learning):</p>
-                    </div>
-                    <div className="flex gap-4 items-center">
-                      <label htmlFor="demo-tab1" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-gray-400 rounded-full inline-block"></span>
-                        id="demo-tab1"
-                      </label>
-                      <label htmlFor="demo-tab2" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-gray-400 rounded-full inline-block"></span>
-                        id="demo-tab2"
-                      </label>
-                      <label htmlFor="demo-tab3" className="text-sm text-blue-800 font-mono cursor-pointer flex items-center gap-2">
-                        <span className="w-4 h-4 border-2 border-gray-400 rounded-full inline-block"></span>
-                        id="demo-tab3"
-                      </label>
-                    </div>
-                    <p className="text-xs text-blue-700 mt-2">The real radio buttons are above. Try clicking them directly, or use the styled tabs below - both control the same state!</p>
-                  </div>
+                  <br />
+                  <br />
 
                   <div className="tab-labels flex gap-2 mb-6">
                       <label
@@ -659,7 +632,7 @@ label {
             {/* Why This Works in Email */}
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-xl blur opacity-20"></div>
-              <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 p-8 rounded-xl border-2 border-emerald-200">
+              <div className="relative bg-gradient-to-br from-emerald-50 to-teal-50 p-3 sm:p-6 md:p-8 rounded-xl border-2 border-emerald-200">
                 <h3 className="text-2xl font-bold text-emerald-900 mb-4 flex items-center gap-2">
                   <Zap className="w-5 h-5 text-emerald-600" />
                   Why This Works in Email
@@ -668,7 +641,7 @@ label {
                   The checkbox hack is particularly well-suited for email because:
                 </p>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid md:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                   <div className="relative">
                     <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-lg blur opacity-20"></div>
                     <div className="relative bg-white p-6 rounded-lg border-2 border-emerald-200">
@@ -718,8 +691,8 @@ label {
 
         {/* Best Practices Section */}
         <section className="relative">
-          <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-emerald-200 shadow-xl">
+          <div className="absolute -inset-2 sm:-inset-3 md:-inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-emerald-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
                 <Lightbulb className="w-6 h-6 text-white" />
@@ -727,7 +700,7 @@ label {
               <h2 className="text-3xl font-black text-gray-900">Best Practices & Common Challenges</h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-8">
               {/* Things to Do */}
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl blur opacity-25"></div>
@@ -814,26 +787,29 @@ label {
             {/* Common Challenges */}
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-amber-400 to-orange-400 rounded-xl blur opacity-20"></div>
-              <div className="relative bg-gradient-to-br from-amber-50 to-orange-50 p-8 rounded-xl border-2 border-amber-200">
+              <div className="relative bg-gradient-to-br from-amber-50 to-orange-50 p-3 sm:p-6 md:p-8 rounded-xl border-2 border-amber-200">
                 <h3 className="text-2xl font-bold text-amber-900 mb-6 flex items-center gap-2">
                   <AlertTriangle className="w-5 h-5 text-amber-600" />
                   Common Challenges
                 </h3>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white p-6 rounded-lg border-2 border-amber-200">
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
+                  <div className="bg-white p-2 sm:p-4 md:p-6 rounded-lg border-2 border-amber-200 min-w-0">
                     <h4 className="font-bold text-amber-900 mb-3">Challenge: Nested Elements</h4>
                     <p className="text-amber-800 mb-4 leading-relaxed">
                       Sometimes you need to select deeply nested elements, which can be tricky with sibling selectors.
                     </p>
                     <p className="text-amber-900 font-medium mb-2">Solution:</p>
-                    <pre className="text-sm text-amber-900 bg-amber-50 p-3 rounded border border-amber-200 overflow-x-auto">{`/* Use the general sibling + wildcard selector */
+                    <CodeBlock
+                      code={`/* Use the general sibling + wildcard selector */
 #checkbox:checked ~* .target-element {
   display: block !important;
-}`}</pre>
+}`}
+                      language="css"
+                    />
                   </div>
 
-                  <div className="bg-white p-6 rounded-lg border-2 border-amber-200">
+                  <div className="bg-white p-2 sm:p-4 md:p-6 rounded-lg border-2 border-amber-200 min-w-0">
                     <h4 className="font-bold text-amber-900 mb-3">Challenge: Email Client Limitations</h4>
                     <p className="text-amber-800 mb-4 leading-relaxed">
                       Some email clients strip or modify certain CSS properties.
@@ -842,7 +818,7 @@ label {
                     <ul className="space-y-2 text-amber-800">
                       <li className="flex items-start gap-2">
                         <span>•</span>
-                        <span>Use <code className="bg-amber-50 px-2 py-0.5 rounded font-mono text-sm">!important</code> to override client styles</span>
+                        <span>Use <code className="bg-amber-50 px-2 py-0.5 rounded font-mono text-xs sm:text-sm">!important</code> to override client styles</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <span>•</span>
@@ -862,8 +838,8 @@ label {
 
         {/* Real-World Applications */}
         <section className="relative">
-          <div className="absolute -inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
-          <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-emerald-200 shadow-xl">
+          <div className="absolute -inset-2 sm:-inset-3 md:-inset-4 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-3xl blur-2xl"></div>
+          <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-emerald-200 shadow-xl">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-500 rounded-xl flex items-center justify-center">
                 <Rocket className="w-6 h-6 text-white" />
@@ -875,7 +851,7 @@ label {
               The checkbox hack can be used to create a variety of interactive elements in kinetic emails. Here are some common applications:
             </p>
 
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid md:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
               <div className="group relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
                 <div className="relative bg-white p-6 rounded-xl border-2 border-emerald-200 hover:border-emerald-300 transition-all">
@@ -965,12 +941,21 @@ label {
         />
       </div>
 
-      {/* Send Email Modal */}
+      {/* Send Email Modal - Toggle Example */}
       <SendEmailModal
         isOpen={showSendModal}
         onClose={() => setShowSendModal(false)}
         emailHTML={checkboxToggleHTML}
         defaultSubject="Learn Kinetic Emails - Checkbox Toggle Example"
+        emailType="learning"
+      />
+
+      {/* Send Email Modal - Tabbed Interface Example */}
+      <SendEmailModal
+        isOpen={showTabsSendModal}
+        onClose={() => setShowTabsSendModal(false)}
+        emailHTML={tabbedInterfaceHTML}
+        defaultSubject="Learn Kinetic Emails - Tabbed Interface Example"
         emailType="learning"
       />
     </PageLayout>

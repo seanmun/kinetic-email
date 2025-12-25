@@ -10,7 +10,7 @@ const TabbedAdvancedExample: React.FC = () => {
   return (
     <section className="relative">
       <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-3xl blur-2xl"></div>
-      <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-orange-200 shadow-xl">
+      <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-orange-200 shadow-xl">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
             <Rocket className="text-white w-6 h-6" />
@@ -24,7 +24,7 @@ const TabbedAdvancedExample: React.FC = () => {
 
         <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Styled Tabs */}
-          <div>
+          <div className="min-w-0">
             <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center gap-2">
               <Palette className="text-orange-600 w-5 h-5" />
               Styled Tabs
@@ -94,7 +94,7 @@ const TabbedAdvancedExample: React.FC = () => {
           </div>
 
           {/* Vertical Tabs & Animations */}
-          <div>
+          <div className="min-w-0">
             <h3 className="text-xl font-bold text-orange-900 mb-4 flex items-center gap-2">
               <ArrowUpDown className="text-orange-600 w-5 h-5" />
               Vertical Tabs
@@ -150,13 +150,13 @@ const TabbedAdvancedExample: React.FC = () => {
         {/* Live Example of Vertical Tabs */}
         <div className="relative">
           <div className="absolute -inset-1 bg-gradient-to-r from-orange-400 to-amber-400 rounded-xl blur opacity-20"></div>
-          <div className="relative bg-gradient-to-br from-gray-50 to-orange-50 p-8 rounded-xl border-2 border-orange-200">
+          <div className="relative bg-gradient-to-br from-gray-50 to-orange-50 p-3 sm:p-6 md:p-8 rounded-xl border-2 border-orange-200">
             <h3 className="text-xl font-bold text-gray-900 mb-4">Live Example: Vertical Tabs</h3>
             <p className="text-gray-700 mb-6 leading-relaxed">
               Here's how vertical tabs look in practice:
             </p>
 
-            <div className="bg-white p-6 rounded-lg border-2 border-orange-300 shadow-lg">
+            <div className="bg-white p-3 sm:p-6 rounded-lg border-2 border-orange-300 shadow-lg">
               <div className="flex">
                 {/* Tab navigation (vertical) */}
                 <div className="w-48 border-r-2 border-orange-200">

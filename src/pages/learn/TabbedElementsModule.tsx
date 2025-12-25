@@ -25,7 +25,7 @@ const TabbedElementsModule: React.FC = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 via-amber-600 to-yellow-600 p-12 text-white">
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-orange-600 via-amber-600 to-yellow-600 p-4 sm:p-8 md:p-10 lg:p-12 text-white">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-orange-400 rounded-full blur-3xl"></div>

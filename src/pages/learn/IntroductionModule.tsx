@@ -24,7 +24,7 @@ const IntroductionModule: React.FC = () => {
       </div>
 
       {/* Hero Header */}
-      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 p-12 text-white">
+      <div className="relative mb-12 overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 p-4 sm:p-8 md:p-10 lg:p-12 text-white">
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white rounded-full blur-3xl"></div>

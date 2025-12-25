@@ -7,7 +7,7 @@ const TabbedBestPractices: React.FC = () => {
   return (
     <section className="relative">
       <div className="absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-amber-500/20 rounded-3xl blur-2xl"></div>
-      <div className="relative bg-white rounded-2xl p-8 md:p-10 border-2 border-orange-200 shadow-xl">
+      <div className="relative bg-white rounded-2xl p-3 sm:p-6 md:p-8 lg:p-10 border-2 border-orange-200 shadow-xl">
         <div className="flex items-center gap-3 mb-6">
           <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center">
             <Lightbulb className="text-white w-6 h-6" />
@@ -21,7 +21,7 @@ const TabbedBestPractices: React.FC = () => {
 
         <div className="grid md:grid-cols-2 gap-8 mb-8">
           {/* Design & User Experience */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl blur opacity-25"></div>
             <div className="relative bg-gradient-to-br from-orange-50 to-amber-50 p-6 rounded-xl border-2 border-orange-200">
               <h3 className="text-xl font-bold text-orange-900 mb-6 flex items-center gap-2">
@@ -62,7 +62,7 @@ const TabbedBestPractices: React.FC = () => {
           </div>
 
           {/* Technical Implementation */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute -inset-1 bg-gradient-to-r from-amber-500 to-yellow-500 rounded-xl blur opacity-25"></div>
             <div className="relative bg-gradient-to-br from-amber-50 to-yellow-50 p-6 rounded-xl border-2 border-amber-200">
               <h3 className="text-xl font-bold text-amber-900 mb-6 flex items-center gap-2">

@@ -31,7 +31,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
   };
 
   return (
-    <div className={`rounded-lg overflow-hidden border border-gray-700 ${className}`}>
+    <div className={`rounded-lg overflow-hidden border border-gray-700 w-full ${className}`}>
       {title && (
         <div className="bg-gray-800 px-4 py-2 border-b border-gray-700 flex justify-between items-center">
           <span className="font-medium text-gray-200 text-sm">{title}</span>
@@ -54,7 +54,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
           </button>
         </div>
       )}
-      
+
       {!title && (
         <div className="relative">
           <button
@@ -74,38 +74,48 @@ const CodeBlock: React.FC<CodeBlockProps> = ({
               </>
             )}
           </button>
-          <SyntaxHighlighter 
-            language={language} 
+          <div className="overflow-x-auto w-full">
+            <SyntaxHighlighter
+              language={language}
+              style={tomorrow}
+              showLineNumbers={showLineNumbers}
+              customStyle={{
+                margin: 0,
+                padding: '0.75rem',
+                fontSize: '0.75rem',
+                lineHeight: '1.4',
+                borderRadius: title ? '0' : '0.5rem',
+                width: '100%',
+                minWidth: 0
+              }}
+              wrapLongLines={false}
+            >
+              {code}
+            </SyntaxHighlighter>
+          </div>
+        </div>
+      )}
+
+      {title && (
+        <div className="overflow-x-auto w-full">
+          <SyntaxHighlighter
+            language={language}
             style={tomorrow}
             showLineNumbers={showLineNumbers}
             customStyle={{
               margin: 0,
-              padding: '1rem',
-              fontSize: '0.875rem',
-              lineHeight: '1.5',
-              borderRadius: title ? '0' : '0.5rem'
+              padding: '0.75rem',
+              fontSize: '0.75rem',
+              lineHeight: '1.4',
+              borderRadius: 0,
+              width: '100%',
+              minWidth: 0
             }}
+            wrapLongLines={false}
           >
             {code}
           </SyntaxHighlighter>
         </div>
-      )}
-      
-      {title && (
-        <SyntaxHighlighter 
-          language={language} 
-          style={tomorrow}
-          showLineNumbers={showLineNumbers}
-          customStyle={{
-            margin: 0,
-            padding: '1rem',
-            fontSize: '0.875rem',
-            lineHeight: '1.5',
-            borderRadius: 0
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
       )}
     </div>
   );
