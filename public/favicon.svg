@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0891b2"/>
+      <stop offset="100%" style="stop-color:#2563eb"/>
+    </linearGradient>
+  </defs>
+
+  <!-- White background -->
+  <rect width="200" height="200" fill="#ffffff"/>
+
+  <!-- K - bold geometric letter -->
+  <g fill="url(#grad)">
+    <!-- Vertical stem of K -->
+    <rect x="30" y="50" width="18" height="100" rx="2"/>
+    <!-- Upper diagonal of K -->
+    <polygon points="48,90 90,50 105,58 63,98"/>
+    <!-- Lower diagonal of K -->
+    <polygon points="63,102 105,142 90,150 48,110"/>
+  </g>
+
+  <!-- .e - lighter weight -->
+  <g fill="url(#grad)">
+    <!-- Dot -->
+    <circle cx="115" cy="70" r="5"/>
+    <!-- e letter - simplified geometric version -->
+    <path d="M 130 110 Q 130 95 145 95 Q 160 95 160 110 L 160 115 L 135 115 Q 135 125 145 125 Q 152 125 156 120 L 163 127 Q 157 137 145 137 Q 130 137 130 122 Q 130 110 130 110 Z M 135 108 L 153 108 Q 153 102 145 102 Q 137 102 135 108 Z"/>
+  </g>
+</svg>

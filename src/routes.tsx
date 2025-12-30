@@ -23,6 +23,9 @@ import HowItWorksPage from './pages/about/HowItWorksPage';
 import PortfolioPage from './pages/portfolio/PortfolioPage';
 import ProjectPage from './pages/portfolio/ProjectPage';
 
+// Import media page
+import MediaPage from './pages/media/MediaPage';
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -52,8 +55,9 @@ const router = createBrowserRouter([
       },
       { path: 'playground', element: <PlaygroundPage /> },
       { path: 'blog', element: <BlogPage /> },
-      { path: 'admin', element: <AdminPortal /> },
+      { path: 'station', element: <AdminPortal /> },
       { path: 'how-it-works', element: <HowItWorksPage /> },
+      { path: 'media', element: <MediaPage /> },
 
       // Portfolio section
       { path: 'portfolio',

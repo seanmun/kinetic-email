@@ -1,82 +1,140 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Modal from '../common/Modal'; // Adjust the import path as needed
+import Modal from '../common/Modal';
+import { FaGithub, FaLinkedin, FaGlobe, FaBolt } from 'react-icons/fa';
 
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
-  
+
   // Modal states
   const [activeModal, setActiveModal] = useState<string | null>(null);
-  
+
   // Modal handlers
   const openModal = (modalName: string) => {
-    // First ensure any previously active modal is fully closed
     setActiveModal(null);
-    
-    // Use a small timeout to ensure state update happens before opening new modal
     setTimeout(() => {
       setActiveModal(modalName);
     }, 10);
   };
-  
+
   const closeModal = () => {
     setActiveModal(null);
   };
-  
+
   return (
     <>
-      <footer className="bg-gray-50 border-t">
-        <div className="container-content py-6 max-w-6xl mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div>
-              <p className="text-gray-600 mb-4 md:mb-0">
-                © {currentYear} Kinetic.email. <Link to="/admin" className="hover:text-gray-800 transition-colors">All rights reserved</Link>.
+      <footer className="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white">
+        <div className="container mx-auto px-4 py-12 max-w-7xl">
+          {/* Main Footer Content */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            {/* Brand Section */}
+            <div className="lg:col-span-1">
+              <div className="flex items-center gap-2 mb-4">
+                <FaBolt className="text-cyan-400 text-2xl" />
+                <h3 className="text-xl font-bold">Kinetic.email</h3>
+              </div>
+              <p className="text-blue-200 text-sm leading-relaxed mb-4">
+                Your resource hub for building dynamic, interactive email experiences that push the boundaries of traditional email design.
               </p>
             </div>
-            
-            <div className="flex flex-wrap justify-center space-x-4 md:space-x-6">
 
-              
-              <button 
-                onClick={() => openModal('acknowledgments')} 
-                className="text-gray-600 hover:text-primary-600 transition-colors"
-              >
-                Acknowledgments
-              </button>
-              
-              <button 
-                onClick={() => openModal('privacy')} 
-                className="text-gray-600 hover:text-primary-600 transition-colors"
-              >
-                Privacy Policy
-              </button>
-              
-              <a 
-                href="https://github.com/seanmun" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-gray-600 hover:text-primary-600 transition-colors"
-              >
-                GitHub
-              </a>
-              
-              <a 
-                href="https://www.linkedin.com/in/sean-munley/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-gray-600 hover:text-primary-600 transition-colors"
-              >
-                LinkedIn
-              </a>
-              
-              <a 
-                href="https://seanmun.com" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="text-gray-600 hover:text-primary-600 transition-colors"
-              >
-                SeanMun.com
-              </a>
+            {/* Learn Section */}
+            <div>
+              <h4 className="font-bold text-lg mb-4 text-cyan-400">Learn</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/learn" className="text-blue-200 hover:text-white transition-colors text-sm">
+                    Learning Modules
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/examples" className="text-blue-200 hover:text-white transition-colors text-sm">
+                    Examples
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/playground" className="text-blue-200 hover:text-white transition-colors text-sm">
+                    AI Playground
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Resources Section */}
+            <div>
+              <h4 className="font-bold text-lg mb-4 text-cyan-400">Resources</h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link to="/media" className="text-blue-200 hover:text-white transition-colors text-sm">
+                    Brand & Media Kit
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => openModal('acknowledgments')}
+                    className="text-blue-200 hover:text-white transition-colors text-sm"
+                  >
+                    Acknowledgments
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => openModal('privacy')}
+                    className="text-blue-200 hover:text-white transition-colors text-sm"
+                  >
+                    Privacy Policy
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            {/* Connect Section */}
+            <div>
+              <h4 className="font-bold text-lg mb-4 text-cyan-400">Connect</h4>
+              <p className="text-blue-200 text-sm mb-4">
+                Built by Sean Munley
+              </p>
+              <div className="flex gap-4">
+                <a
+                  href="https://github.com/seanmun"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-200 hover:text-white transition-colors"
+                  aria-label="GitHub"
+                >
+                  <FaGithub className="text-2xl" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/sean-munley/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-200 hover:text-white transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin className="text-2xl" />
+                </a>
+                <a
+                  href="https://seanmun.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-200 hover:text-white transition-colors"
+                  aria-label="Portfolio Website"
+                >
+                  <FaGlobe className="text-2xl" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-blue-800 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="text-blue-300 text-sm">
+                © {currentYear} Kinetic.email. All rights reserved.
+              </p>
+              <p className="text-blue-300 text-sm">
+                Empowering email developers to create interactive experiences.
+              </p>
             </div>
           </div>
         </div>

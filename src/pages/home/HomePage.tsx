@@ -17,10 +17,32 @@ const HomePage = () => {
   }>>([]);
   const [firedEvents, setFiredEvents] = useState<Set<string>>(new Set());
 
+  // Video ref for lightning strike effect
+  const strikeVideoRef = React.useRef<HTMLVideoElement>(null);
+
   // Generate a visitor ID (persistent for session)
   const visitorId = React.useMemo(() => {
     return `visitor_${Math.random().toString(36).substring(2, 9)}`;
   }, []);
+
+  // Function to play lightning strike video
+  const playStrikeVideo = () => {
+    const video = strikeVideoRef.current;
+    if (video) {
+      // Strikes occur at even seconds: 0, 2, 8, 12
+      // Randomly pick one of the timestamps
+      const evenSeconds = [0, 2, 8, 12];
+      const randomStrike = evenSeconds[Math.floor(Math.random() * evenSeconds.length)];
+
+      video.currentTime = randomStrike;
+      video.play().catch(err => console.log('Video play failed:', err));
+
+      // Stop after 1.8 seconds (to show just the strike)
+      setTimeout(() => {
+        video.pause();
+      }, 1800);
+    }
+  };
 
   // Function to log tracking event
   const logTrackingEvent = (action: string) => {
@@ -44,6 +66,9 @@ const HomePage = () => {
 
     setTrackingEvents(prev => [...prev, event]);
     setFiredEvents(prev => new Set([...prev, action]));
+
+    // Play lightning strike effect
+    playStrikeVideo();
   };
 
   // Listen for messages from iframe
@@ -464,6 +489,20 @@ const HomePage = () => {
     <>
       {/* Hero Section - Full viewport with interactive demo */}
       <div className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 text-white pt-32 pb-24 overflow-hidden">
+        {/* Lightning strike video - desktop only */}
+        <div className="absolute inset-0 overflow-hidden hidden md:block">
+          <video
+            ref={strikeVideoRef}
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full opacity-30 object-cover"
+          >
+            <source src="/lightning.mp4" type="video/mp4" />
+          </video>
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-blue-900/70 to-indigo-900/70"></div>
+        </div>
+
         {/* Animated background elements */}
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>

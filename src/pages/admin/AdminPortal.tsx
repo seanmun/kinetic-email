@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PageLayout from '../../components/layout/PageLayout';
 import Modal from '../../components/common/Modal';
 import { FaLock, FaUpload, FaCheckCircle, FaQuestionCircle, FaCode, FaBook, FaList, FaTrash, FaEye, FaClock, FaStar, FaClipboardCheck, FaPlay, FaFilter } from 'react-icons/fa';
+import { supabase } from '../../lib/supabase';
 
 type UploadType = 'html' | 'blog';
 type TechniqueType = 'tabs' | 'accordion' | 'survey' | 'carousel' | 'toggle' | 'hybrid' | 'static';
@@ -14,6 +15,7 @@ type BlogTopic = 'kinetic-techniques' | 'email-best-practices' | 'case-studies' 
 const AdminPortal = () => {
   // Authentication
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [authError, setAuthError] = useState('');
 
@@ -95,13 +97,26 @@ const AdminPortal = () => {
   const [isRunningEval, setIsRunningEval] = useState(false);
   const [evalFilter, setEvalFilter] = useState<'all' | 'pending' | 'evaluated'>('pending');
 
-  const handleAuth = (e: React.FormEvent) => {
+  const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (passwordInput === 'Sheba') {
-      setIsAuthenticated(true);
-      setAuthError('');
-    } else {
-      setAuthError('Incorrect password');
+    setAuthError('');
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: emailInput,
+        password: passwordInput
+      });
+
+      if (error) {
+        setAuthError('Invalid credentials');
+        return;
+      }
+
+      if (data.user) {
+        setIsAuthenticated(true);
+      }
+    } catch (err) {
+      setAuthError('Authentication error');
     }
   };
 
@@ -400,13 +415,28 @@ const AdminPortal = () => {
               <FaLock className="text-white text-2xl" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">RAG Admin Portal</h1>
-            <p className="text-gray-600">Enter password to access</p>
+            <p className="text-gray-600">Sign in to access</p>
           </div>
 
           <form onSubmit={handleAuth} className="space-y-4">
             <div>
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Enter email"
+                required
+              />
+            </div>
+
+            <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Admin Password
+                Password
               </label>
               <input
                 type="password"
@@ -415,6 +445,7 @@ const AdminPortal = () => {
                 onChange={(e) => setPasswordInput(e.target.value)}
                 className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter password"
+                required
               />
             </div>
 
