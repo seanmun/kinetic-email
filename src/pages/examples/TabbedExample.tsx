@@ -68,8 +68,8 @@ label {
   #Kinetic:checked ~* .interactive { display: block !important; }
   #Kinetic:checked ~* .fallback { display: none !important; }
   /* AOL/Yahoo Compatibility Fix */
-  #Kinetic:checked ~* .& .fallback { display: block !important; }
-  #Kinetic:checked ~* .& .interactive { display: none !important; }
+  #Kinetic:checked ~ .& .fallback { display: block !important; }
+  #Kinetic:checked ~ .& .interactive { display: none !important; }
 </style>`;
 
   // Complete HTML for the preview

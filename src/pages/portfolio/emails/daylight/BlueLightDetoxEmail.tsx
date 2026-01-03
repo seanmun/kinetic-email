@@ -336,11 +336,11 @@ table#email-container {
       }
 
       /* Fix for AOL/Yahoo */
-      #Kinetic:checked ~* .& .fallback { 
-        display: block !important; 
+      #Kinetic:checked ~ .& .fallback {
+        display: block !important;
       }
-      #Kinetic:checked ~* .& .interactive { 
-        display: none !important; 
+      #Kinetic:checked ~ .& .interactive {
+        display: none !important;
       }
   </style>
 </head>

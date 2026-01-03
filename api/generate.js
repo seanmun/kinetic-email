@@ -83,8 +83,8 @@ input[type="radio"], input[type="checkbox"] {
 #Kinetic:checked ~* .fallback { display: none !important; }
 
 /* AOL/Yahoo Compatibility Fixes */
-#Kinetic:checked ~* .& .fallback { display: block !important; }
-#Kinetic:checked ~* .& .interactive { display: none !important; }
+#Kinetic:checked ~ .& .fallback { display: block !important; }
+#Kinetic:checked ~ .& .interactive { display: none !important; }
 
 /* Interactive content hidden by default */
 .interactive { display: none !important; }

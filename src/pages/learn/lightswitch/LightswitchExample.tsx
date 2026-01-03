@@ -67,10 +67,10 @@ const LightswitchExample: React.FC = () => {
 }
 
 /* Fix for AOL/Yahoo */
-#Kinetic:checked ~* .& .fallback {
+#Kinetic:checked ~ .& .fallback {
   display: block !important;
 }
-#Kinetic:checked ~* .& .interactive {
+#Kinetic:checked ~ .& .interactive {
   display: none !important;
 }`}
               language="css"
