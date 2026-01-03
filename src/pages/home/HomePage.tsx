@@ -23,6 +23,15 @@ const HomePage = () => {
   // Video ref for lightning strike effect
   const strikeVideoRef = React.useRef<HTMLVideoElement>(null);
 
+  // Create fallback version of hero email (for Gmail - no kinetic features)
+  const heroFallbackEmail = React.useMemo(() => {
+    // Remove the 'checked' attribute from the Kinetic lightswitch to show fallback content
+    return heroKineticEmail.replace(
+      /<input\s+[^>]*?id=["']Kinetic["'][^>]*?checked[^>]*?>/gi,
+      (match) => match.replace('checked', '')
+    );
+  }, []);
+
   // Generate a visitor ID (persistent for session)
   const visitorId = React.useMemo(() => {
     return `visitor_${Math.random().toString(36).substring(2, 9)}`;
@@ -943,7 +952,7 @@ const HomePage = () => {
                 <div className="min-[450px]:hidden">
                   <div className="w-full overflow-hidden shadow-lg">
                     <iframe
-                      srcDoc={heroKineticEmail}
+                      srcDoc={heroFallbackEmail}
                       title="Gmail Fallback Preview"
                       className="w-full border-0"
                       style={{ height: '500px' }}
