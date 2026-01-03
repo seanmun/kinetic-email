@@ -22,6 +22,7 @@ const AndroidGmailSimulator: React.FC<AndroidGmailSimulatorProps> = ({
   const [htmlContent, setHtmlContent] = useState<string>(initialHtmlContent || 'Loading email...');
   const [isLoading, setIsLoading] = useState<boolean>(!initialHtmlContent && !!htmlPath);
   const [error, setError] = useState<string | null>(null);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
 
   // Only fetch from htmlPath if no direct htmlContent was provided
   useEffect(() => {
@@ -77,6 +78,53 @@ const AndroidGmailSimulator: React.FC<AndroidGmailSimulatorProps> = ({
       setHtmlContent(processedHtml);
     }
   }, [htmlPath, initialHtmlContent]);
+
+  // Dynamically update iframe height when content changes (including kinetic interactions)
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const updateIframeHeight = () => {
+      if (iframe.contentWindow) {
+        const height = iframe.contentWindow.document.documentElement.scrollHeight;
+        iframe.style.height = height + 'px';
+      }
+    };
+
+    // Initial height calculation
+    const handleLoad = () => {
+      updateIframeHeight();
+
+      // Set up MutationObserver to watch for DOM changes inside iframe
+      if (iframe.contentWindow) {
+        const observer = new MutationObserver(() => {
+          updateIframeHeight();
+        });
+
+        observer.observe(iframe.contentWindow.document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: true
+        });
+
+        // Also poll every 500ms as a fallback for CSS-only changes
+        const pollInterval = setInterval(updateIframeHeight, 500);
+
+        // Cleanup
+        return () => {
+          observer.disconnect();
+          clearInterval(pollInterval);
+        };
+      }
+    };
+
+    iframe.addEventListener('load', handleLoad);
+
+    return () => {
+      iframe.removeEventListener('load', handleLoad);
+    };
+  }, [htmlContent]);
 
   return (
     <div className="mx-auto w-[402px]">
@@ -141,131 +189,75 @@ const AndroidGmailSimulator: React.FC<AndroidGmailSimulatorProps> = ({
             </div>
           </div>
           
-          {/* Email content area */}
-          <div className="h-[680px] overflow-y-auto" style={{ overflowY: 'auto' }}>
+          {/* Scrollable wrapper containing email details + email iframe */}
+          <div className="h-[680px] overflow-y-auto bg-white">
+            {/* Email Details - React component (not in iframe) */}
+            <div className="bg-white px-4 py-4 border-b border-gray-200 flex-shrink-0">
+              <h1 className="text-xl font-normal text-gray-900 mb-3">{subject}</h1>
+              <div className="flex justify-between items-center mb-2">
+                <div className="flex items-center">
+                  <link rel="preconnect" href="https://fonts.googleapis.com" />
+                  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-white text-base mr-3"
+                    style={{
+                      background: 'linear-gradient(135deg, #06b6d4 0%, #2563eb 100%)',
+                      fontFamily: "'Orbitron', sans-serif",
+                      fontWeight: 900,
+                      letterSpacing: '-0.5px'
+                    }}
+                  >
+                    K.<span style={{ fontWeight: 400 }}>e</span>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="text-sm font-medium text-gray-900">{sender}</div>
+                    <div className="text-sm text-gray-600">{sender.toLowerCase().replace(/\s+/g, '')}@example.com</div>
+                  </div>
+                </div>
+                <div className="text-sm text-gray-600">{date}</div>
+              </div>
+              <div className="text-sm text-gray-600 ml-[52px]">to me</div>
+            </div>
+
+            {/* Email HTML in iframe */}
             <iframe
+              ref={iframeRef}
               srcDoc={`
                 <!DOCTYPE html>
-                <html>
+                <html style="height: auto;">
                 <head>
                   <meta charset="utf-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
                   <style>
-                    body {
+                    html, body {
                       margin: 0;
                       padding: 0;
-                      font-family: 'Roboto', Arial, sans-serif;
-                      background-color: #ffffff;
-                    }
-                    .email-header {
-                      padding: 16px;
-                      border-bottom: 1px solid #e0e0e0;
-                    }
-                    .subject {
-                      font-size: 20px;
-                      font-weight: 400;
-                      color: #202124;
-                      margin-bottom: 12px;
-                    }
-                    .sender-row {
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                      margin-bottom: 8px;
-                    }
-                    .avatar {
-                      width: 40px;
-                      height: 40px;
-                      border-radius: 50%;
-                      background-color: #C5221F;
-                      color: white;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 16px;
-                      font-weight: 500;
-                      margin-right: 12px;
-                    }
-                    .sender-container {
-                      display: flex;
-                      align-items: center;
-                    }
-                    .sender-info {
-                      display: flex;
-                      flex-direction: column;
-                    }
-                    .sender-name {
-                      font-size: 14px;
-                      font-weight: 500;
-                      color: #202124;
-                    }
-                    .sender-email {
-                      font-size: 14px;
-                      color: #5f6368;
-                    }
-                    .date {
-                      font-size: 14px;
-                      color: #5f6368;
-                    }
-                    .receiver {
-                      font-size: 14px;
-                      color: #5f6368;
-                      margin-top: 4px;
-                      margin-left: 52px;
-                    }
-                    .email-content {
-                      padding: 10px;
-                    }
-                    .loading {
-                      padding: 16px;
-                      text-align: center;
-                      animation: pulse 1.5s infinite;
-                    }
-                    .error {
-                      padding: 16px;
-                      text-align: center;
-                      color: #D93025;
-                    }
-                    
-                    @keyframes pulse {
-                      0% { opacity: 0.6; }
-                      50% { opacity: 1; }
-                      100% { opacity: 0.6; }
+                      height: auto;
+                      overflow: visible;
                     }
                   </style>
                 </head>
                 <body>
-                  <!-- Email header -->
-                  <div class="email-header">
-                    <h1 class="subject">${subject}</h1>
-                    <div class="sender-row">
-                      <div class="sender-container">
-                        <div class="avatar">${sender.charAt(0)}</div>
-                        <div class="sender-info">
-                          <div class="sender-name">${sender}</div>
-                          <div class="sender-email">${sender.toLowerCase().replace(/\s+/g, '')}@example.com</div>
-                        </div>
-                      </div>
-                      <div class="date">${date}</div>
-                    </div>
-                    <div class="receiver">to me</div>
-                  </div>
-                  
-                  <!-- Email content -->
-                  <div class="email-content">
-                    ${isLoading ? 
-                      '<div class="loading">Loading email content...</div>' : 
-                      error ? 
-                        `<div class="error">${error}</div>` : 
-                        htmlContent
-                    }
-                  </div>
+                  ${isLoading ?
+                    '<div style="padding: 16px; text-align: center; color: #6b7280;">Loading email content...</div>' :
+                    error ?
+                      `<div style="padding: 16px; text-align: center; color: #ef4444;">${error}</div>` :
+                      htmlContent
+                  }
                 </body>
                 </html>
               `}
               title="Email Content"
-              className="w-full h-full border-0"
-              style={{ border: 'none', height: '100%' }}
+              scrolling="no"
+              className="w-full border-0 block"
+              style={{
+                border: 'none',
+                display: 'block',
+                overflow: 'visible',
+                height: 'auto',
+                minHeight: '500px'
+              }}
               sandbox="allow-same-origin"
             />
           </div>

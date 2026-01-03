@@ -22,6 +22,7 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
   const [htmlContent, setHtmlContent] = useState<string>(initialHtmlContent || 'Loading email...');
   const [isLoading, setIsLoading] = useState<boolean>(!initialHtmlContent && !!htmlPath);
   const [error, setError] = useState<string | null>(null);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
 
   // Only fetch from htmlPath if no direct htmlContent was provided
   useEffect(() => {
@@ -64,6 +65,53 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
       fetchHtmlContent();
     }
   }, [htmlPath, initialHtmlContent]);
+
+  // Dynamically update iframe height when content changes (including kinetic interactions)
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const updateIframeHeight = () => {
+      if (iframe.contentWindow) {
+        const height = iframe.contentWindow.document.documentElement.scrollHeight;
+        iframe.style.height = height + 'px';
+      }
+    };
+
+    // Initial height calculation
+    const handleLoad = () => {
+      updateIframeHeight();
+
+      // Set up MutationObserver to watch for DOM changes inside iframe
+      if (iframe.contentWindow) {
+        const observer = new MutationObserver(() => {
+          updateIframeHeight();
+        });
+
+        observer.observe(iframe.contentWindow.document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          characterData: true
+        });
+
+        // Also poll every 500ms as a fallback for CSS-only changes
+        const pollInterval = setInterval(updateIframeHeight, 500);
+
+        // Cleanup
+        return () => {
+          observer.disconnect();
+          clearInterval(pollInterval);
+        };
+      }
+    };
+
+    iframe.addEventListener('load', handleLoad);
+
+    return () => {
+      iframe.removeEventListener('load', handleLoad);
+    };
+  }, [htmlContent]);
 
   return (
     <div className="mx-auto w-[402px]">
@@ -113,152 +161,85 @@ const IOSMailSimulator: React.FC<IOSMailSimulatorProps> = ({
             </div>
           </div>
           
-          {/* Entire scrollable content area (includes header and email body) */}
-          <div className="h-[680px] overflow-y-auto bg-white" style={{ overflowY: 'auto' }}>
-            {/* Combined content approach - all wrapped in an iframe for better rendering */}
+          {/* Scrollable wrapper containing OS details div + email iframe */}
+          <div className="h-[680px] overflow-y-auto bg-white">
+            {/* OS Details - React component (not in iframe) */}
+            <div className="bg-white px-4 py-3 border-b border-gray-200 flex-shrink-0">
+              <div className="flex justify-between items-start mb-2">
+                <div className="text-xs text-gray-500">{date}</div>
+                <div className="flex gap-3">
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+                  </svg>
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                  </svg>
+                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                  </svg>
+                </div>
+              </div>
+              <h2 className="text-base font-semibold text-gray-900 mb-2">{subject}</h2>
+              <div className="flex items-center gap-2">
+                <link rel="preconnect" href="https://fonts.googleapis.com" />
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+                <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm"
+                  style={{
+                    background: 'linear-gradient(135deg, #06b6d4 0%, #2563eb 100%)',
+                    fontFamily: "'Orbitron', sans-serif",
+                    fontWeight: 900,
+                    letterSpacing: '-0.5px'
+                  }}
+                >
+                  K.<span style={{ fontWeight: 400 }}>e</span>
+                </div>
+                <div>
+                  <div className="text-sm font-medium text-gray-900">{sender}</div>
+                  <div className="text-xs text-gray-500">To: me</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Email HTML in seamless iframe (scrolling handled by parent) */}
             <iframe
+              ref={iframeRef}
               srcDoc={`
                 <!DOCTYPE html>
-                <html>
+                <html style="height: auto;">
                 <head>
                   <meta charset="utf-8">
-                  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-                  <link rel="preconnect" href="https://fonts.googleapis.com">
-                  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
                   <style>
-                    body {
+                    html, body {
                       margin: 0;
                       padding: 0;
-                      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-                    }
-                    .email-header {
-                      background-color: white;
-                      padding: 16px;
-                      border-bottom: 1px solid #e5e5e5;
-                    }
-                    .header-details {
-                      display: flex;
-                      justify-content: space-between;
-                      margin-bottom: 8px;
-                    }
-                    .date {
-                      font-size: 12px;
-                      color: #6b7280;
-                    }
-                    .header-actions {
-                      display: flex;
-                      gap: 8px;
-                    }
-                    .header-action-icon {
-                      color: #9ca3af;
-                    }
-                    .subject {
-                      font-size: 16px;
-                      font-weight: 600;
-                      margin-bottom: 4px;
-                    }
-                    .sender-wrapper {
-                      display: flex;
-                      align-items: center;
-                    }
-                    .sender-avatar {
-                      width: 32px;
-                      height: 32px;
-                      border-radius: 50%;
-                      background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
-                      color: white;
-                      display: flex;
-                      align-items: center;
-                      justify-content: center;
-                      font-size: 13px;
-                      margin-right: 8px;
-                      font-family: 'Orbitron', sans-serif;
-                      font-weight: 900;
-                      letter-spacing: -0.5px;
-                    }
-                    .sender-info {
-                      font-size: 14px;
-                    }
-                    .sender-name {
-                      font-weight: 500;
-                    }
-                    .receiver {
-                      font-size: 12px;
-                      color: #6b7280;
-                    }
-                    .email-content {
-                      padding: 0px;
-                    }
-                    
-                    /* Loading and error states */
-                    .loading {
-                      padding: 16px;
-                      text-align: center;
-                      animation: pulse 1.5s infinite;
-                    }
-                    .error {
-                      padding: 16px;
-                      text-align: center;
-                      color: #ef4444;
-                    }
-                    .error-path {
-                      margin-top: 8px;
-                      font-size: 12px;
-                      color: #6b7280;
-                    }
-                    
-                    @keyframes pulse {
-                      0% { opacity: 0.6; }
-                      50% { opacity: 1; }
-                      100% { opacity: 0.6; }
+                      height: auto;
+                      overflow: visible;
                     }
                   </style>
                 </head>
                 <body>
-                  <!-- Email header - part of scrollable area -->
-                  <div class="email-header">
-                    <div class="header-details">
-                      <div class="date">${date}</div>
-                      <div class="header-actions">
-                        <svg class="header-action-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
-                        </svg>
-                        <svg class="header-action-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                        </svg>
-                        <svg class="header-action-icon" width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
-                        </svg>
-                      </div>
-                    </div>
-                    <h2 class="subject">${subject}</h2>
-                    <div class="sender-wrapper">
-                      <div class="sender-avatar">
-                        K.<span style="font-weight: 400;">e</span>
-                      </div>
-                      <div class="sender-info">
-                        <div class="sender-name">${sender}</div>
-                        <div class="receiver">To: me</div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <!-- Email content -->
-                  <div class="email-content">
-                    ${isLoading ? 
-                      '<div class="loading">Loading email content...</div>' : 
-                      error ? 
-                        `<div class="error">${error}<div class="error-path">Tried to load: ${htmlPath}</div></div>` : 
-                        htmlContent
-                    }
-                  </div>
+                  ${isLoading ?
+                    '<div style="padding: 16px; text-align: center; color: #6b7280;">Loading email content...</div>' :
+                    error ?
+                      `<div style="padding: 16px; text-align: center; color: #ef4444;">${error}<div style="margin-top: 8px; font-size: 12px; color: #6b7280;">Tried to load: ${htmlPath}</div></div>` :
+                      htmlContent
+                  }
                 </body>
                 </html>
               `}
               title="Email Content"
-              className="w-full h-full border-0"
-              style={{ border: 'none', height: '100%' }}
+              scrolling="no"
+              className="w-full border-0 block"
+              style={{
+                border: 'none',
+                display: 'block',
+                overflow: 'visible',
+                height: 'auto',
+                minHeight: '500px'
+              }}
               sandbox="allow-same-origin allow-scripts"
             />
           </div>

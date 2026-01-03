@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
+import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
 import { FaBook, FaCode, FaPaperPlane, FaChartLine, FaApple, FaMagic, FaCheckCircle, FaBolt, FaArrowRight } from 'react-icons/fa';
 import { Search, CheckCircle2, TrendingUp } from 'lucide-react';
 
@@ -144,7 +145,44 @@ const HomePage = () => {
 </script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; background: #f5f5f7; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  /* Hide the lightswitch checkbox */
+  .kinetic {
+    display: none;
+  }
+
+  /* Show fallback content by default (for clients that don't support :checked) */
+  .fallback {
+    display: block !important;
+  }
+
+  /* Hide interactive content by default (for clients that don't support :checked) */
+  .interactive {
+    display: none !important;
+  }
+
+  /* Lightswitch: Show interactive content when checkbox is checked (for supporting clients) */
+  #Kinetic:checked ~ .interactive {
+    display: block !important;
+  }
+
+  /* Lightswitch: Hide fallback content when checkbox is checked (for supporting clients) */
+  #Kinetic:checked ~ .fallback {
+    display: none !important;
+  }
+
+  /* Fix for AOL/Yahoo - they support :checked but not ~* properly */
+  #Kinetic:checked ~* .& .fallback {
+    display: block !important;
+  }
+  #Kinetic:checked ~* .& .interactive {
+    display: none !important;
+  }
 
   /* Hide radio and checkbox inputs */
   input[type="radio"], input[type="checkbox"] {
@@ -194,7 +232,11 @@ const HomePage = () => {
   }
 
   /* Content sections - hide all by default */
-  .content { display: none; padding: 24px; }
+  .content {
+    display: none;
+    padding: 24px;
+    min-height: 350px;
+  }
 
   /* Show content based on checked radio */
   #tab1:checked ~* .content1,
@@ -309,22 +351,83 @@ const HomePage = () => {
     background: #0066FF;
     color: white;
   }
+
+  /* Footer styling */
+  .email-footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .footer-logo {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #06b6d4 0%, #2563eb 100%);
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .footer-link {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.2s;
+  }
+
+  .footer-link:hover {
+    color: white;
+  }
 </style>
 </head>
 <body>
-  <!-- Tab Navigation -->
-  <input type="radio" name="tabs" id="tab1" checked>
-  <input type="radio" name="tabs" id="tab2">
-  <input type="radio" name="tabs" id="tab3">
+  <!-- The Kinetic Lightswitch -->
+  <input type="checkbox" class="kinetic" name="interactive" id="Kinetic" checked>
 
-  <!-- Survey checkboxes -->
-  <input type="checkbox" id="feature1">
-  <input type="checkbox" id="feature2">
-  <input type="checkbox" id="feature3">
-  <input type="checkbox" id="feature4">
-  <input type="checkbox" id="survey_submit">
+  <!-- INTERACTIVE CONTENT (shown in clients that support kinetic emails) -->
+  <div class="interactive">
+    <!-- Tab Navigation -->
+    <input type="radio" name="tabs" id="tab1" checked>
+    <input type="radio" name="tabs" id="tab2">
+    <input type="radio" name="tabs" id="tab3">
 
-  <div class="tab-container">
+    <!-- Survey checkboxes -->
+    <input type="checkbox" id="feature1">
+    <input type="checkbox" id="feature2">
+    <input type="checkbox" id="feature3">
+    <input type="checkbox" id="feature4">
+    <input type="checkbox" id="survey_submit">
+
+    <div class="tab-container">
     <div class="tab-labels">
       <label for="tab1">Survey</label>
       <label for="tab2">Benefits</label>
@@ -385,6 +488,59 @@ const HomePage = () => {
       <h3>Ready to Build Your Own?</h3>
       <p>Our AI-powered playground makes it easy to create kinetic emails in minutes.</p>
       <a href="#" class="cta-button">Try the Playground →</a>
+    </div>
+  </div>
+  </div><!-- End .interactive -->
+
+  <!-- FALLBACK CONTENT (shown in clients that don't support kinetic emails) -->
+  <div class="fallback">
+    <div class="email-container" style="background: white; border-radius: 12px; padding: 24px; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #0066FF; margin-bottom: 20px; font-size: 24px;">Discover Kinetic Emails</h2>
+
+      <!-- Survey Section -->
+      <div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: 2px solid #e5e5e7;">
+        <h3 style="color: #0066FF; margin-bottom: 12px; font-size: 20px;">Which features interest you most?</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li style="padding: 8px 0; color: #333;">✓ Interactive Tabs & Navigation</li>
+          <li style="padding: 8px 0; color: #333;">✓ Product Carousels</li>
+          <li style="padding: 8px 0; color: #333;">✓ In-Email Surveys</li>
+          <li style="padding: 8px 0; color: #333;">✓ Event Tracking & Analytics</li>
+        </ul>
+        <a href="#" style="display: inline-block; margin-top: 16px; padding: 12px 24px; background: linear-gradient(135deg, #0066FF, #00D4FF); color: white; text-decoration: none; border-radius: 8px; font-weight: 600;">Submit Preferences</a>
+      </div>
+
+      <!-- Benefits Section -->
+      <div style="margin-bottom: 32px; padding-bottom: 32px; border-bottom: 2px solid #e5e5e7;">
+        <h3 style="color: #0066FF; margin-bottom: 12px; font-size: 20px;">Why Kinetic Emails Work</h3>
+        <p style="color: #333; line-height: 1.6; margin-bottom: 12px;"><strong>Psychology meets design:</strong> When people start interacting (clicking tabs, completing surveys), they're more likely to finish and take action.</p>
+        <p style="color: #333; line-height: 1.6; margin-bottom: 12px;"><strong>Better data collection:</strong> Capture granular engagement data - which tabs were clicked, survey responses, product interests - all without leaving the email.</p>
+        <p style="color: #333; line-height: 1.6;"><strong>Reduced friction:</strong> No scrolling through long emails or clicking multiple links. Everything users need is right there, organized and interactive.</p>
+      </div>
+
+      <!-- Get Started Section -->
+      <div style="margin-bottom: 32px;">
+        <h3 style="color: #0066FF; margin-bottom: 12px; font-size: 20px;">Ready to Build Your Own?</h3>
+        <p style="color: #333; line-height: 1.6; margin-bottom: 16px;">Our AI-powered playground makes it easy to create kinetic emails in minutes.</p>
+        <a href="#" style="display: inline-block; padding: 12px 24px; background: transparent; color: #0066FF; text-decoration: none; border: 2px solid #0066FF; border-radius: 8px; font-weight: 600;">Try the Playground →</a>
+      </div>
+    </div>
+  </div><!-- End .fallback -->
+
+  <!-- SHARED FOOTER (shown in both kinetic and fallback) -->
+  <div class="email-footer">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        K.<span style="font-weight: 400;">e</span>
+      </div>
+      <span style="color: rgba(255, 255, 255, 0.9); font-weight: 600; font-size: 16px;">kinetic.email</span>
+    </div>
+    <p class="footer-text">
+      Build interactive emails that engage your audience
+    </p>
+    <div class="footer-links">
+      <a href="https://kinetic.email" class="footer-link">Learn More</a>
+      <a href="https://kinetic.email/playground" class="footer-link">Playground</a>
+      <a href="https://kinetic.email/examples" class="footer-link">Examples</a>
     </div>
   </div>
 </body>
@@ -716,7 +872,7 @@ const HomePage = () => {
             See The Difference
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Compare traditional static emails with kinetic interactive experiences
+            The same email in Gmail (fallback) vs Apple Mail (kinetic) - one HTML file, two experiences
           </p>
 
           {/* Mobile Toggle */}
@@ -730,7 +886,7 @@ const HomePage = () => {
                     : 'text-gray-600'
                 }`}
               >
-                Traditional
+                Gmail
               </button>
               <button
                 onClick={() => setMobileComparisonView('kinetic')}
@@ -740,33 +896,33 @@ const HomePage = () => {
                     : 'text-gray-600'
                 }`}
               >
-                Kinetic
+                Apple Mail
               </button>
             </div>
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Static Email */}
+          {/* Gmail Fallback Email */}
           <div className={`relative group ${mobileComparisonView === 'kinetic' ? 'hidden md:block' : ''}`}>
             <div className="absolute -inset-2 bg-gradient-to-r from-gray-300 to-gray-400 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
             <div className="relative bg-white rounded-xl shadow-xl overflow-hidden border-2 border-gray-200">
               <div className="bg-gray-100 px-6 py-4 border-b border-gray-200">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-gray-700">Traditional Static Email</h3>
-                  <span className="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">
-                    Static
+                  <h3 className="text-lg font-bold text-gray-700">Gmail (Fallback Version)</h3>
+                  <span className="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">
+                    Fallback
                   </span>
                 </div>
               </div>
               <div className="p-2">
                 {/* Desktop/Tablet: Show phone simulator (≥450px) */}
                 <div className="hidden min-[450px]:block transform scale-90 origin-top">
-                  <IOSMailSimulator
-                    sender="Old School Marketing"
-                    subject="Check out our products"
-                    htmlContent={staticEmailHTML}
-                    date="Yesterday"
+                  <AndroidGmailSimulator
+                    sender="Kinetic.email"
+                    subject="Interactive product showcase ⚡"
+                    htmlContent={heroKineticEmail}
+                    date="Today"
                   />
                 </div>
 
@@ -774,11 +930,11 @@ const HomePage = () => {
                 <div className="min-[450px]:hidden">
                   <div className="w-full overflow-hidden shadow-lg">
                     <iframe
-                      srcDoc={staticEmailHTML}
-                      title="Static Email Preview"
+                      srcDoc={heroKineticEmail}
+                      title="Gmail Fallback Preview"
                       className="w-full border-0"
                       style={{ height: '500px' }}
-                      sandbox="allow-same-origin allow-scripts"
+                      sandbox=""
                     />
                   </div>
                 </div>
@@ -786,16 +942,16 @@ const HomePage = () => {
               <div className="bg-gray-50 px-6 py-4 border-t border-gray-200">
                 <ul className="text-sm text-gray-600 space-y-2">
                   <li className="flex items-center gap-2">
-                    <span className="text-red-500">✗</span>
-                    No interaction
+                    <span className="text-orange-600">→</span>
+                    Shows fallback content
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-red-500">✗</span>
-                    Multiple clicks required
+                    <span className="text-orange-600">→</span>
+                    All sections visible
                   </li>
                   <li className="flex items-center gap-2">
-                    <span className="text-red-500">✗</span>
-                    Low engagement
+                    <span className="text-orange-600">→</span>
+                    No interactive features
                   </li>
                 </ul>
               </div>

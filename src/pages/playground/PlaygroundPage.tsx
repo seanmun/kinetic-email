@@ -19,7 +19,7 @@ const PlaygroundPage = () => {
   const [emailClient, setEmailClient] = useState<EmailClient>('ios');
   const [viewMode, setViewMode] = useState<ViewMode>('preview');
   const [hasGenerated, setHasGenerated] = useState(false);
-  const [useRAG, setUseRAG] = useState(false);
+  const [useRAG] = useState(true); // Always use RAG
   const [ragModel, setRagModel] = useState<'small' | 'large'>('small');
   const [ragMetadata, setRagMetadata] = useState<any>(null);
   const [showRagExamples, setShowRagExamples] = useState(false);
@@ -260,51 +260,41 @@ const PlaygroundPage = () => {
 
                   {/* RAG Model Selection */}
                   <div className="p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200 space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="flex-shrink-0">
-                        <div className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-200 ${useRAG ? 'bg-purple-600' : 'bg-gray-300'}`} onClick={() => setUseRAG(!useRAG)}>
-                          <div className={`bg-white w-4 h-4 rounded-full shadow-md transform transition-transform duration-200 ${useRAG ? 'translate-x-6' : ''}`}></div>
-                        </div>
-                      </div>
-                      <div>
-                        <label className="text-sm font-semibold text-gray-900 cursor-pointer" onClick={() => setUseRAG(!useRAG)}>
-                          Use RAG Model <span className="text-purple-600 text-xs">(Beta)</span>
-                        </label>
-                        <p className="text-xs text-gray-600 mt-0.5">Enhanced with example-based learning</p>
-                      </div>
+                    <div>
+                      <label className="text-sm font-semibold text-gray-900">
+                        <FaDatabase className="inline mr-2 text-purple-600" />
+                        RAG Model Selection
+                      </label>
+                      <p className="text-xs text-gray-600 mt-1">Choose your embedding model</p>
                     </div>
 
-                    {/* RAG Model Selector - only show when RAG is enabled */}
-                    {useRAG && (
-                      <div className="pl-2 space-y-2">
-                        <p className="text-xs font-medium text-gray-700">Embedding Model:</p>
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setRagModel('small')}
-                            className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
-                              ragModel === 'small'
-                                ? 'bg-purple-600 text-white shadow-md'
-                                : 'bg-white text-gray-700 border border-gray-300 hover:border-purple-300'
-                            }`}
-                          >
-                            Small Model
-                          </button>
-                          <button
-                            onClick={() => setRagModel('large')}
-                            className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
-                              ragModel === 'large'
-                                ? 'bg-purple-600 text-white shadow-md'
-                                : 'bg-white text-gray-700 border border-gray-300 hover:border-purple-300'
-                            }`}
-                          >
-                            Large Model
-                          </button>
-                        </div>
-                        <p className="text-xs text-gray-500 italic">
-                          {ragModel === 'small' ? 'Faster, cost-effective' : 'Better precision, higher cost'}
-                        </p>
+                    <div className="space-y-2">
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => setRagModel('small')}
+                          className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
+                            ragModel === 'small'
+                              ? 'bg-purple-600 text-white shadow-md'
+                              : 'bg-white text-gray-700 border border-gray-300 hover:border-purple-300'
+                          }`}
+                        >
+                          Small Model
+                        </button>
+                        <button
+                          onClick={() => setRagModel('large')}
+                          className={`flex-1 px-3 py-2 rounded-lg text-xs font-medium transition-all duration-200 ${
+                            ragModel === 'large'
+                              ? 'bg-purple-600 text-white shadow-md'
+                              : 'bg-white text-gray-700 border border-gray-300 hover:border-purple-300'
+                          }`}
+                        >
+                          Large Model
+                        </button>
                       </div>
-                    )}
+                      <p className="text-xs text-gray-500 italic">
+                        {ragModel === 'small' ? 'Faster, cost-effective' : 'Better precision, higher cost'}
+                      </p>
+                    </div>
                   </div>
 
                   <button
