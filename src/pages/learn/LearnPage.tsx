@@ -249,22 +249,27 @@ const LearnPage: React.FC = () => {
         <p className="text-gray-600 text-center mb-8">Follow the path from beginner to expert</p>
 
         {/* Module Cards with Visual Path */}
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto relative pb-32">
           {modules.map((module, index) => {
             const isCompleted = completedModules.has(module.id);
             const isHovered = hoveredModule === module.id;
             const isLocked = false; // For future: could lock modules based on prerequisites
 
             return (
-              <div key={module.id} className="relative">
-                {/* Connecting Line */}
-                {index < modules.length - 1 && (
-                  <div className="absolute left-1/2 top-full w-1 h-8 -ml-0.5 bg-gradient-to-b from-blue-300 to-transparent"></div>
-                )}
-
+              <div
+                key={module.id}
+                className="relative mb-8 md:mb-12 sticky"
+                style={{
+                  // Sticky positioning with staggered top values for layering effect
+                  // Later modules stack on top of earlier ones
+                  // Mobile: smaller offset (1rem), Desktop: larger offset (2rem)
+                  top: `${Math.min(index * 1, 5)}rem`,
+                  zIndex: index + 1,
+                }}
+              >
                 <Link
                   to={module.path}
-                  className={`group block mb-8 transition-all duration-300 ${isLocked ? 'pointer-events-none' : ''}`}
+                  className={`group block transition-all duration-300 ${isLocked ? 'pointer-events-none' : ''}`}
                   onMouseEnter={() => setHoveredModule(module.id)}
                   onMouseLeave={() => setHoveredModule(null)}
                 >

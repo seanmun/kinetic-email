@@ -201,7 +201,7 @@ const IntroductionModule: React.FC = () => {
                       </svg>
                     </div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">The Zeigarnik Effect</h3>
-                    <p className="text-gray-700 leading-relaxed">When people start interacting—clicking tabs, completing surveys—they're more likely to finish and take action due to psychological tension from incomplete tasks.</p>
+                    <p className="text-gray-700 leading-relaxed">When people start interacting with elements like tabs or surveys, they're more likely to finish and take action due to psychological tension from incomplete tasks.</p>
                   </div>
                 </div>
 
@@ -293,7 +293,7 @@ const IntroductionModule: React.FC = () => {
                     </div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">Works on Apple Mail</h3>
                     <p className="text-gray-700">
-                      Fully supported on Apple Mail (iOS, macOS, iPadOS)—representing 51% of all email opens.
+                      Fully supported on Apple Mail (iOS, macOS, iPadOS), representing 51% of all email opens.
                     </p>
                   </div>
                 </div>
@@ -321,7 +321,7 @@ const IntroductionModule: React.FC = () => {
                     </div>
                     <h3 className="font-bold text-gray-900 mb-2 text-lg">Pure Upside</h3>
                     <p className="text-gray-700">
-                      Zero downside risk. Those who can't see kinetic features get the exact same email you'd send without kinetic—no one loses.
+                      Zero downside risk. Those who can't see kinetic features get the exact same email you'd send without kinetic, so no one loses.
                     </p>
                   </div>
                 </div>
