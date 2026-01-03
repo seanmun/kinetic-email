@@ -23,15 +23,6 @@ const HomePage = () => {
   // Video ref for lightning strike effect
   const strikeVideoRef = React.useRef<HTMLVideoElement>(null);
 
-  // Create fallback version of hero email (for Gmail - no kinetic features)
-  const heroFallbackEmail = React.useMemo(() => {
-    // Remove the 'checked' attribute from the Kinetic lightswitch to show fallback content
-    return heroKineticEmail.replace(
-      /<input\s+[^>]*?id=["']Kinetic["'][^>]*?checked[^>]*?>/gi,
-      (match) => match.replace('checked', '')
-    );
-  }, []);
-
   // Generate a visitor ID (persistent for session)
   const visitorId = React.useMemo(() => {
     return `visitor_${Math.random().toString(36).substring(2, 9)}`;
@@ -187,11 +178,11 @@ const HomePage = () => {
     display: none !important;
   }
 
-  /* Fix for AOL/Yahoo - they support :checked but not ~* properly */
-  #Kinetic:checked ~* .& .fallback {
+  /* Fix for AOL/Yahoo */
+  #Kinetic:checked ~ .& .fallback {
     display: block !important;
   }
-  #Kinetic:checked ~* .& .interactive {
+  #Kinetic:checked ~ .& .interactive {
     display: none !important;
   }
 
@@ -557,6 +548,15 @@ const HomePage = () => {
 </body>
 </html>
   `;
+
+  // Create fallback version of hero email (for Gmail - no kinetic features)
+  const heroFallbackEmail = React.useMemo(() => {
+    // Remove the 'checked' attribute from the Kinetic lightswitch to show fallback content
+    return heroKineticEmail.replace(
+      /<input\s+[^>]*?id=["']Kinetic["'][^>]*?checked[^>]*?>/gi,
+      (match) => match.replace('checked', '')
+    );
+  }, []);
 
   const staticEmailHTML = `
 <!DOCTYPE html>
