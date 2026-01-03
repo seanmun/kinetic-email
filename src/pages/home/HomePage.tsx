@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import IOSMailSimulator from '../../components/portfolio/IOSMailSimulator';
 import AndroidGmailSimulator from '../../components/portfolio/AndroidGmailSimulator';
+import SendEmailModal from '../../components/common/SendEmailModal';
 import { FaBook, FaCode, FaPaperPlane, FaChartLine, FaApple, FaMagic, FaCheckCircle, FaBolt, FaArrowRight } from 'react-icons/fa';
 import { Search, CheckCircle2, TrendingUp } from 'lucide-react';
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState<'static' | 'kinetic'>('kinetic');
   const [mobileComparisonView, setMobileComparisonView] = useState<'static' | 'kinetic'>('kinetic');
+  const [showSendEmailModal, setShowSendEmailModal] = useState(false);
   const [trackingEvents, setTrackingEvents] = useState<Array<{
     userId: string;
     emailName: string;
@@ -871,9 +873,20 @@ const HomePage = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             See The Difference
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
             The same email in Gmail (fallback) vs Apple Mail (kinetic) - one HTML file, two experiences
           </p>
+
+          {/* Send to Inbox Button */}
+          <div className="flex justify-center">
+            <button
+              onClick={() => setShowSendEmailModal(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+            >
+              <FaPaperPlane />
+              Send to My Inbox
+            </button>
+          </div>
 
           {/* Mobile Toggle */}
           <div className="md:hidden mt-8 flex justify-center">
@@ -1202,6 +1215,16 @@ const HomePage = () => {
           animation-delay: 4s;
         }
       `}</style>
+
+      {/* Send Email Modal */}
+      <SendEmailModal
+        isOpen={showSendEmailModal}
+        onClose={() => setShowSendEmailModal(false)}
+        emailHTML={heroKineticEmail}
+        defaultSubject="Interactive product showcase ⚡"
+        emailType="portfolio"
+        projectName="Product Showcase"
+      />
     </>
   );
 };
