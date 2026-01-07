@@ -97,25 +97,41 @@ const AdminPortal = () => {
   const [isRunningEval, setIsRunningEval] = useState(false);
   const [evalFilter, setEvalFilter] = useState<'all' | 'pending' | 'evaluated'>('pending');
 
+  // Check for existing auth on mount
+  React.useEffect(() => {
+    const isAuthed = sessionStorage.getItem('admin_auth');
+    if (isAuthed === 'true') {
+      setIsAuthenticated(true);
+    }
+  }, []);
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError('');
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: emailInput,
-        password: passwordInput
+      // Verify credentials against environment variables via API
+      const response = await fetch('/api/admin/verify-auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: emailInput, password: passwordInput }),
       });
 
-      if (error) {
+      if (!response.ok) {
         setAuthError('Invalid credentials');
         return;
       }
 
-      if (data.user) {
+      const data = await response.json();
+      if (data.authenticated) {
         setIsAuthenticated(true);
+        // Store auth token in sessionStorage
+        sessionStorage.setItem('admin_auth', 'true');
+      } else {
+        setAuthError('Invalid credentials');
       }
     } catch (err) {
+      console.error('Auth error:', err);
       setAuthError('Authentication error');
     }
   };
