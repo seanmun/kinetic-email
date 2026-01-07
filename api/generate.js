@@ -67,24 +67,68 @@ u + .body a { color: inherit; text-decoration: none; font-size: inherit; font-we
 .a6S { display: none !important; opacity: 0.01 !important; }
 .im { color: inherit !important; }
 
-/* KINETIC EMAIL STYLES */
+/* centre email on Android 4.4 - margin reset */
+
+ div[style*="margin: 16px 0"] {
+  margin: 0!important;
+  }
+
+/* The following styles are aligned with components in the RAG such as one and two column layouts. */
+
+table#email-container {
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hide {
+    display: none !important;
+    width: 0px !important;
+    height: 0px !important;
+    mso-hide: all;
+    font-size: 0px;
+}
+.mobile {
+    width: 0;
+    max-height: 0;
+    overflow: hidden;
+    float: left;
+    display: none;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .mobile {display : block !important;width : 100% !important;max-height: inherit !important;overflow : visible !important;float : none !important;}
+    .desktop {display: none !important;width: 0px !important;height: 0px !important;mso-hide: all; font-size: 0px;}
+    .hidemobile {display: none !important;width: 0px !important;height: 0px !important;}
+    .full {width: 100% !important;float: none !important;display: block !important;margin-right: auto !important;margin-left: auto !important;padding-left: 0px !important;padding-right: 0px !important;text-align: center !important;padding-top: 10px !important;padding-bottom: 10px !important;}
+    .full0 {width: 100% !important;float: none !important;display: block !important;margin-right: auto !important;margin-left: auto !important;padding-left: 0px !important;padding-right: 0px !important;text-align: center !important;}
+    .mobile-center {margin-left: auto !important;margin-right: auto !important;display: table !important;}
+    .fluid {width:100% !important;}
+}
+
+
+
+</style>
+<style>
+/* KINETIC EMAIL lightswtich style block should be in its own style block. Not to be mixes with reset, email or interactive fucntionality style blocks. Its important to separate these due to gmail ignore the entire style block if a :checkbox is included" */
 /* Hide all form inputs */
-input[type="radio"], input[type="checkbox"] { 
-  display: none !important; 
-  -webkit-appearance: none !important; 
-  mso-hide: all !important; 
+input[type="radio"], input[type="checkbox"] {
+  display: none !important;
+  -webkit-appearance: none !important;
+  mso-hide: all !important;
 }
 
 /* KINETIC LIGHTSWITCH - Critical for email client compatibility */
 .kinetic { display: none !important; }
 
-/* LIGHTSWITCH CORE FUNCTIONALITY - Always include these exact selectors */
+/* LIGHTSWITCH CORE FUNCTIONALITY - Always include these exact selectors. Depending on the build structure using just ~ maybe used instead of ~* it will be case by case */
 #Kinetic:checked ~* .interactive { display: block !important; }
 #Kinetic:checked ~* .fallback { display: none !important; }
 
 /* AOL/Yahoo Compatibility Fixes */
-#Kinetic:checked ~ .& .fallback { display: block !important; }
-#Kinetic:checked ~ .& .interactive { display: none !important; }
+#Kinetic:checked ~* .& .fallback { display: block !important; }
+#Kinetic:checked ~* .& .interactive { display: none !important; }
 
 /* Interactive content hidden by default */
 .interactive { display: none !important; }
@@ -148,7 +192,13 @@ CRITICAL: Always use !important on display and visibility properties
 <input type="checkbox" class="kinetic" name="interactive" id="Kinetic" checked style="display: none !important;">
 
 <table id="email-container" width="100%" cellspacing="0" cellpadding="0" border="0" role="none">
-<!-- KINETIC EMAIL CONTENT GOES HERE -->
+<!-- Email Content goes here -->
+
+<!-- KINETIC EMAIL  -->
+
+<!-- Fallback content should alwasy be included, try matching as close as possible to the kinetic content without hiding any content.  -->
+
+<!-- Shared content is content that is visible on all clients. This is content that is not connected to kinetic or fallback. But rather relevant for all subscribers. Headers, Heros, footers, etc.  -->
 </table>
 
 <!--[if mso]>

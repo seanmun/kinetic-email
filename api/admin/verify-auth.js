@@ -31,7 +31,12 @@ export default async function handler(req, res) {
 
     if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
       console.error('ADMIN_EMAIL or ADMIN_PASSWORD not set in environment variables');
-      return res.status(500).json({ error: 'Server configuration error' });
+      console.error('ADMIN_EMAIL exists:', !!ADMIN_EMAIL);
+      console.error('ADMIN_PASSWORD exists:', !!ADMIN_PASSWORD);
+      return res.status(500).json({
+        error: 'Server configuration error',
+        details: 'ADMIN_EMAIL or ADMIN_PASSWORD not configured in Vercel environment variables'
+      });
     }
 
     // Simple comparison (consider using bcrypt for production)
