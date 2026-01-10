@@ -1,8 +1,9 @@
 // src/pages/admin/AdminPortal.tsx
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import PageLayout from '../../components/layout/PageLayout';
 import Modal from '../../components/common/Modal';
-import { FaLock, FaUpload, FaCheckCircle, FaQuestionCircle, FaCode, FaBook, FaList, FaTrash, FaEye, FaClock, FaStar, FaClipboardCheck, FaPlay, FaFilter } from 'react-icons/fa';
+import { FaLock, FaUpload, FaCheckCircle, FaQuestionCircle, FaCode, FaBook, FaList, FaTrash, FaEye, FaClock, FaStar, FaClipboardCheck, FaPlay, FaFilter, FaArrowLeft } from 'react-icons/fa';
 import { supabase } from '../../lib/supabase';
 
 type UploadType = 'html' | 'blog';
@@ -13,11 +14,7 @@ type HTMLType = 'complete' | 'component';
 type BlogTopic = 'kinetic-techniques' | 'email-best-practices' | 'case-studies' | 'tutorials';
 
 const AdminPortal = () => {
-  // Authentication
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [emailInput, setEmailInput] = useState('');
-  const [passwordInput, setPasswordInput] = useState('');
-  const [authError, setAuthError] = useState('');
+  const navigate = useNavigate();
 
   // Upload type
   const [uploadType, setUploadType] = useState<UploadType>('html');
@@ -97,44 +94,7 @@ const AdminPortal = () => {
   const [isRunningEval, setIsRunningEval] = useState(false);
   const [evalFilter, setEvalFilter] = useState<'all' | 'pending' | 'evaluated'>('pending');
 
-  // Check for existing auth on mount
-  React.useEffect(() => {
-    const isAuthed = sessionStorage.getItem('admin_auth');
-    if (isAuthed === 'true') {
-      setIsAuthenticated(true);
-    }
-  }, []);
-
-  const handleAuth = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setAuthError('');
-
-    try {
-      // Verify credentials against environment variables via API
-      const response = await fetch('/api/admin/verify-auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: emailInput, password: passwordInput }),
-      });
-
-      if (!response.ok) {
-        setAuthError('Invalid credentials');
-        return;
-      }
-
-      const data = await response.json();
-      if (data.authenticated) {
-        setIsAuthenticated(true);
-        // Store auth token in sessionStorage
-        sessionStorage.setItem('admin_auth', 'true');
-      } else {
-        setAuthError('Invalid credentials');
-      }
-    } catch (err) {
-      console.error('Auth error:', err);
-      setAuthError('Authentication error');
-    }
-  };
+  // Auth is now handled by StationLayout parent component
 
   const handleAutoTag = async () => {
     if (!htmlContent) {
@@ -302,17 +262,17 @@ const AdminPortal = () => {
 
   // Load library when switching to library tab
   useEffect(() => {
-    if (activeTab === 'library' && isAuthenticated) {
+    if (activeTab === 'library') {
       loadLibrary();
     }
-  }, [activeTab, isAuthenticated]);
+  }, [activeTab]);
 
   // Load evaluations when switching to evaluations tab
   useEffect(() => {
-    if (activeTab === 'evaluations' && isAuthenticated) {
+    if (activeTab === 'evaluations') {
       loadEvaluations();
     }
-  }, [activeTab, isAuthenticated, evalFilter]);
+  }, [activeTab, evalFilter]);
 
   const loadLibrary = async () => {
     setIsLoadingLibrary(true);
@@ -421,73 +381,20 @@ const AdminPortal = () => {
     });
   };
 
-  // Authentication screen
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full">
-          <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mb-4">
-              <FaLock className="text-white text-2xl" />
-            </div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">RAG Admin Portal</h1>
-            <p className="text-gray-600">Sign in to access</p>
-          </div>
-
-          <form onSubmit={handleAuth} className="space-y-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                value={emailInput}
-                onChange={(e) => setEmailInput(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter email"
-                required
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                value={passwordInput}
-                onChange={(e) => setPasswordInput(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Enter password"
-                required
-              />
-            </div>
-
-            {authError && (
-              <div className="text-red-600 text-sm bg-red-50 p-3 rounded-lg">
-                {authError}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 px-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 font-medium transition-all duration-200"
-            >
-              Unlock Portal
-            </button>
-          </form>
-        </div>
-      </div>
-    );
-  }
-
-  // Main admin portal
+  // Main admin portal (auth handled by StationLayout)
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
       <PageLayout>
         <div className="max-w-5xl mx-auto py-8 px-4">
+          {/* Back to Station Button */}
+          <button
+            onClick={() => navigate('/station')}
+            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 mb-6 transition-colors"
+          >
+            <FaArrowLeft />
+            <span>Back to Station</span>
+          </button>
+
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">

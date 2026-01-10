@@ -44,9 +44,14 @@ const Navigation = () => {
           <div className="transition-transform duration-200 group-hover:scale-110 group-hover:rotate-12">
             <Zap className="w-6 h-6 text-yellow-500 fill-yellow-500" />
           </div>
-          <span className="text-2xl bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.3)] transition-all duration-200 group-hover:drop-shadow-[0_0_12px_rgba(6,182,212,0.4)] tracking-tight" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900 }}>
-            KINETIC<span className="font-normal tracking-normal" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 400 }}>.email</span>
-          </span>
+          <div className="flex items-center gap-2">
+            <span className="text-2xl bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent font-bold drop-shadow-[0_0_8px_rgba(6,182,212,0.3)] transition-all duration-200 group-hover:drop-shadow-[0_0_12px_rgba(6,182,212,0.4)] tracking-tight" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900 }}>
+              KINETIC<span className="font-normal tracking-normal" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 400 }}>.email</span>
+            </span>
+            <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+              BETA
+            </span>
+          </div>
         </Link>
         
         {/* Mobile menu button */}

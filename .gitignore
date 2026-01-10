@@ -31,3 +31,5 @@ dist-ssr
 
 # Internal documentation
 CONTEXT.md
+station-context.md
+auth-system-plan.md

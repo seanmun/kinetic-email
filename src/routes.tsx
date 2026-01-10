@@ -17,6 +17,10 @@ import SurveyExample from './pages/examples/SurveyExample';
 import PlaygroundPage from './pages/playground/PlaygroundPage';
 import BlogPage from './pages/blog/BlogPage';
 import AdminPortal from './pages/admin/AdminPortal';
+import StationLayout from './pages/admin/StationLayout';
+import StationDashboard from './pages/admin/StationDashboard';
+import KineticDatabasePlaceholder from './pages/admin/KineticDatabasePlaceholder';
+import SubscribersPlaceholder from './pages/admin/SubscribersPlaceholder';
 import HowItWorksPage from './pages/about/HowItWorksPage';
 
 // Import portfolio components
@@ -55,7 +59,16 @@ const router = createBrowserRouter([
       },
       { path: 'playground', element: <PlaygroundPage /> },
       { path: 'blog', element: <BlogPage /> },
-      { path: 'station', element: <AdminPortal /> },
+      // Station admin section with nested routes
+      { path: 'station',
+        element: <StationLayout />,
+        children: [
+          { index: true, element: <StationDashboard /> },
+          { path: 'rag', element: <AdminPortal /> },
+          { path: 'database', element: <KineticDatabasePlaceholder /> },
+          { path: 'subscribers', element: <SubscribersPlaceholder /> },
+        ]
+      },
       { path: 'how-it-works', element: <HowItWorksPage /> },
       { path: 'media', element: <MediaPage /> },
 
