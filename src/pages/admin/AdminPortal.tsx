@@ -383,13 +383,13 @@ const AdminPortal = () => {
 
   // Main admin portal (auth handled by StationLayout)
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
       <PageLayout>
-        <div className="max-w-5xl mx-auto py-8 px-4">
+        <div className="max-w-5xl mx-auto py-24 px-4">
           {/* Back to Station Button */}
           <button
             onClick={() => navigate('/station')}
-            className="flex items-center gap-2 text-gray-600 hover:text-blue-600 mb-6 transition-colors"
+            className="flex items-center gap-2 text-gray-400 hover:text-cyan-400 mb-6 transition-colors"
           >
             <FaArrowLeft />
             <span>Back to Station</span>
@@ -397,10 +397,10 @@ const AdminPortal = () => {
 
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-3">
-              RAG Knowledge Base Portal
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent mb-3 drop-shadow-[0_0_15px_rgba(6,182,212,0.4)]" style={{ fontFamily: "'Orbitron', sans-serif", fontWeight: 900 }}>
+              RAG KNOWLEDGE BASE
             </h1>
-            <p className="text-gray-600 mb-4">
+            <p className="text-gray-400 mb-4">
               Upload examples to train the AI for better kinetic email generation
             </p>
             <button
@@ -429,8 +429,8 @@ const AdminPortal = () => {
               onClick={() => setActiveTab('upload')}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
                 activeTab === 'upload'
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-50 shadow border border-gray-200'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/20'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700 hover:border-gray-600'
               }`}
             >
               <FaUpload />
@@ -440,8 +440,8 @@ const AdminPortal = () => {
               onClick={() => setActiveTab('library')}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
                 activeTab === 'library'
-                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-50 shadow border border-gray-200'
+                  ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/20'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700 hover:border-gray-600'
               }`}
             >
               <FaList />
@@ -451,8 +451,8 @@ const AdminPortal = () => {
               onClick={() => setActiveTab('evaluations')}
               className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-200 ${
                 activeTab === 'evaluations'
-                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-gray-50 shadow border border-gray-200'
+                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/20'
+                  : 'bg-gray-800 text-gray-400 hover:bg-gray-700 border border-gray-700 hover:border-gray-600'
               }`}
             >
               <FaClipboardCheck />
@@ -464,43 +464,43 @@ const AdminPortal = () => {
           {activeTab === 'upload' && (
             <>
           {/* Upload Type Selection */}
-          <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 mb-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">What are you uploading?</h2>
+          <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-6 mb-6">
+            <h2 className="text-lg font-semibold text-white mb-4">What are you uploading?</h2>
             <div className="grid grid-cols-2 gap-4">
               <button
                 onClick={() => setUploadType('html')}
                 className={`p-6 rounded-xl border-2 transition-all duration-200 ${
                   uploadType === 'html'
-                    ? 'border-blue-600 bg-blue-50'
-                    : 'border-gray-200 bg-white hover:border-blue-300'
+                    ? 'border-blue-500 bg-blue-900/30'
+                    : 'border-gray-700 bg-gray-900 hover:border-blue-600'
                 }`}
               >
-                <FaCode className={`text-3xl mb-3 ${uploadType === 'html' ? 'text-blue-600' : 'text-gray-400'}`} />
-                <h3 className="font-semibold text-gray-900 mb-1">HTML Email</h3>
-                <p className="text-sm text-gray-600">Kinetic or static email code</p>
+                <FaCode className={`text-3xl mb-3 ${uploadType === 'html' ? 'text-blue-400' : 'text-gray-500'}`} />
+                <h3 className="font-semibold text-white mb-1">HTML Email</h3>
+                <p className="text-sm text-gray-400">Kinetic or static email code</p>
               </button>
               <button
                 onClick={() => setUploadType('blog')}
                 className={`p-6 rounded-xl border-2 transition-all duration-200 ${
                   uploadType === 'blog'
-                    ? 'border-blue-600 bg-blue-50'
-                    : 'border-gray-200 bg-white hover:border-blue-300'
+                    ? 'border-blue-500 bg-blue-900/30'
+                    : 'border-gray-700 bg-gray-900 hover:border-blue-600'
                 }`}
               >
-                <FaBook className={`text-3xl mb-3 ${uploadType === 'blog' ? 'text-blue-600' : 'text-gray-400'}`} />
-                <h3 className="font-semibold text-gray-900 mb-1">Blog Content</h3>
-                <p className="text-sm text-gray-600">Educational content & techniques</p>
+                <FaBook className={`text-3xl mb-3 ${uploadType === 'blog' ? 'text-blue-400' : 'text-gray-500'}`} />
+                <h3 className="font-semibold text-white mb-1">Blog Content</h3>
+                <p className="text-sm text-gray-400">Educational content & techniques</p>
               </button>
             </div>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6 space-y-6">
+          <form onSubmit={handleSubmit} className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-6 space-y-6">
             {uploadType === 'html' ? (
               <>
                 {/* HTML Email Fields */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     HTML Content <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -508,7 +508,7 @@ const AdminPortal = () => {
                     onChange={(e) => setHtmlContent(e.target.value)}
                     rows={12}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
+                    className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-sm"
                     placeholder="Paste your full HTML email code here..."
                   />
                   <div className="mt-3 flex items-center justify-between">
@@ -540,7 +540,7 @@ const AdminPortal = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Description / Prompt <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -548,7 +548,7 @@ const AdminPortal = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="e.g., Tabbed product showcase for running shoes with 3 color options, pricing, and features"
                   />
                   <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
@@ -565,13 +565,13 @@ const AdminPortal = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Technique Type <span className="text-red-500">*</span>
                     </label>
                     <select
                       value={technique}
                       onChange={(e) => setTechnique(e.target.value as TechniqueType)}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="tabs">Tabs</option>
                       <option value="accordion">Accordion</option>
@@ -584,13 +584,13 @@ const AdminPortal = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Email Purpose
                     </label>
                     <select
                       value={emailPurpose}
                       onChange={(e) => setEmailPurpose(e.target.value as EmailPurpose)}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="promotional">Promotional</option>
                       <option value="transactional">Transactional</option>
@@ -603,13 +603,13 @@ const AdminPortal = () => {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Complexity Level
                     </label>
                     <select
                       value={complexity}
                       onChange={(e) => setComplexity(e.target.value as ComplexityLevel)}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="beginner">Beginner</option>
                       <option value="intermediate">Intermediate</option>
@@ -618,7 +618,7 @@ const AdminPortal = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       HTML Type
                     </label>
                     <div className="flex gap-4 pt-3">
@@ -630,7 +630,7 @@ const AdminPortal = () => {
                           onChange={(e) => setHtmlType(e.target.value as HTMLType)}
                           className="w-4 h-4 text-blue-600"
                         />
-                        <span className="text-sm text-gray-700">Complete Email</span>
+                        <span className="text-sm text-gray-300">Complete Email</span>
                       </label>
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input
@@ -640,7 +640,7 @@ const AdminPortal = () => {
                           onChange={(e) => setHtmlType(e.target.value as HTMLType)}
                           className="w-4 h-4 text-blue-600"
                         />
-                        <span className="text-sm text-gray-700">Component/Module</span>
+                        <span className="text-sm text-gray-300">Component/Module</span>
                       </label>
                     </div>
                   </div>
@@ -705,7 +705,7 @@ const AdminPortal = () => {
                           onChange={() => toggleKeyFeature(key as keyof typeof keyFeatures)}
                           className="w-4 h-4 text-blue-600 rounded"
                         />
-                        <span className="text-sm text-gray-700">{label}</span>
+                        <span className="text-sm text-gray-300">{label}</span>
                       </label>
                     ))}
                   </div>
@@ -731,21 +731,21 @@ const AdminPortal = () => {
                           onChange={() => toggleBestPracticeTag(key as keyof typeof bestPracticeTags)}
                           className="w-4 h-4 text-blue-600 rounded"
                         />
-                        <span className="text-sm text-gray-700">{label}</span>
+                        <span className="text-sm text-gray-300">{label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Notes (Optional)
                   </label>
                   <textarea
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     rows={3}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Special considerations, bugs fixed, client-specific quirks..."
                   />
                 </div>
@@ -754,7 +754,7 @@ const AdminPortal = () => {
               <>
                 {/* Blog Content Fields */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Blog Title <span className="text-red-500">*</span>
                   </label>
                   <input
@@ -762,13 +762,13 @@ const AdminPortal = () => {
                     value={blogTitle}
                     onChange={(e) => setBlogTitle(e.target.value)}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="e.g., How to Build Tabbed Emails in Apple Mail"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Blog Content <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -776,20 +776,20 @@ const AdminPortal = () => {
                     onChange={(e) => setBlogContent(e.target.value)}
                     rows={12}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Full blog post content (markdown supported)..."
                   />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Topic <span className="text-red-500">*</span>
                     </label>
                     <select
                       value={blogTopic}
                       onChange={(e) => setBlogTopic(e.target.value as BlogTopic)}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="kinetic-techniques">Kinetic Techniques</option>
                       <option value="email-best-practices">Email Best Practices</option>
@@ -799,13 +799,13 @@ const AdminPortal = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
                       Learning Level
                     </label>
                     <select
                       value={learningLevel}
                       onChange={(e) => setLearningLevel(e.target.value as ComplexityLevel)}
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="beginner">Beginner</option>
                       <option value="intermediate">Intermediate</option>
@@ -834,14 +834,14 @@ const AdminPortal = () => {
                           onChange={() => toggleTechniqueCovered(key as keyof typeof techniquesCovered)}
                           className="w-4 h-4 text-blue-600 rounded"
                         />
-                        <span className="text-sm text-gray-700">{label}</span>
+                        <span className="text-sm text-gray-300">{label}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
                     Key Takeaways <span className="text-red-500">*</span>
                   </label>
                   <textarea
@@ -849,7 +849,7 @@ const AdminPortal = () => {
                     onChange={(e) => setKeyTakeaways(e.target.value)}
                     rows={4}
                     required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Summary of main learnings from this blog post..."
                   />
                   <p className="text-xs text-gray-500 mt-1">This helps generate better embeddings for retrieval</p>
@@ -888,9 +888,9 @@ const AdminPortal = () => {
 
           {/* Library Tab Content */}
           {activeTab === 'library' && (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-6">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">Knowledge Base Library</h2>
+                <h2 className="text-xl font-semibold text-white">Knowledge Base Library</h2>
                 <button
                   onClick={loadLibrary}
                   disabled={isLoadingLibrary}
@@ -909,12 +909,12 @@ const AdminPortal = () => {
               {isLoadingLibrary ? (
                 <div className="text-center py-12">
                   <div className="inline-block w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mb-4"></div>
-                  <p className="text-gray-600">Loading library...</p>
+                  <p className="text-gray-400">Loading library...</p>
                 </div>
               ) : libraryItems.length === 0 ? (
                 <div className="text-center py-12">
                   <FaBook className="text-6xl text-gray-300 mx-auto mb-4" />
-                  <p className="text-gray-600 text-lg">No content in library yet</p>
+                  <p className="text-gray-400 text-lg">No content in library yet</p>
                   <p className="text-gray-500 text-sm mt-2">Upload your first example to get started!</p>
                 </div>
               ) : (
@@ -926,7 +926,7 @@ const AdminPortal = () => {
                     return (
                       <div
                         key={item.id}
-                        className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-all duration-200"
+                        className="border border-gray-700 bg-gray-900 rounded-lg p-4 hover:shadow-md transition-all duration-200"
                       >
                         <div className="flex items-start justify-between gap-4">
                           <div className="flex-1">
@@ -936,7 +936,7 @@ const AdminPortal = () => {
                               ) : (
                                 <FaBook className="text-purple-600 text-lg" />
                               )}
-                              <h3 className="font-semibold text-gray-900">
+                              <h3 className="font-semibold text-white">
                                 {isHtml ? meta.description : meta.blogTitle}
                               </h3>
                             </div>
@@ -1007,9 +1007,9 @@ const AdminPortal = () => {
 
           {/* Evaluations Tab Content */}
           {activeTab === 'evaluations' && (
-            <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-6">
+            <div className="bg-gray-800 rounded-2xl shadow-lg border border-gray-700 p-6">
               <div className="mb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Evaluation Queue</h2>
+                <h2 className="text-2xl font-bold text-white mb-2">Evaluation Queue</h2>
                 <p className="text-gray-600">Review and evaluate playground submissions to improve the AI model</p>
               </div>
 
@@ -1051,7 +1051,7 @@ const AdminPortal = () => {
               {isLoadingEvaluations && (
                 <div className="text-center py-12">
                   <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-                  <p className="text-gray-600 mt-4">Loading evaluations...</p>
+                  <p className="text-gray-400 mt-4">Loading evaluations...</p>
                 </div>
               )}
 
@@ -1066,7 +1066,7 @@ const AdminPortal = () => {
               {!isLoadingEvaluations && evaluations.length === 0 && (
                 <div className="text-center py-12">
                   <FaClipboardCheck className="text-gray-300 text-6xl mx-auto mb-4" />
-                  <p className="text-gray-600 text-lg">No submissions {evalFilter !== 'all' ? `with status "${evalFilter}"` : ''}</p>
+                  <p className="text-gray-400 text-lg">No submissions {evalFilter !== 'all' ? `with status "${evalFilter}"` : ''}</p>
                   <p className="text-gray-500 text-sm mt-2">Submissions from the playground will appear here</p>
                 </div>
               )}
@@ -1075,7 +1075,7 @@ const AdminPortal = () => {
               {!isLoadingEvaluations && evaluations.length > 0 && (
                 <div className="space-y-4">
                   {evaluations.map((submission: any) => (
-                    <div key={submission.id} className="border border-gray-200 rounded-xl p-5 hover:border-purple-300 transition-all duration-200">
+                    <div key={submission.id} className="border border-gray-700 bg-gray-900 rounded-xl p-5 hover:border-purple-300 transition-all duration-200">
                       <div className="flex justify-between items-start mb-4">
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
@@ -1126,7 +1126,7 @@ const AdminPortal = () => {
                       {/* User Intent Preview */}
                       <div className="bg-gray-50 rounded-lg p-4">
                         <p className="text-sm font-semibold text-gray-700 mb-1">User Intent:</p>
-                        <p className="text-gray-600 text-sm">{submission.user_intent}</p>
+                        <p className="text-gray-400 text-sm">{submission.user_intent}</p>
                       </div>
 
                       {/* Evaluation Results (if evaluated) */}
@@ -1138,15 +1138,15 @@ const AdminPortal = () => {
                           </div>
                           <div className="grid grid-cols-3 gap-2 mt-3 text-sm">
                             <div>
-                              <p className="text-gray-600">Code Quality:</p>
+                              <p className="text-gray-400">Code Quality:</p>
                               <p className="font-semibold">{submission.evaluations[0].score_code_quality}/100</p>
                             </div>
                             <div>
-                              <p className="text-gray-600">Functionality:</p>
+                              <p className="text-gray-400">Functionality:</p>
                               <p className="font-semibold">{submission.evaluations[0].score_functionality}/100</p>
                             </div>
                             <div>
-                              <p className="text-gray-600">Fallback:</p>
+                              <p className="text-gray-400">Fallback:</p>
                               <p className="font-semibold">{submission.evaluations[0].score_fallback_quality}/100</p>
                             </div>
                           </div>
@@ -1174,7 +1174,7 @@ const AdminPortal = () => {
               <div className="space-y-4">
                 <div>
                   <h3 className="font-semibold text-gray-700 mb-2">Description:</h3>
-                  <p className="text-gray-600">{previewItem.metadata.description}</p>
+                  <p className="text-gray-400">{previewItem.metadata.description}</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-700 mb-2">HTML Code:</h3>
@@ -1185,7 +1185,7 @@ const AdminPortal = () => {
                 {previewItem.metadata.notes && (
                   <div>
                     <h3 className="font-semibold text-gray-700 mb-2">Notes:</h3>
-                    <p className="text-gray-600 text-sm">{previewItem.metadata.notes}</p>
+                    <p className="text-gray-400 text-sm">{previewItem.metadata.notes}</p>
                   </div>
                 )}
               </div>
@@ -1197,7 +1197,7 @@ const AdminPortal = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-700 mb-2">Key Takeaways:</h3>
-                  <p className="text-gray-600">{previewItem.metadata.keyTakeaways}</p>
+                  <p className="text-gray-400">{previewItem.metadata.keyTakeaways}</p>
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-700 mb-2">Content:</h3>
@@ -1264,19 +1264,19 @@ const AdminPortal = () => {
             <div className="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg p-4">
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div>
-                  <p className="text-gray-600 font-medium">Model Used:</p>
+                  <p className="text-gray-400 font-medium">Model Used:</p>
                   <p className="text-gray-900">{selectedSubmission.model_used === 'large' ? 'Large Model' : 'Small Model'}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600 font-medium">Status:</p>
+                  <p className="text-gray-400 font-medium">Status:</p>
                   <p className="text-gray-900 capitalize">{selectedSubmission.status}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600 font-medium">RAG Used:</p>
+                  <p className="text-gray-400 font-medium">RAG Used:</p>
                   <p className="text-gray-900">{selectedSubmission.rag_used ? `Yes (${selectedSubmission.rag_examples_count} examples)` : 'No'}</p>
                 </div>
                 <div>
-                  <p className="text-gray-600 font-medium">Submitted:</p>
+                  <p className="text-gray-400 font-medium">Submitted:</p>
                   <p className="text-gray-900">{formatDate(selectedSubmission.created_at)}</p>
                 </div>
               </div>
@@ -1328,27 +1328,27 @@ const AdminPortal = () => {
 
                   <div className="grid grid-cols-2 gap-3 text-sm">
                     <div className="bg-white rounded p-3">
-                      <p className="text-gray-600">Code Quality</p>
+                      <p className="text-gray-400">Code Quality</p>
                       <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_code_quality}/100</p>
                     </div>
                     <div className="bg-white rounded p-3">
-                      <p className="text-gray-600">Kinetic Integration</p>
+                      <p className="text-gray-400">Kinetic Integration</p>
                       <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_kinetic_integration}/100</p>
                     </div>
                     <div className="bg-white rounded p-3">
-                      <p className="text-gray-600">Functionality</p>
+                      <p className="text-gray-400">Functionality</p>
                       <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_functionality}/100</p>
                     </div>
                     <div className="bg-white rounded p-3">
-                      <p className="text-gray-600">Fallback Quality</p>
+                      <p className="text-gray-400">Fallback Quality</p>
                       <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_fallback_quality}/100</p>
                     </div>
                     <div className="bg-white rounded p-3">
-                      <p className="text-gray-600">User Intent Match</p>
+                      <p className="text-gray-400">User Intent Match</p>
                       <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_user_intent_match}/100</p>
                     </div>
                     <div className="bg-white rounded p-3">
-                      <p className="text-gray-600">Creativity & Design</p>
+                      <p className="text-gray-400">Creativity & Design</p>
                       <p className="text-xl font-bold text-gray-900">{selectedSubmission.evaluations[0].score_creativity_design}/100</p>
                     </div>
                   </div>
@@ -1356,7 +1356,7 @@ const AdminPortal = () => {
                   {selectedSubmission.evaluations[0].overall_assessment && (
                     <div className="bg-white rounded p-3">
                       <p className="font-semibold text-gray-700 mb-2">Overall Assessment:</p>
-                      <p className="text-gray-600 text-sm">{selectedSubmission.evaluations[0].overall_assessment}</p>
+                      <p className="text-gray-400 text-sm">{selectedSubmission.evaluations[0].overall_assessment}</p>
                     </div>
                   )}
 
